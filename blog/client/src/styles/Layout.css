@@ -49,6 +49,7 @@
 }
 
 
+
 .columns-second{
 
   margin-top: 1.5rem;
@@ -63,6 +64,10 @@
   color: rgb(190, 187, 187);
   font-size: large;
 }
+.columns img{
+  border: 2px solid white;
+  border-radius: 20px;
+}
 .columns-second a:hover{
   color: white;
 }
@@ -71,4 +76,122 @@
 
 .dropdown-content.show {
   display: block;
+}
+
+
+
+.overlay {
+  position: absolute;
+  top: 165px;
+  left: 140px;
+  transform: translate(-50%, -50%);
+  color: white;
+
+  background-color: rgba(42, 72, 238, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  opacity: 1;
+  transition: opacity 0.5s, transform 1.5s; /* Add transform to transition */
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+  transform: translate(-50%, -150%);
+}
+
+.overlay2 {
+  position: absolute;
+  top: 165px;
+  left: 415px;
+  transform: translate(-50%, -50%);
+  color: white;
+
+  background-color: rgba(42, 72, 238, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  opacity: 1;
+  transition: opacity 0.5s, transform 1.5s; /* Add transform to transition */
+}
+
+.image-container2:hover .overlay2 {
+  opacity: 1;
+  transform: translate(-50%, -150%);
+}
+
+
+.overlay3 {
+  position: absolute;
+  top: 385px;
+  left: 140px;
+  transform: translate(-50%, -50%);
+  color: white;
+
+  background-color: rgba(42, 72, 238, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  opacity: 1;
+  transition: opacity 0.5s, transform 1.5s; /* Add transform to transition */
+}
+
+.image-container3:hover .overlay3 {
+  opacity: 1;
+  transform: translate(-50%, -150%);
+}
+
+.overlay4 {
+  position: absolute;
+  top: 385px;
+  left: 415px;
+  transform: translate(-50%, -50%);
+  color: white;
+
+  background-color: rgba(42, 72, 238, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  opacity: 1;
+  transition: opacity 0.5s, transform 1.5s; /* Add transform to transition */
+}
+
+.image-container4:hover .overlay4 {
+  opacity: 1;
+  transform: translate(-50%, -150%);
+}
+
+
+.overlay5 {
+  position: absolute;
+  top: 605px;
+  left: 140px;
+  transform: translate(-50%, -50%);
+  color: white;
+
+  background-color: rgba(42, 72, 238, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  opacity: 1;
+  transition: opacity 0.5s, transform 1.5s; /* Add transform to transition */
+}
+
+.image-container5:hover .overlay5 {
+  opacity: 1;
+  transform: translate(-50%, -150%);
+}
+
+.overlay6 {
+  position: absolute;
+  top: 605px;
+  left: 415px;
+  transform: translate(-50%, -50%);
+  color: white;
+
+  background-color: rgba(42, 72, 238, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  opacity: 1;
+  transition: opacity 0.5s, transform 1.5s; /* Add transform to transition */
+}
+
+.image-container6:hover .overlay6 {
+  opacity: 1;
+  transform: translate(-50%, -150%);
 }

@@ -10,9 +10,7 @@ const Layout = ({ children }) => {
     setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown state
   };
 
-  const handleCloseDropdown = () => {
-    setIsDropdownOpen(false); // Close dropdown
-  };
+
 
   return (
     <div>
@@ -35,50 +33,69 @@ const Layout = ({ children }) => {
                 <div className='row'>
                     <div className='columns'>
                         <NavDropdown.Item href="#action/3.1">
-                                <img
-                                src="/images/korean.jpg"
-                                alt='Korean' 
-                                style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
+                        <span className="image-container">
+                            <img
+                            src="/images/korean.jpg"
+                            alt='Korean'
+                            style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
+                            />
+                            <span className="overlay">Korean </span>
+                        </span>
+                        </NavDropdown.Item>
 
-                                />
-                        </NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.1">
-                                <img
-                                src="/images/korean.jpg"
-                                alt='Korean' 
-                                style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
+                        <span className="image-container2">
+                            <img
+                            src="/images/korean.jpg"
+                            alt='Korean'
+                            style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
+                            />
+                            <span className="overlay2">China </span>
+                        </span>
+                        </NavDropdown.Item>
 
-                                />
-                        </NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.1">
-                                <img
-                                src="/images/korean.jpg"
-                                alt='Korean' 
-                                style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
+                        <span className="image-container3">
+                            <img
+                            src="/images/korean.jpg"
+                            alt='Korean'
+                            style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
+                            />
+                            <span className="overlay3">Japan </span>
+                        </span>
+                        </NavDropdown.Item>
 
-                                />
-                        </NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.1">
-                                <img
-                                src="/images/korean.jpg"
-                                alt='Korean' 
-                                style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
-                                />
+                        <span className="image-container4">
+                            <img
+                            src="/images/korean.jpg"
+                            alt='Korean'
+                            style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
+                            />
+                            <span className="overlay4">Taiwan </span>
+                        </span>
                         </NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.1">
-                                <img
-                                src="/images/korean.jpg"
-                                alt='Korean' 
-                                style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
 
-                                />
-                        </NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.1">
-                                <img
-                                src="/images/korean.jpg"
-                                alt='Korean' 
-                                style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
-                                />
+                        <span className="image-container5">
+                            <img
+                            src="/images/korean.jpg"
+                            alt='Korean'
+                            style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
+                            />
+                            <span className="overlay5">Thailand </span>
+                        </span>
+                        </NavDropdown.Item>
+
+                        <NavDropdown.Item href="#action/3.1">
+                        <span className="image-container6">
+                            <img
+                            src="/images/korean.jpg"
+                            alt='Korean'
+                            style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
+                            />
+                            <span className="overlay6">Other </span>
+                        </span>
                         </NavDropdown.Item>
                         
                     </div>
