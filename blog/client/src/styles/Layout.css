@@ -1,0 +1,74 @@
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Align items on the ends */
+  align-items: center;
+}
+
+.categories-movies {
+  margin-right: auto; /* Pushes categories and movies to the left */
+  display: flex;
+
+}
+
+.categories-movies a {
+  color: white; /* Set color to white */
+  text-decoration: none; /* Remove text decoration */
+  font-size: 16px;
+  font-weight: bold;
+}
+.categories-movies a:hover{
+  color: rgb(72, 72, 245);
+}
+
+.search-login {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  min-width: 50rem;
+  top: 2.4rem;
+  left: -1rem;
+  background-color: #020202;
+  overflow: auto;
+
+}
+
+
+.row{
+  border: 1px solid rgb(46, 12, 240);
+  display: flex;
+}
+.columns{
+  border-right: 1px solid rgb(138, 138, 135);
+  max-width: 35rem;
+
+}
+
+
+.columns-second{
+
+  margin-top: 1.5rem;
+}
+.columns-second span{
+  color: white;  
+}
+.columns-second a{
+  display: flex;
+  text-align: left;
+  padding-left: 4rem;
+  color: rgb(190, 187, 187);
+  font-size: large;
+}
+.columns-second a:hover{
+  color: white;
+}
+
+
+
+.dropdown-content.show {
+  display: block;
+}
