@@ -1,22 +1,22 @@
 .navbar {
   display: flex;
-  justify-content: space-between; /* Align items on the ends */
+  justify-content: space-between;
   align-items: center;
 }
 
 .categories-movies {
-  margin-right: auto; /* Pushes categories and movies to the left */
+  margin-right: auto;
   display: flex;
-
 }
 
 .categories-movies a {
-  color: white; /* Set color to white */
-  text-decoration: none; /* Remove text decoration */
+  color: white;
+  text-decoration: none;
   font-size: 16px;
   font-weight: bold;
 }
-.categories-movies a:hover{
+
+.categories-movies a:hover {
   color: rgb(72, 72, 245);
 }
 
@@ -24,61 +24,68 @@
   display: flex;
   align-items: center;
 }
+.mr-sm-2, .mr-sm-3, .mr-sm-4 {
+  padding: 5px;
+}
+.navbar-toggler{
+  padding: 5px;
 
+}
 .dropdown-content {
   display: none;
   position: absolute;
   z-index: 1;
   min-width: 50rem;
-  top: 2.4rem;
+  top: 3.37rem;
   left: -1rem;
-  background-color: #020202;
+  
+  background-color: rgb(17, 17, 17);
   overflow: auto;
-
 }
 
-
-.row{
-  border: 1px solid rgb(46, 12, 240);
+.row {
   display: flex;
 }
-.columns{
+
+.columns {
   border-right: 1px solid rgb(138, 138, 135);
   max-width: 35rem;
-
 }
 
-
-
-.columns-second{
-
+.columns-second {
   margin-top: 1.5rem;
 }
-.columns-second span{
-  color: white;  
+
+.columns-second span {
+  color: white;
 }
-.columns-second a{
+
+.columns-arrow{
+color: blue;
+padding-left:4.5rem;
+font-size: 21px;
+}
+
+.columns-second a {
   display: flex;
   text-align: left;
   padding-left: 4rem;
   color: rgb(190, 187, 187);
   font-size: large;
 }
-.columns img{
+
+.columns img {
   border: 2px solid white;
   border-radius: 20px;
 }
-.columns-second a:hover{
+
+.columns-second a:hover {
   color: white;
 }
-
-
 
 .dropdown-content.show {
   display: block;
 }
-
-
 
 .overlay {
   position: absolute;
@@ -86,12 +93,11 @@
   left: 140px;
   transform: translate(-50%, -50%);
   color: white;
-
   background-color: rgba(42, 72, 238, 0.5);
   border-radius: 10px;
   padding: 10px;
   opacity: 1;
-  transition: opacity 0.5s, transform 1.5s; /* Add transform to transition */
+  transition: opacity 0.5s, transform 1.5s;
 }
 
 .image-container:hover .overlay {
@@ -105,12 +111,11 @@
   left: 415px;
   transform: translate(-50%, -50%);
   color: white;
-
   background-color: rgba(42, 72, 238, 0.5);
   border-radius: 10px;
   padding: 10px;
   opacity: 1;
-  transition: opacity 0.5s, transform 1.5s; /* Add transform to transition */
+  transition: opacity 0.5s, transform 1.5s;
 }
 
 .image-container2:hover .overlay2 {
@@ -118,19 +123,17 @@
   transform: translate(-50%, -150%);
 }
 
-
 .overlay3 {
   position: absolute;
   top: 385px;
   left: 140px;
   transform: translate(-50%, -50%);
   color: white;
-
   background-color: rgba(42, 72, 238, 0.5);
   border-radius: 10px;
   padding: 10px;
   opacity: 1;
-  transition: opacity 0.5s, transform 1.5s; /* Add transform to transition */
+  transition: opacity 0.5s, transform 1.5s;
 }
 
 .image-container3:hover .overlay3 {
@@ -144,12 +147,11 @@
   left: 415px;
   transform: translate(-50%, -50%);
   color: white;
-
   background-color: rgba(42, 72, 238, 0.5);
   border-radius: 10px;
   padding: 10px;
   opacity: 1;
-  transition: opacity 0.5s, transform 1.5s; /* Add transform to transition */
+  transition: opacity 0.5s, transform 1.5s;
 }
 
 .image-container4:hover .overlay4 {
@@ -157,19 +159,17 @@
   transform: translate(-50%, -150%);
 }
 
-
 .overlay5 {
   position: absolute;
   top: 605px;
   left: 140px;
   transform: translate(-50%, -50%);
   color: white;
-
   background-color: rgba(42, 72, 238, 0.5);
   border-radius: 10px;
   padding: 10px;
   opacity: 1;
-  transition: opacity 0.5s, transform 1.5s; /* Add transform to transition */
+  transition: opacity 0.5s, transform 1.5s;
 }
 
 .image-container5:hover .overlay5 {
@@ -183,15 +183,171 @@
   left: 415px;
   transform: translate(-50%, -50%);
   color: white;
-
   background-color: rgba(42, 72, 238, 0.5);
   border-radius: 10px;
   padding: 10px;
   opacity: 1;
-  transition: opacity 0.5s, transform 1.5s; /* Add transform to transition */
+  transition: opacity 0.5s, transform 1.5s;
 }
 
 .image-container6:hover .overlay6 {
   opacity: 1;
   transform: translate(-50%, -150%);
 }
+
+
+
+@media screen and (max-width: 767px) {
+  .categories-movies {
+    position: absolute;
+    top: 5.4rem; /* Adjust the top position to fit under the logo */
+    display: flex;
+    left: 0;
+    flex-direction: column;
+    background-color: rgb(32, 32, 32);
+    padding: 20px ;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    min-width: 30rem;
+    top: 2.4rem;
+    left: -1.3rem;
+    background-color: rgb(17, 17, 17);
+    overflow: auto;
+  }
+
+  .categories-movies > span {
+    margin-bottom: 5px; /* Add margin between links */
+  }
+
+
+  .overlay {
+    position: absolute;
+    top: 165px;
+    left: 140px;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(42, 72, 238, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    opacity: 1;
+    transition: opacity 0.5s, transform 1.5s;
+  }
+  
+  .image-container:hover .overlay {
+    opacity: 1;
+    transform: translate(-50%, -150%);
+  }
+  
+  .overlay2 {
+    position: absolute;
+    top: 385px;
+    left: 140px;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(42, 72, 238, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    opacity: 1;
+    transition: opacity 0.5s, transform 1.5s;
+  }
+  
+  .image-container2:hover .overlay2 {
+    opacity: 1;
+    transform: translate(-50%, -150%);
+  }
+  
+  .overlay3 {
+    position: absolute;
+    
+    top: 605px;
+    left: 140px;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(42, 72, 238, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    opacity: 1;
+    transition: opacity 0.5s, transform 1.5s;
+  }
+  
+  .image-container3:hover .overlay3 {
+    opacity: 1;
+    transform: translate(-50%, -150%);
+  }
+  
+  .overlay4 {
+    position: absolute;
+    top: 825px;
+    left: 140px;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(42, 72, 238, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    opacity: 1;
+    transition: opacity 0.5s, transform 1.5s;
+  }
+  
+  .image-container4:hover .overlay4 {
+    opacity: 1;
+    transform: translate(-50%, -150%);
+  }
+  
+  .overlay5 {
+    position: absolute;
+    top: 1045px;
+    left: 140px;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(42, 72, 238, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    opacity: 1;
+    transition: opacity 0.5s, transform 1.5s;
+  }
+  
+  .image-container5:hover .overlay5 {
+    opacity: 1;
+    transform: translate(-50%, -150%);
+  }
+  
+  .overlay6 {
+    position: absolute;
+    top: 1265px;
+    left: 140px;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(42, 72, 238, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    opacity: 1;
+    transition: opacity 0.5s, transform 1.5s;
+  }
+  
+  .image-container6:hover .overlay6 {
+    opacity: 1;
+    transform: translate(-50%, -150%);
+  }
+
+
+
+  .columns-arrow{
+    color: blue;
+    padding-left:3.5rem;
+    font-size: 21px;
+    }
+    
+    .columns-second a {
+      display: flex;
+      text-align: left;
+      padding-right:3rem;
+      color: rgb(190, 187, 187);
+      font-size: large;
+    }
+
+}
+
