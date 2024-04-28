@@ -195,9 +195,22 @@ font-size: 21px;
   transform: translate(-50%, -150%);
 }
 
+@media screen and (max-width: 860px) {
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    min-width: 50rem;
+    top: 3.37rem;
+    left:-10rem;
+    background-color: rgb(17, 17, 17);
+    overflow: auto;
+  }
+}
 
 
-@media screen and (max-width: 767px) {
+
+@media screen and (max-width: 650px) {
   .categories-movies {
     position: absolute;
     top: 5.4rem; /* Adjust the top position to fit under the logo */

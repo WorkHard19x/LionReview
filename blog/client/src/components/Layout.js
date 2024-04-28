@@ -6,12 +6,12 @@ import '../styles/Layout.css';
 const Layout = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Placeholder for dropdown state
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 767);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 650);
   const [isSearchVisible, setIsSearchVisible] = useState(false); // State to track if search input is visible
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 767);
+      setIsSmallScreen(window.innerWidth <= 650);
     };
 
     window.addEventListener('resize', handleResize);
