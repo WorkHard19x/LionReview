@@ -1,0 +1,48 @@
+/* Footer.css */
+
+.footer {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.863);
+  }
+  
+  .footer-column,
+  .footer-column1,
+  .footer-column2{
+    flex: 1;
+    padding: 20px;
+  }
+
+
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .social-icons li {
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 25px;
+    font-size: 22px;
+  }
+  .social-icons li a {
+    color: white;
+  }
+  
+  .social-icons li:last-child {
+    margin-right: 0;
+  }
+  
+  .fa {
+    font-size: 24px;
+  }
+  
+  /* Remove underline from anchor links */
+  a {
+    text-decoration: none;
+    color:white;
+  }
+  .footer-column1 ul li a,
+  .footer-column2 ul li a{
+    font-size: 12px;
+  }

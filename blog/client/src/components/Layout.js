@@ -66,7 +66,7 @@ const Layout = ({ children }) => {
     <div>
       <div style={{ backgroundColor: 'rgb(17, 17, 17)' }}>
         <Navbar variant="dark" expand="lg" style={{ padding: '1rem', marginLeft: '20px' }}>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="/">
             <img src="/images/logo.png" alt="Your Logo" style={{ maxHeight: '50px', marginRight: '1rem' }} />
           </Navbar.Brand>
           {(isMenuOpen || !isSmallScreen) && (
@@ -92,7 +92,7 @@ const Layout = ({ children }) => {
                         <NavDropdown.Item href="#action/3.1">
                         <span className="image-container2">
                             <img
-                            src="/images/korean.jpg"
+                            src="/images/chinese.jpg"
                             alt='Korean'
                             style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
                             />
@@ -103,7 +103,7 @@ const Layout = ({ children }) => {
                         <NavDropdown.Item href="#action/3.1">
                         <span className="image-container3">
                             <img
-                            src="/images/korean.jpg"
+                            src="/images/japan.jpg"
                             alt='Korean'
                             style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
                             />
@@ -114,7 +114,7 @@ const Layout = ({ children }) => {
                         <NavDropdown.Item href="#action/3.1">
                         <span className="image-container4">
                             <img
-                            src="/images/korean.jpg"
+                            src="/images/taiwan.jpg"
                             alt='Korean'
                             style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
                             />
@@ -125,7 +125,7 @@ const Layout = ({ children }) => {
                         <NavDropdown.Item href="#action/3.1">
                         <span className="image-container5">
                             <img
-                            src="/images/korean.jpg"
+                            src="/images/thailand.jpg"
                             alt='Korean'
                             style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
                             />
@@ -136,7 +136,7 @@ const Layout = ({ children }) => {
                         <NavDropdown.Item href="#action/3.1">
                         <span className="image-container6">
                             <img
-                            src="/images/korean.jpg"
+                            src="/images/hongkong.jpg"
                             alt='Korean'
                             style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
                             />

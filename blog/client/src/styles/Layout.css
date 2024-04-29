@@ -7,6 +7,7 @@
 .categories-movies {
   margin-right: auto;
   display: flex;
+   z-index: 5;
 }
 
 .categories-movies a {
@@ -39,7 +40,7 @@
   top: 3.37rem;
   left: -1rem;
   
-  background-color: rgb(17, 17, 17);
+  background-color: rgba(17, 17, 17, 0.863);
   overflow: auto;
 }
 
@@ -89,7 +90,7 @@ font-size: 21px;
 
 .overlay {
   position: absolute;
-  top: 165px;
+  top: -35px;
   left: 140px;
   transform: translate(-50%, -50%);
   color: white;
@@ -239,7 +240,7 @@ font-size: 21px;
 
   .overlay {
     position: absolute;
-    top: 165px;
+    top: -35px;
     left: 140px;
     transform: translate(-50%, -50%);
     color: white;

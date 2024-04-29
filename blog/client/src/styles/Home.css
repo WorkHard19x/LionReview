@@ -1,30 +1,368 @@
-.title-img{
+
+.full-size{
+    background-color: black;
+    }
+    
+.container {
     display: flex;
+    max-height: 520px;
     width: 100%;
 }
-.title{
-    border: 1px solid red;
-    
-}
-.title2{
-    border: 1px solid red;
-}
-.opacity-mask {
+  
+  .border {
+    flex: 1;
+    max-height: 520px;
+    border: 1px solid rgb(253, 253, 253);
+    position: relative;
+  }
+  
+  .border::after {
+    content: '';
     position: absolute;
-    top: 50%; /* Adjust this value to control the starting point of opacity */
+    top: 0;
     left: 0;
     width: 100%;
-    height: 40%; /* Adjust this value to control the height of the masked area */
-    background: linear-gradient(to bottom, rgb(226, 10, 10), rgba(255, 255, 255, 0.1));
-    mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    display: none; /* Hide by default */
+  }
+  
+  .border.show-bg::after {
+    display: block; /* Show when the class is applied */
+  }
+  
+  .overlay-text {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    font-family: 'FancyFont', cursive;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    z-index: 2;
+  }
+  
+  .arrow-icon {
+    position: absolute;
+    bottom: 50px;
+    left: 60px;
+    z-index: 2;
   }
 
-@media screen and (max-width: 650px) {
-    .title2{
+  .arrow-icon i {
+    color: rgb(255, 254, 254);
+  }
+  
+  .arrow-icon:hover {
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  
+  .arrow-icon:hover i {
+    color: rgba(8, 8, 8, 0.719); /* Red color */
+
+  }
+
+  .border1,
+  .border2,
+  .border3,
+  .border4{
+    background-color: rgba(0, 0, 0, 0.925);
+    position: relative;
+    min-height: 520px;
+  }
+  
+  .border1::after {
+    background-image: url('../assets/korean/korean.jpg');
+}
+  
+  /* Repeat for border2, border3, and border4 */
+  
+  .border2::after {
+    background-image: url('../assets/korean/korean.jpg');
+  }
+  
+  
+  .border3::after {
+    background-image: url('../assets/korean/korean.jpg');
+  }
+
+  
+  .border4::after {
+    background-image: url('../assets/korean/korean.jpg');
+  }
+  
+  .continue {
+    padding-left: 40px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .continue p {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .image-slider-continue {
+    margin-top: 10px;
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    max-height: 200px;
+    max-width: 100%;
+  }
+  
+  .image-slider-continue img {
+    scroll-snap-align: start;
+    max-height: 200px;
+    margin-right: 10px; /* Add some spacing between images */
+    border-radius: 10px;
+  }
+  
+  /* Hide scrollbar */
+  .image-slider-continue::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navigation-arrows {
+    margin-top: 10px;
+    display: flex;
+    position: absolute;
+    align-items: center; /* Center items vertically */
+    font-size: 45px;
+    left: 0;
+}
+.navigation-arrows1 {
+    margin-top: 10px;
+    display: flex;
+    position: absolute;
+    align-items: center; /* Center items vertically */
+    font-size: 50px;
+    right: 0;
+}
+  
+  .navigation-arrows i,
+  .navigation-arrows1 i {
+    cursor: pointer;
+    color: rgba(41, 40, 40, 0.925) ;
+    background-color: rgba(122, 121, 121, 0.904);
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+  .continue:hover .navigation-arrows i,
+  .continue:hover .navigation-arrows1 i{
+    opacity: 1;
+  }
+  .navigation-arrows i:hover,
+  .navigation-arrows1 i:hover{
+    color:white
+  }
+
+.navigation-arrows i:first-child {
+  margin-right: auto; /* Push the left arrow to the left */
+  margin-top: 170%;
+}
+.navigation-arrows1 i:first-child {
+    margin-left: auto; /* Push the left arrow to the left */
+    margin-top: 170%;
+  }
+  
+  .tooltip,
+  .tooltipk {
+    position: relative;
+    display: inline-block;
+    left: 20px;
+    margin-bottom: -20px;
+  }
+  
+  .tooltip a,
+  .tooltipk a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .tooltip span,
+  .tooltipk span{
+    font-size: 20px;
+  }
+  
+  .tooltip:hover a,
+  .tooltip:hover h1,
+  .tooltip:hover span,
+  .tooltip:hover .tooltiptext,
+  .tooltipk:hover a,
+  .tooltipk:hover h1,
+  .tooltipk:hover span,
+  .tooltipk:hover .tooltiptextk {
+    color:  rgba(9, 191, 247, 0.966); /* Change color on hover for all elements */
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    color: rgba(9, 191, 247, 0.966); /* Change color on hover for all elements */
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 25%;
+    left: 115%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .tooltipk .tooltiptextk {
+    visibility: hidden;
+    width: 120px;
+    color: rgba(9, 191, 247, 0.966); /* Change color on hover for all elements */
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 25%;
+    left: 130%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip:hover .tooltiptext,
+  .tooltipk:hover .tooltiptextk{
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .tooltip h1,
+  .tooltipk h1 {
+    color: white; /* Set initial color for h1 */
+  }
+  
+  .news {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Distribute items evenly */
+    color: white;
+    padding: 2rem; /* Adjust padding to ensure spacing from container border */
+  }
+  
+  .news img {
+    max-height: 240px;
+    border-radius: 10px;
+    margin-top:  2rem;
+  }
+  
+  .image-container {
+    position: relative; /* Ensure position context for absolute positioning */
+  }
+  
+  .image-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+    color: white;
+    padding: 0.5rem;
+    margin: 0;
+  }
+
+  .image-slider-continue p {
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  }
+ 
+  @media screen and (max-width: 1440px) {
+    .news img {
+      max-height: 200px;
+      border-radius: 10px;
+      margin-top:  2rem;
+    }
+
+  }
+ 
+  @media only screen and (max-width: 1280px) {
+    .news img {
+      max-height: 160px;
+      border-radius: 10px;
+      margin-top:  2rem;
+    }  
+  }
+
+
+  @media only screen and (max-width: 960px) {
+    .news img {
+      max-height: 150px;
+      border-radius: 10px;
+      margin-top:  2rem;
+    }  
+  }
+
+  @media screen and (max-width: 650px) {
+    .container {
+        display: flex;
+        max-height: 520px;
         width: 100%;
     }
-    .title{
-        width: 0%;
+    .news img {
+      max-height: 115px;
+      border-radius: 10px;
+      margin-top:  2rem;
+    }  
+    .border {
+        flex: 1;
+        max-height: 520px;
+        border: 1px solid rgb(253, 253, 253);
+        position: relative;
     }
-}
+    .border1,
+    .border2,
+    .border3,
+    .border4 {
+        background-color: rgba(0, 0, 0, 0.925);
+        position: relative;
+        min-height: 480px;
+    }
+
+    .overlay-text {
+        position: absolute;
+        top: 30px;
+        left: 10px;
+        font-family: 'FancyFont', cursive;
+        font-size: 24px;
+        color: rgb(255, 255, 255);
+        z-index: 2;
+      }
+      
+      .arrow-icon {
+        position: absolute;
+        bottom: 50px;
+        left: 10px;
+        z-index: 2;
+      }
+      .image-slider-continue img {
+        scroll-snap-align: start;
+        max-height: 120px;
+        margin-right: 10px; /* Add some spacing between images */
+        border-radius: 10px;
+      }
+      .navigation-arrows i:first-child {
+        margin-right: auto; /* Push the left arrow to the left */
+        margin-top: 108%;
+      }
+      .navigation-arrows1 i:first-child {
+          margin-left: auto; /* Push the left arrow to the left */
+          margin-top: 108%;
+      }
+      .navigation-arrows,
+      .navigation-arrows1{
+        font-size: 40px;
+        }
+
+
+  }

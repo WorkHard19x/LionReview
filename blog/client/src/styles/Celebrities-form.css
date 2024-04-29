@@ -1,0 +1,184 @@
+.profile-container-header{
+  background-color: rgb(26, 25, 25);
+
+}
+.profile-container {
+  max-height: 520px;
+  width: 99%;
+  background-color: rgb(26, 25, 25);
+
+}
+
+.profile-border {
+  border: 1px solid black;
+}
+
+.profile-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Align items vertically */
+}
+
+.profile-info {
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.808);
+}
+
+.profile-info h1 {
+  color: rgb(255, 255, 255);
+}
+
+.share-button {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 10px;
+  position: relative;
+  border-radius: 10px;
+  margin-left: 20px;
+  padding: 0.6rem;
+  background-color: rgba(110, 111, 112, 0.808);
+  color: rgba(208, 209, 211, 0.911);
+}
+
+.follow {
+  color: white;
+  background-color: rgba(48, 129, 235, 0.986);
+  border-radius: 10px;
+  padding: 0.6rem;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  z-index: 999;
+  background-color: rgba(110, 111, 112, 0.808);
+  border: 1px solid #ccc;
+  color: rgba(255, 255, 255, 0.808);
+  border-radius: 5px;
+  padding: 5px 0;
+  width: 150px;
+}
+
+.dropdown-option {
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+.dropdown-option:hover {
+  background-color: #b39797;
+}
+
+.profile-image {
+  background-image: url('../assets/korean/korean.jpg');
+  min-height: 450px;
+  width: 60%;
+  position: relative;
+  background-size: cover;
+}
+.tittle{
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(65, 64, 64, 0.63);
+}
+.tittle span {
+  margin: 0 15px; /* Adjust the value to control the space between the words */
+  color: rgba(255, 255, 255, 0.801);
+  font-weight: bold;
+}
+.tittle a:hover {
+  border-bottom: 1px solid blue;
+}
+
+.shows img{
+  width: auto;
+  height: 100px;
+}
+
+.shows{
+  margin: 0 25px;
+
+}
+
+.shows-container p{
+  color:white;
+  font-weight: bold;
+  font-size: 22px;
+  margin: 3px 0px;
+}
+.shows-container span{
+  color:rgb(211, 208, 208);
+  font-weight: bold;
+  font-size: 16px;
+
+}
+.shows-container{
+  padding: 20px;
+}
+
+  .image-container {
+    position: relative;
+    /* margin: 0 2px; */
+    margin-top: -20px;
+    margin-left: 5px;
+  }
+  
+  .image-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+    color: white;
+
+    margin: 0;
+    font-size: 12px;
+  }
+
+  .more-detail{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .detail{
+    justify-content: center;
+    text-align: center;
+    padding: 20px 20px;
+    border: 2px solid white;
+    border-radius: 8px;
+  }
+
+
+
+@media screen and (max-width: 960px) {
+  .profile-image {
+    background-image: url('../assets/korean/korean.jpg');
+    min-height: 370px;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+  }
+  .profile-info{
+    padding: 0px;
+    color: rgba(255, 255, 255, 0.808);
+  }
+}
+
+
+
+@media screen and (max-width: 650px) {
+  .profile-image {
+    background-image: url('../assets/korean/korean.jpg');
+    min-height: 370px;
+    width: 150%;
+    position: relative;
+    background-size: cover;
+  }
+  .profile-info{
+    padding: 0px;
+    color: rgba(255, 255, 255, 0.808);
+  }
+}
