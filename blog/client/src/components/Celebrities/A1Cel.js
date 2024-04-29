@@ -6,7 +6,7 @@ import Image from "../../assets/korean/korean.jpg";
 function A1Cel({ formData = { name: '', birthdate: '', country: '' } }) {
     const [isFollowing, setIsFollowing] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const { name, birthdate, country } = formData; // Destructure form data props
+    const { name, birthdate, country,nickname } = formData; // Destructure form data props
 
     const handleFollow = () => {
       setIsFollowing(!isFollowing);
@@ -39,7 +39,7 @@ function A1Cel({ formData = { name: '', birthdate: '', country: '' } }) {
     }, []);
 
     function calculateAge() {
-        const birthDate = new Date('1986-09-25');
+        const birthDate = new Date(birthdate);
         const today = new Date();
         let age = today.getFullYear() - birthDate.getFullYear();
         const monthDiff = today.getMonth() - birthDate.getMonth();
@@ -82,12 +82,9 @@ function A1Cel({ formData = { name: '', birthdate: '', country: '' } }) {
             <div className="profile-content">
                 <div className="profile-info">
                 <h1>{name}</h1>
+                <p>{nickname}</p>
                 <p>{country}</p>
                 <p>{birthdate} (age {age})</p>
-                {/* <h1>Yoon Shi Yoon</h1>
-                <p>윤시윤</p>
-                <p>Korea</p>
-                <p>Sep 25, 1986 (age {age})</p> */}
                 <p>{isFollowing ? 'Followers: 1,000,000' : 'Follow'}</p>
                 <button onClick={handleFollow} className="follow">{isFollowing ? <i className="fa-solid fa-heart" > Following</i>  : <i className="fa-regular fa-heart" > Follow</i>}</button>
                 <button className="share-button" onClick={toggleDropdown}>
@@ -103,7 +100,10 @@ function A1Cel({ formData = { name: '', birthdate: '', country: '' } }) {
                 )}
                 </button>
                 </div>
-                <div className="profile-image"></div>
+                <div className="profile-image">
+                <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" alt="Leodoan" />
+
+                </div>
             </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
 }
 .profile-container {
   max-height: 520px;
-  width: 99%;
+  width: 100%;
   background-color: rgb(26, 25, 25);
 
 }
@@ -20,7 +20,8 @@
 }
 
 .profile-info {
-  padding: 20px;
+  width: 15%;
+  padding-left: 50px;
   color: rgba(255, 255, 255, 0.808);
 }
 
@@ -69,13 +70,16 @@
   background-color: #b39797;
 }
 
-.profile-image {
-  background-image: url('../assets/korean/korean.jpg');
-  min-height: 450px;
-  width: 60%;
-  position: relative;
-  background-size: cover;
+.profile-img {
+  max-height: 450px;
+  overflow: hidden;
 }
+.profile-img img {
+  max-width: 100%; /* Ensure the image doesn't exceed its container's width */
+  height: auto; /* Let the height adjust proportionally */
+  display: block;
+}
+
 .tittle{
   justify-content: center;
   text-align: center;
@@ -154,15 +158,14 @@
 
 
 @media screen and (max-width: 960px) {
-  .profile-image {
-    background-image: url('../assets/korean/korean.jpg');
-    min-height: 370px;
-    width: 100%;
-    position: relative;
-    background-size: cover;
-  }
+
   .profile-info{
     padding: 0px;
+    color: rgba(255, 255, 255, 0.808);
+  }
+  .profile-info {
+    width: 25%;
+    padding-left: 8px;
     color: rgba(255, 255, 255, 0.808);
   }
 }
@@ -170,15 +173,8 @@
 
 
 @media screen and (max-width: 650px) {
-  .profile-image {
-    background-image: url('../assets/korean/korean.jpg');
-    min-height: 370px;
-    width: 150%;
-    position: relative;
-    background-size: cover;
-  }
-  .profile-info{
-    padding: 0px;
+  .profile-info {
+    min-width: 20%;
     color: rgba(255, 255, 255, 0.808);
   }
 }
