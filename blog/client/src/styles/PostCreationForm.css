@@ -1,0 +1,110 @@
+.Header {
+    background-color: rgb(15, 15, 15);
+    margin: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.border-all {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    background-color: rgba(36, 35, 35, 0.685);
+    width: 50%;
+    padding: 20px; /* Add padding for spacing */
+    border-radius: 10px;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between; /* Align items on opposite ends */
+    margin-bottom: 10px; /* Add margin between input containers */
+}
+
+.input-container label {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.input-container input {
+    flex: 1; /* Take up remaining space */
+    margin-left: 10px; /* Add space between label and input */
+}
+.Imagenews_url,
+.News_url,
+.New_title,
+.Showtitle,
+.Show_url,
+.Imageshow_url{
+    display: flex;
+    justify-content: space-between; /* Align items on opposite ends */
+    margin-bottom: 10px;
+}
+
+
+
+input {
+    flex: 1; /* Take up remaining space */
+    margin-left: 10px; /* Add space between label and input */
+}
+
+.Describle {
+    display: flex;
+    align-items: center; /* Align items vertically */
+
+    margin-bottom: 10px; /* Add margin below the container */
+    margin-top: 10px;
+}
+
+.Describle label {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 10px; /* Add space between label and input */
+}
+
+.Describle textarea {
+    flex: 1; /* Take up remaining space */
+    font-size: 13px; /* Maintain font size */
+    padding: 8px; /* Maintain padding */
+    width: 100%; /* Make the textarea full-width */
+    height: 150px; /* Set initial height of the textarea */
+    resize: vertical; /* Allow vertical resizing */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
+
+
+h2 {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px; /* Add margin below the heading */
+}
+label{
+    color: rgb(255, 255, 255);
+
+}
+.buttons{
+    display: flex;
+    align-items: center; /* Align items vertically */
+    text-align: center;
+    justify-content: center;
+    margin-top: 25px; /* Add margin below the container */
+
+}
+.submit-button{
+    font-size: 25px;
+    border-radius: 10px;
+    background-color: rgb(248, 245, 245);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+
+}
+.submit-button:hover {
+    background-color: #fa0202e3; /* Change background color on hover */
+    color: #ffffff; /* Change text color on hover */
+    cursor: pointer;
+}

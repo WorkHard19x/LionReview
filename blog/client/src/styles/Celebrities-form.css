@@ -73,11 +73,14 @@
 .profile-img {
   max-height: 450px;
   overflow: hidden;
+  border-radius: 10px;
+
 }
 .profile-img img {
   max-width: 100%; /* Ensure the image doesn't exceed its container's width */
   height: auto; /* Let the height adjust proportionally */
   display: block;
+
 }
 
 .tittle{
@@ -95,10 +98,7 @@
   border-bottom: 1px solid blue;
 }
 
-.shows img{
-  width: auto;
-  height: 100px;
-}
+
 
 .shows{
   margin: 0 25px;
@@ -123,11 +123,17 @@
 
   .image-container {
     position: relative;
-    /* margin: 0 2px; */
+    width: auto;
     margin-top: -20px;
+    margin-bottom: 20px;
     margin-left: 5px;
   }
+  .image-container img {
+    width: auto;
+    max-height: 500px;
+  }
   
+
   .image-title {
     position: absolute;
     bottom: 0;
@@ -176,5 +182,20 @@
   .profile-info {
     min-width: 20%;
     color: rgba(255, 255, 255, 0.808);
+  }
+  .image-container {
+    position: relative;
+    /* margin: 0 2px; */
+    width: auto;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    margin-left: 5px;
+  }
+  .shows{
+    margin: 0;
+    padding: 0;
+  }
+  .image-container p{
+    font-size: 10px;
   }
 }
