@@ -1,6 +1,6 @@
 <h1>Relax is a Blog for Entertainment</h1>
 
-`WorkHard is a technology blog` that covers various topics such as mathematics, physics, and coding. It was created as the basis for my own website, but everyone is welcome to use it. We provide news and updates on these subjects. Additionally, our blog offers assistance to students with their homework, projects, labs, and exercises. You can contact us through our website. We also have a Discord server for real-time communication. Alternatively, you can send us your files, and we will provide detailed step-by-step explanations and assistance`
+``
 
 
 ## Goals
