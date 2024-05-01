@@ -2,21 +2,60 @@
                 import React, { useState, useEffect } from 'react';
                 import '../../styles/Celebrities-form.css';
                 import '@fortawesome/fontawesome-free/css/all.css';
-                
+                import axios from 'axios';
+                const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+
                 function Yoon_Shi_Yoon() {
-                    const [isFollowing, setIsFollowing] = useState(false);
+                
+                
                     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
                     const [birthdated, setBirthdate] = useState('1986-09-26'); // Set initial birthdate
+                    
 
-                    const handleFollow = () => {
-                        setIsFollowing(!isFollowing);
-                    };
-                
                     const toggleDropdown = () => {
                         setIsDropdownOpen(!isDropdownOpen);
                     };
-                    const shareOptions = ['Copy Link', 'Facebook', 'Twitter', 'Messenger'];
-                      function toggleSection(sectionId) {
+                    const shareOptions = ['Copy Link', 'Facebook', 'Twitter'];
+                    const shareUrl = 'https://vivufilm.com/xem-phim';
+
+                    const handleShareOptionClick = async (option) => {
+                        try {
+                            switch (option) {
+                                case 'Copy Link':
+                                    await navigator.clipboard.writeText(shareUrl);
+                                    console.log('Link copied to clipboard:', shareUrl);
+                                    // Optionally show a notification or update UI to indicate success
+                                    break;
+                                case 'Facebook':
+                                    shareOnFacebook();
+                                    break;
+                                case 'Twitter':
+                                    // Implement share on Twitter functionality
+                                    break;
+                                default:
+                                    break;
+                            }
+                        } catch (error) {
+                            console.error('Failed to copy or share:', error);
+                            // Optionally show a notification or update UI to indicate failure
+                        }
+                    };
+                
+                    const shareOnFacebook = () => {
+                        // Implement sharing on Facebook using Facebook SDK
+                        // Ensure the Facebook SDK is loaded before using FB object
+                        window.FB.ui({
+                            method: 'share',
+                            href: 'https://example.com', // Replace with your URL
+                        }, function(response){});
+                    };
+                    
+                    
+                    
+                    
+                    
+                    
+                    function toggleSection(sectionId) {
                     const sections = document.querySelectorAll('.section');
                         sections.forEach(section => {
                             if (section.id === sectionId) {
@@ -103,6 +142,34 @@
 
 
 
+                        const [isFollowing, setIsFollowing] = useState(false);
+                        const [followerCount, setFollowerCount] = useState(0);
+                    
+                        useEffect(() => {
+                            fetchFollowerCount();
+                        }, []);
+                    
+                        const fetchFollowerCount = async () => {
+                            try {
+                                const response = await axios.get(`${API_BASE_URL}/api/follower-count`);
+                                setFollowerCount(response.data.followerCount);
+                                setIsFollowing(response.data.isFollowing);
+                            } catch (error) {
+                                console.error('Error fetching follower count:', error);
+                            }
+                        };
+                    
+                        const handleFollow = async () => {
+                            try {
+                                const ipAddress = '127.0.0.1';
+                                const response = await axios.post(`${API_BASE_URL}/api/follow`, { ipAddress });
+                                setIsFollowing(response.data.isFollowing);
+                                setFollowerCount(response.data.followerCount);
+                            } catch (error) {
+                                console.error('Error following:', error);
+                            }
+                        };
+
                     return (
                         <div className="profile-container-header">
                             <div className="profile-container">
@@ -113,19 +180,30 @@
                                             <p>윤시윤</p>
                                             <p>Vietnam</p>
                                             <p>{birthdated} (age {age})</p>
-                                            <p>{isFollowing ? 'Followers: 1,000,000' : 'Follow'}</p>
-                                            <button onClick={handleFollow} className="follow">{isFollowing ? <i className="fa-solid fa-heart" > Following</i>  : <i className="fa-regular fa-heart" > Follow</i>}</button>
+
+                                            <p>{isFollowing ? `Followers: ${followerCount}` : 'Follow'}</p>
+                                            <button onClick={handleFollow} className="follow">
+                                                {isFollowing ? 
+                                                <span>
+                                                <i className="fa-solid fa-heart"></i> Following
+                                                </span> 
+                                                : 
+                                                <span>
+                                                    <i className="fa-regular fa-heart"></i> Follow
+                                                </span>
+                                                }
+                                            </button>
                                             <button className="share-button" onClick={toggleDropdown}>
-                                            <i className="fa-solid fa-share-nodes" ></i> Share {'▼'}
-                                            {isDropdownOpen && (
-                                                <div  className="dropdown">
-                                                {shareOptions.map((option, index) => (
-                                                    <div key={index} className="dropdown-option">
-                                                    {option}
+                                                <i className="fa-solid fa-share-nodes"></i> Share {'▼'}
+                                                {isDropdownOpen && (
+                                                    <div className="dropdown">
+                                                        {shareOptions.map((option, index) => (
+                                                            <div key={index} className="dropdown-option" onClick={() => handleShareOptionClick(option)}>
+                                                                {option}
+                                                            </div>
+                                                        ))}
                                                     </div>
-                                                ))}
-                                                </div>
-                                            )}
+                                                )}
                                             </button>
                                         </div>
                                         <div className="profile-image">
