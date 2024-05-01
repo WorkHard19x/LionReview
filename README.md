@@ -1,33 +1,33 @@
 <h1>Relax is a Blog for Entertainment</h1>
 
-`WorkHard is a technology blog` that covers various topics such as mathematics, physics, and coding. It was created as the basis for my own website, but everyone is welcome to use it. We provide news and updates on these subjects. Additionally, our blog offers assistance to students with their homework, projects, labs, and exercises. You can contact us through our website. We also have a Discord server for real-time communication. Alternatively, you can send us your files, and we will provide detailed step-by-step explanations and assistance`
+``
 
 
 ## Goals
 - An easy way to create a simple, secure website with a blog
 - Support for text-based and photo-based blog formats
-- Easy authoring in HTML, Markdown (with code formatting), or JSON
+- Easy authoring in react
 - Easy customization of site layout and formatting
 - Support for Windows and Linux hosting Flask
 - Quick search of post content, including simple search queries
   
 ## Structure
-- `/app.py` Entry point for the application, configures the server and static content
-- `/script.js` Handles image slideshows, post dates, and dropdown menus
-- `/templates/HTML` directory manages the layout of the webpage
-- `/static/CSS` directory manages the styling and formatting of the HTML conten
+- `blog-web\blog\backend\app.py` Entry point for the application, configures the server and static content
+- `blog-web\blog\client\npm start` Handles image slideshows, post dates, and dropdown menus
+- `blog-web\blog\client\src\components` directory manages the layout of the webpage
+- `blog-web\blog\client\src\styles/CSS` directory manages the styling and formatting of the HTML conten
 
 ## Instructions
 
-1. Install Python, .NET SDK, MongoDB, Node.js
+1. Install react, Python, .NET SDK, Flask, MongoDB, Node.js
 1. cd (your folder)\blog-web\blog\client
 1. npm install react-bootstrap, react-icons, react-router-dom.
  
 
 # Front-End Stack
-- HTML: Defines the structure and content of your web pages
-- CSS: Styles HTML elements, defining layout, colors, typography, and other visual aspects to enhance presentation
-- JavaScript: Adds interactivity and dynamic functionality to your web pages, including features such as image sliders, real-time timestamp updates (e.g., updateTimeAgo), dropdown menus, rating systems, pagination (showPostsForPage), and more
+- React: Defines the structure and content of your web pages
+- CSS: Styles, defining layout, colors, typography, and other visual aspects to enhance presentation
+- React: Adds interactivity and dynamic functionality to your web pages, including features such as real-time timestamp updates (e.g., updateTimeAgo), dropdown menus, and more
 
 # Back-End Stack
 - Server-side Languages (Python Flask): Handles server-side logic, data processing, and communication with databases. Flask, a Python web framework, provides a lightweight and flexible platform for building web applications, allowing you to create dynamic content, handle user requests, and manage session data effectively
