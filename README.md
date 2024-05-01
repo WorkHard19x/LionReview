@@ -19,15 +19,15 @@
 
 ## Instructions
 
-1. Install Python, .NET SDK, MongoDB, Node.js
+1. Install react, Python, .NET SDK, Flask, MongoDB, Node.js
 1. cd (your folder)\blog-web\blog\client
 1. npm install react-bootstrap, react-icons, react-router-dom.
  
 
 # Front-End Stack
-- HTML: Defines the structure and content of your web pages
-- CSS: Styles HTML elements, defining layout, colors, typography, and other visual aspects to enhance presentation
-- JavaScript: Adds interactivity and dynamic functionality to your web pages, including features such as image sliders, real-time timestamp updates (e.g., updateTimeAgo), dropdown menus, rating systems, pagination (showPostsForPage), and more
+- React: Defines the structure and content of your web pages
+- CSS: Styles, defining layout, colors, typography, and other visual aspects to enhance presentation
+- React: Adds interactivity and dynamic functionality to your web pages, including features such as real-time timestamp updates (e.g., updateTimeAgo), dropdown menus, and more
 
 # Back-End Stack
 - Server-side Languages (Python Flask): Handles server-side logic, data processing, and communication with databases. Flask, a Python web framework, provides a lightweight and flexible platform for building web applications, allowing you to create dynamic content, handle user requests, and manage session data effectively
