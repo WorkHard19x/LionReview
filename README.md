@@ -6,16 +6,16 @@
 ## Goals
 - An easy way to create a simple, secure website with a blog
 - Support for text-based and photo-based blog formats
-- Easy authoring in HTML, Markdown (with code formatting), or JSON
+- Easy authoring in react
 - Easy customization of site layout and formatting
 - Support for Windows and Linux hosting Flask
 - Quick search of post content, including simple search queries
   
 ## Structure
-- `/app.py` Entry point for the application, configures the server and static content
-- `/script.js` Handles image slideshows, post dates, and dropdown menus
-- `/templates/HTML` directory manages the layout of the webpage
-- `/static/CSS` directory manages the styling and formatting of the HTML conten
+- `blog-web\blog\backend\app.py` Entry point for the application, configures the server and static content
+- `blog-web\blog\client\npm start` Handles image slideshows, post dates, and dropdown menus
+- `blog-web\blog\client\src\components` directory manages the layout of the webpage
+- `blog-web\blog\client\src\styles/CSS` directory manages the styling and formatting of the HTML conten
 
 ## Instructions
 
