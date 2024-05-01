@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../../styles/News.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import axios from 'axios';
+import Editable from '../Editable';
 
 function News({ pageId }) {
 
@@ -63,6 +64,48 @@ function News({ pageId }) {
         }
     };
 
+
+        const [summarytext, setName] = useState(localStorage.getItem(window.location.href + '-summarytext') || 'summarytext');
+
+        useEffect(() => {
+            localStorage.setItem(window.location.href + '-summarytext', summarytext);
+        }, [summarytext]); // Run this effect whenever the name changes
+
+        const handleNameChange = (newName) => {
+            setName(newName);
+        };
+        const [fulldetail, setNamefulldetail] = useState(localStorage.getItem(window.location.href + '-fulldetail') || 'fulldetail');
+
+        useEffect(() => {
+            localStorage.setItem(window.location.href + '-fulldetail', fulldetail);
+        }, [fulldetail]); // Run this effect whenever the name changes
+
+        const handleNameChangefulldetail = (newNamed) => {
+            setNamefulldetail(newNamed);
+        };
+        const [isAdmin, setIsAdmin] = useState(false);
+                        
+        // Effect to check if user is admin
+        useEffect(() => {
+            // Logic to check if user is admin
+            // For example, you might check if the user is logged in and has admin privileges
+            const userIsAdmin = checkIfUserIsAdmin(); // You need to implement this function
+            setIsAdmin(userIsAdmin);
+        }, []);
+
+        // Effect to save the name to localStorage whenever it changes
+        
+
+        // Function to check if user is admin (you need to implement this)
+        const checkIfUserIsAdmin = () => {
+            // Logic to determine if user is admin
+            // For example, you might check if the user is logged in and has admin privileges
+            // Return true if user is admin, false otherwise
+            const isLoggedIn = true; // Example: You would replace this with your actual authentication logic
+            const isAdmin = true; // Example: You would replace this with your actual admin check logic
+            return isLoggedIn && isAdmin;
+        };
+
   return (
     <div className='News'>
             <div className='News-header'>
@@ -81,7 +124,10 @@ function News({ pageId }) {
                     </div>
                     <div className="news-summary">
                         <p style={{fontWeight: 'bold', fontSize:'19px'}}>Summary: </p> 
-                        <p>With this setup, regardless of the original dimensions of the images, they will be scaled to fill the .news-image container while maintaining their aspect ratio. The object-fit: cover; property ensures that the entire container is covered by the image, and any excess is cropped as needed. Adjust the border-radius value as desired to apply rounded corners to the images.</p>
+                        {/* <p>With this setup, regardless of the original dimensions of the images, they will be scaled to fill the .news-image container while maintaining their aspect ratio. The object-fit: cover; property ensures that the entire container is covered by the image, and any excess is cropped as needed. Adjust the border-radius value as desired to apply rounded corners to the images.</p> */}
+
+                        {isAdmin && <p><Editable initialValue={summarytext} onSave={handleNameChange} /></p>}
+                        {!isAdmin && <p>{summarytext}</p>}
                     </div>
                     <div className="news-ads">
                         <h1>Love</h1>
@@ -89,7 +135,10 @@ function News({ pageId }) {
                     
                     <div className="news-details">
                     <p style={{fontWeight: 'bold', fontSize:'19px'}}>Full Details: </p> 
-                    <p>With this setup, regardless of the original dimensions of the images, they will be scaled to fill the .news-image container while maintaining their aspect ratio. The object-fit: cover; property ensures that the entire container is covered by the image, and any excess is cropped as needed. Adjust the border-radius value as desired to apply rounded corners to the images.</p>
+                    {/* <p>With this setup, regardless of the original dimensions of the images, they will be scaled to fill the .news-image container while maintaining their aspect ratio. The object-fit: cover; property ensures that the entire container is covered by the image, and any excess is cropped as needed. Adjust the border-radius value as desired to apply rounded corners to the images.</p> */}
+                    {isAdmin && <p><Editable initialValue={fulldetail} onSave={handleNameChangefulldetail} /></p>}
+                        {!isAdmin && <p>{fulldetail}</p>}
+                    
                     </div>
                     <div className="news-provide">
                         <a href=""><p>Provided</p></a>

@@ -8,30 +8,28 @@ function BoldToggle({ textareaRef, type }) {
     const textarea = textareaRef.current;
     const startPos = textarea.selectionStart;
     const endPos = textarea.selectionEnd;
-    let newText = '';
-    let startTag = '';
-    let endTag = '';
-
+    let newText = ''; // Declare newText here
+  
     switch (type) {
       case 'b':
-        startTag = isActive ? '' : '<strong>';
-        endTag = isActive ? '' : '</strong>';
+        insertTextAtPosition(textarea, '<strong>', '</strong>');
         break;
       case 'i':
-        startTag = isActive ? '' : '<em>';
-        endTag = isActive ? '' : '</em>';
+        insertTextAtPosition(textarea, '<em>', '</em>');
         break;
+      case 'br':
+          insertTextAtPosition(textarea, '<br/>');
+          break;
       case 'color':
-        startTag = isActive ? '' : '<span style="color:red">';
-        endTag = isActive ? '' : '</span>';
+        const color = prompt('Enter color:');
+        if (color) {
+          insertTextAtPosition(textarea, `<span style="color:${color}">`, '</span>');
+        }
         break;
       case 'link':
-        if (!isActive) {
-          const url = prompt('Enter the URL:');
-          if (url) {
-            startTag = `<a href="${url}" target="_blank">`;
-            endTag = '</a>';
-          }
+        const url = prompt('Enter the URL:');
+        if (url) {
+          insertTextAtPosition(textarea, `<a href="${url}" target="_blank">`, '</a>');
         }
         break;
       case 'img':
@@ -39,32 +37,36 @@ function BoldToggle({ textareaRef, type }) {
           const imgUrl = prompt('Enter the image URL:');
           if (imgUrl) {
             newText = `<img src="${imgUrl}" alt="Image" />`;
-            insertTextAtPosition(textarea, newText);
+            insertTextAtPosition(textarea, newText, '');
           }
         }
         break;
       default:
         break;
     }
-
+  
     setIsActive(!isActive);
   };
+  
 
-  const insertTextAtPosition = (textarea, newText) => {
+  const insertTextAtPosition = (textarea, newText, endText = '') => {
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const text = textarea.value;
     const before = text.substring(0, start);
     const after = text.substring(end, text.length);
-    textarea.value = before + newText + after;
-    textarea.selectionStart = textarea.selectionEnd = start + newText.length;
+  
+    textarea.value = before + newText + endText + after;
+    textarea.selectionStart = textarea.selectionEnd = start + newText.length + endText.length;
   };
+  
+  
 
   return (
     <span className='bold-italic'
       style={{
         cursor: 'pointer',
-        padding: '3px 0px',
+        padding: '1px 0px',
         border: '1px solid #ccc',
         display: 'flex',
         flexDirection: 'column',

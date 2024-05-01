@@ -15,7 +15,8 @@ function PostNewForm() {
         imageUrltitle:'',
         summarytext:'',
         fulldetail:'',
-        provided:'',
+        provide:'',
+        title_url:'',
     });
   
 //   const handleChange = (e) => {
@@ -27,8 +28,18 @@ function PostNewForm() {
 const handleChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
   };
-const handleSubmit = async (e) => {
-    e.preventDefault();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    // Trim trailing spaces and remove consecutive line breaks from the textarea value
+    const cleanedValue = formData.fulldetail.trim().replace(/\n{2,}/g, '\n');
+
+    // Update the state with the cleaned value
+    setFormData({...formData, fulldetail: cleanedValue});
+
+    // Now you can proceed with handling the submission, for example:
+    // Make an API call, update state, etc.
     try {
         // Send form data to the server
         const response = await axios.post('http://localhost:5000/news-jsx', formData, {
@@ -46,6 +57,29 @@ const handleSubmit = async (e) => {
     }
 };
 
+
+
+
+
+// const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//         // Send form data to the server
+//         const response = await axios.post('http://localhost:5000/news-jsx', formData, {
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         });
+//         alert('Form data submitted successfully');
+//         // Add import statement to App.js
+//         const jsFileName = response.data.jsFileName;
+//         updateAppJs(jsFileName);
+//     } catch (error) {
+//         console.log('Error submitting form data:', error);
+//         alert('Failed to submit form data');
+//     }
+// };
+
 const updateAppJs = (jsFileName) => {
     axios.post('http://localhost:5000/update-app-js', { jsFileName }, {
         headers: {
@@ -61,6 +95,9 @@ const updateAppJs = (jsFileName) => {
         console.log('Error updating App.js:', error);
     });
 };
+
+
+
   return (
       <div className='Header'>
             <div className='border-all'>
@@ -69,7 +106,10 @@ const updateAppJs = (jsFileName) => {
 
 
             <h2>Create News Form</h2>
-               
+                <div className="input-container">
+                        <label>Title_url:</label>
+                        <input type="text" name="title_url" value={formData.title_url.replace(/\b\w/g, (char) => char.toUpperCase()).replace(/\s+/g, '_') } onChange={(e) => handleChange(e.target.name, e.target.value)} />
+                </div>
                 <div className="input-container">
                     <label>Title:</label>
                     <input type="text" name="title" value={formData.title} onChange={(e) => handleChange(e.target.name, e.target.value)} />
@@ -95,7 +135,6 @@ const updateAppJs = (jsFileName) => {
                     <input type="text" name="imageUrltitle" value={formData.imageUrltitle} onChange={(e) => handleChange(e.target.name, e.target.value)} />
                 </div>
 
-
                 <div className="Describle">
                 <label>Summary:</label>
                 <textarea
@@ -107,6 +146,7 @@ const updateAppJs = (jsFileName) => {
                 <span>
                     <BoldToggle type="b" textareaRef={summaryTextareaRef} />
                     <BoldToggle type="i" textareaRef={summaryTextareaRef} />
+                    <BoldToggle type="br" textareaRef={summaryTextareaRef} />
                     <BoldToggle type="color" textareaRef={summaryTextareaRef} />
                     <BoldToggle type="link" textareaRef={summaryTextareaRef} />
                     <BoldToggle type="img" textareaRef={summaryTextareaRef} />
@@ -124,6 +164,7 @@ const updateAppJs = (jsFileName) => {
                 <span>
                     <BoldToggle type="b" textareaRef={fulldetailTextareaRef} />
                     <BoldToggle type="i" textareaRef={fulldetailTextareaRef} />
+                    <BoldToggle type="br" textareaRef={fulldetailTextareaRef} />
                     <BoldToggle type="color" textareaRef={fulldetailTextareaRef} />
                     <BoldToggle type="link" textareaRef={fulldetailTextareaRef} />
                     <BoldToggle type="img" textareaRef={fulldetailTextareaRef} />
@@ -132,19 +173,13 @@ const updateAppJs = (jsFileName) => {
 
                 <div className="input-container">
                     <label>Provided:</label>
-                    <input type="text" name="provided" value={formData.provided} onChange={(e) => handleChange(e.target.name, e.target.value)} />
+                    <input type="text" name="provide" value={formData.provide} onChange={(e) => handleChange(e.target.name, e.target.value)} />
                 </div>
                 <div className="buttons">
                     <button type="submit" className="submit-button">Submit</button>
                 </div >
-
-
-
-
-
-
-
                 </form>
+
             </div>
     </div>
   )

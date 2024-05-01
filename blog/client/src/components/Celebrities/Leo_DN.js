@@ -1,21 +1,56 @@
 
                 import React, { useState, useEffect } from 'react';
+                import Editable from '../Editable';
                 import '../../styles/Celebrities-form.css';
+                import axios from 'axios';
+
                 import '@fortawesome/fontawesome-free/css/all.css';
+                const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
-                function Yoon_Shi_Yoon() {
-                    const [isFollowing, setIsFollowing] = useState(false);
+                function Leo_DN() {
                     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-                    const [birthdated, setBirthdate] = useState('1986-09-26'); // Set initial birthdate
-
-                    const handleFollow = () => {
-                        setIsFollowing(!isFollowing);
-                    };
+                    const [birthdated, setBirthdate] = useState('2024-03-26'); // Set initial birthdate
                 
                     const toggleDropdown = () => {
                         setIsDropdownOpen(!isDropdownOpen);
                     };
                     const shareOptions = ['Copy Link', 'Facebook', 'Twitter', 'Messenger'];
+                    const shareUrl = '/Leo_DN';
+
+                    const handleShareOptionClick = async (option) => {
+                        try {
+                            switch (option) {
+                                case 'Copy Link':
+                                    await navigator.clipboard.writeText(shareUrl);
+                                    console.log('Link copied to clipboard:', shareUrl);
+                                    // Optionally show a notification or update UI to indicate success
+                                    break;
+                                case 'Facebook':
+                                    shareOnFacebook();
+                                    break;
+                                case 'Twitter':
+                                    // Implement share on Twitter functionality
+                                    break;
+                                default:
+                                    break;
+                            }
+                        } catch (error) {
+                            console.error('Failed to copy or share:', error);
+                            // Optionally show a notification or update UI to indicate failure
+                        }
+                    };
+                
+                    const shareOnFacebook = () => {
+                        // Implement sharing on Facebook using Facebook SDK
+                        // Ensure the Facebook SDK is loaded before using FB object
+                        window.FB.ui({
+                            method: 'share',
+                            href: 'https://example.com', // Replace with your URL
+                        }, function(response){});
+                    };
+
+
+
                       function toggleSection(sectionId) {
                     const sections = document.querySelectorAll('.section');
                         sections.forEach(section => {
@@ -54,21 +89,22 @@
                     }
 
                         // const imagesshows = [
-                        //     { url: "", title: "It's Beautiful Now (2022)", img: "https://i.mydramalist.com/k2lrO_4c.jpg?v=1" },
-                        //     { url: "", title: "You Raise Me Up (2021)", img: "https://i.mydramalist.com/wbn6g_4c.jpg?v=1" },
-                        //     { url: "", title: "Train (2020)", img: "https://i.mydramalist.com/kdEBO_4c.jpg?v=1" },
-                        //     { url: "", title: "Psychopath Diary (2019)", img: "https://i.mydramalist.com/2g4yWc.jpg?v=1" },
-                        //     { url: "", title: "The Nokdu Flower (2019)", img: "https://i.mydramalist.com/kXL5bc.jpg?v=1" },
-                        //     { url: "", title: "Your Honor (2018)", img: "https://i.mydramalist.com/O5jzQc.jpg?v=1" },
-                        //     { url: "", title: "Grand Prince (2018)", img: "https://i.mydramalist.com/244yEc.jpg?v=1" },
-                        //     { url: "", title: "Hit the Top (2017)", img: "https://i.mydramalist.com/elgEec.jpg?v=1" },
-                        //     { url: "", title: "Vivid Romance (2017)", img: "https://i.mydramalist.com/VKAjEc.jpg?v=1" },
-                        //     { url: "", title: "Mirror of the Witch (2016)", img: "https://i.mydramalist.com/Brdq5c.jpg?v=1" },
-                        //     { url: "", title: "Prime Minister and I (2013)", img: "https://i.mydramalist.com/kvA5Oc.jpg?v=1" },
-                        //     { url: "", title: "Happy Noodle (2013)", img: "https://i.mydramalist.com/2QDRRc.jpg?v=1" },
-                        //     { url: "", title: "Flower Boy Next Door (2013)", img: "https://i.mydramalist.com/Z82l1c.jpg?v=1" },
-                        //     { url: "", title: "Bread, Love and Dreams (2010)", img: "https://i.mydramalist.com/6024gc.jpg?v=1" },
-                        //     { url: "", title: "High Kick Through the Roof! (2009)", img: "https://i.mydramalist.com/Kp5wRc.jpg?v=1" },
+                        //     { url: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", title: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", img: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
+                        //     { url: "", title: "", img: "" },
                         //     { url: "", title: "", img: "" },
                         //     { url: "", title: "", img: "" },
                         //     { url: "", title: "", img: "" },
@@ -77,7 +113,7 @@
                         // ];
                         
                         // const imagesnews = [
-                        //     { url: "", title: "", img: "" },
+                        //     { url: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", title: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", img: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" },
                         //     { url: "", title: "", img: "" },
                         //     { url: "", title: "", img: "" },
                         //     { url: "", title: "", img: "" },
@@ -99,9 +135,49 @@
                         //     { url: "", title: "", img: "" }
 
                         // ];
-                        const userName = 'YoonShiYoon'; // Define the userName variable
-                        const userNamenews = 'YoonShiYoon-new'; // Define the userName variable
 
+                        const [isFollowing, setIsFollowing] = useState(false);
+                        const [followerCount, setFollowerCount] = useState(0);
+                    
+                        useEffect(() => {
+                            fetchFollowerCount();
+                        }, []);
+                    
+                        const fetchFollowerCount = async () => {
+                            try {
+                                const response = await axios.get(`${API_BASE_URL}/api/follower-count`);
+                                setFollowerCount(response.data.followerCount);
+                                setIsFollowing(response.data.isFollowing);
+                            }catch (error) {
+                                console.error('Error fetching follower count:', error);
+                            }
+                        };
+                    
+                        const handleFollow = async () => {
+                            try {
+                                const ipAddress = '127.0.0.1';
+                                const response = await axios.post(`${API_BASE_URL}/api/follow`, { ipAddress });
+                                setIsFollowing(response.data.isFollowing);
+                                setFollowerCount(response.data.followerCount);
+                            } catch (error) {
+                                console.error('Error following:', error);
+                            }
+                        };
+
+
+                        const [name, setName] = useState(localStorage.getItem(window.location.href + '-name') || 'Leo_DN');
+
+                        useEffect(() => {
+                            localStorage.setItem(window.location.href + '-name', name);
+                        }, [name]); // Run this effect whenever the name changes
+
+                        const handleNameChange = (newName) => {
+                            setName(newName);
+                        };
+
+
+                        const userName = 'Leo_DN-shows'; // Define the userName variable
+                        const userNamenews = 'Leo_DN-news'; // Define the userName variable
                         const saveImageDataToMongoDB = async (imageData, userName,userNamenews, imagesnews) => {
                             try {
                                 const response = await fetch('http://localhost:5000/api/saveImageData', {
@@ -122,20 +198,30 @@
                                 console.error('Error saving image data:', error);
                             }
                         };
-
-
-
-                        
                         const [imagesnews, setimagesnews] = useState(() => {
                             const storedimagesnews = localStorage.getItem('imagesnews');
                             return storedimagesnews ? JSON.parse(storedimagesnews) : [
-                                { url: "", title: "It's Beautiful Now (2022)", img: "https://i.mydramalist.com/k2lrO_4c.jpg?v=1" },
-                                { url: "", title: "You Raise Me Up (2021)", img: "https://i.mydramalist.com/wbn6g_4c.jpg?v=1" },
-                                { url: "", title: "Train (2020)", img: "https://i.mydramalist.com/kdEBO_4c.jpg?v=1" },
-                                { url: "", title: "Psychopath Diary (2019)", img: "https://i.mydramalist.com/2g4yWc.jpg?v=1" },
-                                { url: "", title: "The Nokdu Flower (2019)", img: "https://i.mydramalist.com/kXL5bc.jpg?v=1" },
-                                { url: "", title: "Your Honor (2018)", img: "https://i.mydramalist.com/O5jzQc.jpg?v=1" },
-                            ];
+                                { url: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", title: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", img: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" }
+                                ];
                         });
                         useEffect(() => {
                             localStorage.setItem('imageData', JSON.stringify(imagesnews));
@@ -148,7 +234,7 @@
                         };
 
                         const handleAddImaged = () => {
-                            const userNamenews = '{name}';
+                            const userNamenews = 'Leo_DN';
 
                             setimagesnews([{ url: "", title: "", img: "", userNamenews }, ...imagesnews]);
                         };
@@ -158,18 +244,30 @@
                             setimagesnews(updatedImageData);
                         };
 
-
-
                         const [imageData, setImageData] = useState(() => {
                             const storedImageData = localStorage.getItem('imageData');
                             return storedImageData ? JSON.parse(storedImageData) : [
-                                { url: "", title: "It's Beautiful Now (2022)", img: "https://i.mydramalist.com/k2lrO_4c.jpg?v=1" },
-                                { url: "", title: "You Raise Me Up (2021)", img: "https://i.mydramalist.com/wbn6g_4c.jpg?v=1" },
-                                { url: "", title: "Train (2020)", img: "https://i.mydramalist.com/kdEBO_4c.jpg?v=1" },
-                                { url: "", title: "Psychopath Diary (2019)", img: "https://i.mydramalist.com/2g4yWc.jpg?v=1" },
-                                { url: "", title: "The Nokdu Flower (2019)", img: "https://i.mydramalist.com/kXL5bc.jpg?v=1" },
-                                { url: "", title: "Your Honor (2018)", img: "https://i.mydramalist.com/O5jzQc.jpg?v=1" },
-                            ];
+                                { url: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", title: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", img: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" },
+                                { url: "", title: "", img: "" }
+                                ];
                         });
                         useEffect(() => {
                             localStorage.setItem('imageData', JSON.stringify(imageData));
@@ -182,7 +280,7 @@
                         };
 
                         const handleAddImage = () => {
-                            const userName = '{name}';
+                            const userName = 'Leo_DN';
 
                             setImageData([{ url: "", title: "", img: "", userName }, ...imageData]);
                         };
@@ -216,38 +314,47 @@
                             return isLoggedIn && isAdmin;
                         };
 
+
+
                     return (
                         <div className="profile-container-header">
                             <div className="profile-container">
                                 <div className="profile-border">
                                     <div className="profile-content">
                                         <div className="profile-info">
-                                            {/* <h1><Editable initialValue={name} onSave={handleNameChange} /></h1> */}
-                                            
-
-                                            {/* Render the name */}
-                                            <h1>Yoon Shi Yoon</h1>
-                                            <p>윤시윤</p>
+                                             {isAdmin && <h1><Editable initialValue={name} onSave={handleNameChange} /></h1>}
+                                            <p>leo</p>
                                             <p>Vietnam</p>
-                                            {/* <p>{birthdated} (age {age})</p> */}
-                                            <p>{isFollowing ? 'Followers: 1,000,000' : 'Follow'}</p>
-                                            <button onClick={handleFollow} className="follow">{isFollowing ? <i className="fa-solid fa-heart" > Following</i>  : <i className="fa-regular fa-heart" > Follow</i>}</button>
+                                            <p>{birthdated} (age {age})</p>
+
+                                            <p>{isFollowing ? `Followers: ${followerCount}` : 'Follow'}</p>
+                                            <button onClick={handleFollow} className="follow">
+                                                {isFollowing ? 
+                                                <span>
+                                                <i className="fa-solid fa-heart"></i> Following
+                                                </span> 
+                                                : 
+                                                <span>
+                                                    <i className="fa-regular fa-heart"></i> Follow
+                                                </span>
+                                                }
+                                            </button>
                                             <button className="share-button" onClick={toggleDropdown}>
-                                            <i className="fa-solid fa-share-nodes" ></i> Share {'▼'}
-                                            {isDropdownOpen && (
-                                                <div  className="dropdown">
-                                                {shareOptions.map((option, index) => (
-                                                    <div key={index} className="dropdown-option">
-                                                    {option}
+                                                <i className="fa-solid fa-share-nodes"></i> Share {'▼'}
+                                                {isDropdownOpen && (
+                                                    <div className="dropdown">
+                                                        {shareOptions.map((option, index) => (
+                                                            <div key={index} className="dropdown-option" onClick={() => handleShareOptionClick(option)}>
+                                                                {option}
+                                                            </div>
+                                                        ))}
                                                     </div>
-                                                ))}
-                                                </div>
-                                            )}
+                                                )}
                                             </button>
                                         </div>
                                         <div className="profile-image">
                                             <div className="profile-img">
-                                            <img src="https://image.kpopmap.com/2020/09/Yoon-shiyoon-cover.jpg" alt="Yoon_Shi_Yoon" />
+                                            <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" alt="Leo_DN" />
                                             </div>
                                         </div>
                                     </div>
@@ -270,8 +377,7 @@
                                         <button onClick={() => saveImageDataToMongoDB(imageData, userName)}>Save to MongoDB</button>
                                     </>
                                 )}
-
-                                <div className="news">
+                            <div className="news">
                                     {imageData.map((info, index) => (
                                         <div key={index} className="image-container">
                                             <img src={info.img} alt={`Image ${index}`} />
@@ -308,8 +414,6 @@
                                         </div>
                                     ))}
                                 </div>
-
-                                {/* Add image button for admin */}
                             </div>
                         </div>
                         <div className="section" id="about" style={{display: 'none'}}>
@@ -318,13 +422,8 @@
                                     <p> <span style={{fontSize:'16px', color:'rgb(13, 104, 241)'}}>
                                         {'▶'}</span>About </p>
                                     <span>
-                                    Yoon Shi Yoon, born in Suncheon as Yoon Dong Gu, is a South Korean actor and television personality managed by MOA Entertainment. Yoon debuted in the daily sitcom "High Kick Through the Roof". He was nominated for Best New Actor in TV at the Baeksang Arts Awards and won MBC's Best Couple award with his co-star Shin Se Kyung.
+                                    Yoon Shi Yoon, born in Suncheon as Yoon Dong Gu, is a South Korean actor and television personality managed by MOA Entertainment. Yoon debuted in the daily sitcom "High Kick Through the Roof". He was nominated for Best New Actor in TV at the Baeksang Arts Awards and won MBC's Best Couple award with his co-star Shin Se Kyung. The following year, Yoon was cast as the main character in the slice-of-life television series "King of Baking, Kim Takgu". The series was one of the most watched shows in South Korea in 2010 with a final episode viewership rating of 50.8%, and Yoon became a household name in Korea. Due to the drama's popularity, Yoon and co-star Lee Young Ah were named promotional ambassadors for North Chungcheong Province. In 2013, he starred in the cable series "My Cute Guys", the third installment of tvN 's "flower boy" series. The series was the highest sold cable drama ever to Japan. Yoon appeared in a commercial for the cellphone Bubi Bubi with the famous girl group T-ara. He also sang 4 singles for the soundtrack of the commercial. On April 28, 2014, Yoon secretly enlisted into the Republic of Korea Marine Corps and was discharged on January 27, 2016.
 
-The following year, Yoon was cast as the main character in the slice-of-life television series "King of Baking, Kim Takgu". The series was one of the most watched shows in South Korea in 2010 with a final episode viewership rating of 50.8%, and Yoon became a household name in Korea. Due to the drama's popularity, Yoon and co-star Lee Young Ah were named promotional ambassadors for North Chungcheong Province. In 2013, he starred in the cable series "My Cute Guys", the third installment of tvN 's "flower boy" series. The series was the highest sold cable drama ever to Japan.
-
-Yoon appeared in a commercial for the cellphone Bubi Bubi with the famous girl group T-ara. He also sang 4 singles for the soundtrack of the commercial.
-
-On April 28, 2014, Yoon secretly enlisted into the Republic of Korea Marine Corps and was discharged on January 27, 2016.
                                     </span>
                     
                                     <div className='more-detail'>
@@ -333,9 +432,9 @@ On April 28, 2014, Yoon secretly enlisted into the Republic of Korea Marine Corp
                                             <span><i className="fa-regular fa-star" style={{color:'white'}}></i> Zodiac: Libra</span>
                                             <br /><span><i className="fa-solid fa-up-long" style={{color:'white'}}></i> Tall: 178cm</span>
                                             <br /><span><i className="fa-brands fa-font-awesome" style={{color:'white'}}></i> Nationality: South Korean</span>
-                                            <br /><a href="https://www.instagram.com/moa_ent" ><span><i className="fa-brands fa-instagram" style={{color:'white'}}></i> Yoon Shi Yoon's instagram</span></a>
-                                            <br /><a href="https://www.youtube.com/channel/UCzdxR414mQFe3eyrgt4WKDg" 
-                                            target="_blank" ><span><i className="fa-brands fa-youtube" style={{color:'white'}}></i> Yoon Shi Yoon's youtube</span></a>
+                                            <br /><a href="https://www.instagram.com/moa_ent/?hl=ko" ><span><i className="fa-brands fa-instagram" style={{color:'white'}}></i> Leo Doan's instagram</span></a>
+                                            <br /><a href="https://www.youtube.com/" 
+                                            target="_blank" ><span><i className="fa-brands fa-youtube" style={{color:'white'}}></i> Leo Doan's youtube</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -352,6 +451,7 @@ On April 28, 2014, Yoon secretly enlisted into the Republic of Korea Marine Corp
                                         <button onClick={() => saveImageDataToMongoDB(imagesnews, userNamenews)}>Save to MongoDB</button>
                                     </>
                                 )}
+
                                 <div className="news">
                                     {imagesnews.map((infos, indexs) => (
                                         <div key={indexs} className="image-container">
@@ -399,5 +499,5 @@ On April 28, 2014, Yoon secretly enlisted into the Republic of Korea Marine Corp
                 );
             };
                 
-            export default Yoon_Shi_Yoon;
+            export default Leo_DN;
             

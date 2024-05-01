@@ -297,7 +297,15 @@
 
   @media only screen and (max-width: 960px) {
     .news img {
-      max-height: 150px;
+      max-height: 140px;
+      border-radius: 10px;
+      margin-top:  2rem;
+    }  
+  }
+
+  @media only screen and (max-width: 920px) {
+    .news img {
+      max-height: 110px;
       border-radius: 10px;
       margin-top:  2rem;
     }  
@@ -310,7 +318,7 @@
         width: 100%;
     }
     .news img {
-      max-height: 115px;
+      max-height: 100px;
       border-radius: 10px;
       margin-top:  2rem;
     }  

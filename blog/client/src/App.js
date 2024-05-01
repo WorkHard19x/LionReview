@@ -1,3 +1,5 @@
+import Leo_DN from './components/Celebrities/Leo_DN';
+
 
 import Yoon_Shi_Yoon from './components/Celebrities/Yoon_Shi_Yoon';
 import Layout from './components/Layout';
@@ -10,7 +12,7 @@ import Footer from './components/Bottom';
 import A1Cel from './components/Celebrities/A1Cel';
 
 import News_Yon from './components/News/News_Yon';
-
+import Admin from './components/Admin'; // Import the Admin component
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -27,10 +29,9 @@ function App() {
           <Route path="/Test" element={<Test />} />
           <Route path="/Yoon_Shi_Yoon" element={<Yoon_Shi_Yoon />} />
           <Route path="/Create_Celebrities_Profiles" element={<PostCreationForm />} />
-
-
-
           <Route path="/Create_New_Profiles" element={<PostNewForm />} />
+          <Route path="/Celebrities/Leo_DN" element={<Leo_DN />} />
+          <Route path="/Admin" element={<Admin />} />
         </Routes>
       </Layout>
       <Footer></Footer>
