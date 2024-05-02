@@ -10,7 +10,7 @@ function PostCreationForm() {
         nickname:'',
         country: '',
         imageUrl: '',
-
+        name_url:'',
         imageshowUrl: '',
         showurl: '',
         showtitle: '',
@@ -368,7 +368,7 @@ function PostCreationForm() {
 
             inputsImagenews_url.push(
                 <div className="Imagenews_url" key={i}>
-                    <label>{`Imagenews_url ${i}:`}</label>
+                    <label style={{color:"rgba(70, 247, 108, 0.932)"}}>{`Imagenews_url ${i}:`}</label>
                     <input
                         type="text"
                         name={inputNameimagenewsUrl}
@@ -399,7 +399,7 @@ function PostCreationForm() {
 
             inputsshowurlNews_url.push(
                 <div className="News_url" key={i}>
-                    <label>{`News_url ${i}:`}</label>
+                    <label style={{color:"rgba(70, 247, 108, 0.932)"}}>{`News_url ${i}:`}</label>
                     <input
                         type="text"
                         name={inputNameNews_url}
@@ -424,7 +424,7 @@ function PostCreationForm() {
 
             inputsshowtitleNew_title.push(
                 <div className="New_title" key={i}>
-                    <label>{`New_title ${i}:`}</label>
+                    <label style={{color:"rgba(70, 247, 108, 0.932)"}}>{`New_title ${i}:`}</label>
                     <input
                         type="text"
                         name={inputNameshowtitleNew_title}
@@ -449,6 +449,10 @@ function PostCreationForm() {
             
             <form onSubmit={handleSubmit}>
             <h2>Create Celebrities Profiles</h2>
+                <div className="input-container">
+                    <label>Name_url:</label>
+                    <input type="text" name="name_url" value={formData.name_url.replace(/\b\w/g, (char) => char.toUpperCase()).replace(/\s+/g, '_') } onChange={(e) => handleChange(e.target.name, e.target.value)} />
+                </div>
                 <div className="input-container">
                     <label>Name:</label>
                     <input type="text" name="name" value={formData.name} onChange={handleChange} />
@@ -489,51 +493,21 @@ function PostCreationForm() {
                 <div className='new_title'>
                     {renderInputsshowtitle()}
                 </div>
-
-                {/* <div className='Imageshow_url20'>
-                    <label>Imageshow_url20:</label>
-                    <input type="text" name="imageshowUrl18" value={formData.imageshowUrl20} onChange={handleChange} />
-                </div>  */}
-
-                {/* <div className='Show_url'>
-                    <label>Show_url:</label>
-                    <input type="text" name="showurl1" value={formData.showurl} onChange={handleChange} />
-                </div> */}
-
-                {/* <div className='Show_title'>
-                    <label>Show_title:</label>
-                    <input type="text" name="showtitle" value={formData.showtitle} onChange={handleChange} />
-                </div> */}
-
                 
                 {/* <!-- Imagenews_url --> */}
                 <div className='new_title'>
                     {renderInputsImagenews_url()}
                 </div>
 
-                {/* <div className='news_url'>
-                    <label>Imagenews_url:</label>
-                    <input type="text" name="imagenewsUrl" value={formData.imagenewsUrl} onChange={handleChange} />
-                </div> */}
-                
                 {/* <!-- News_url --> */}
                 <div className='new_title'>
                     {renderInputsNews_url()}
                 </div>
-                {/* <div className='new_url'>
-                    <label>News_url:</label>
-                    <input type="text" name="newsurl" value={formData.newsurl} onChange={handleChange} />
-                </div> */}
-
                 
                 {/* <!-- New_title --> */}
                 <div className='new_title'>
                     {renderInputsNew_title()}
                 </div>
-                {/* <div className='new_title'>
-                    <label>New_title:</label>
-                    <input type="text" name="newstitle" value={formData.newstitle} onChange={handleChange} />
-                </div> */}
 
                 <div className="Describle">
                     <label>Describle:</label>

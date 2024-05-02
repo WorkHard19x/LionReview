@@ -141,7 +141,7 @@ function News({ pageId }) {
                     
                     </div>
                     <div className="news-provide">
-                        <a href=""><p>Provided</p></a>
+                       <p>Provided: <a href=""> Link</a></p> 
                     </div>
                 </div>
                 <div className="new-side">

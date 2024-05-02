@@ -111,10 +111,14 @@
     margin-top: 2rem;
     border-top: 2px solid rgb(151, 148, 148);
 }
-.news-provide a,
+.news-provide a{
+    color:black;
+    text-decoration: underline;
+    font-weight: bold;
+}
 .news-provide p
 {
-    color:black
+    color:black;
 }
 
 .new-side{

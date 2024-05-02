@@ -1,12 +1,13 @@
 import Leo_DN from './components/Celebrities/Leo_DN';
-
-
 import Yoon_Shi_Yoon from './components/Celebrities/Yoon_Shi_Yoon';
+import It_Beautiful_Now from './components/Korean/It_Beautiful_Now';
 import Layout from './components/Layout';
 import Home from './components/Home';
 import News from './components/News';
 import Test from './components/Test';
 import PostNewForm from './components/PostNewForm';
+import ParentComponent from './components/ParentComponent';
+
 
 import Footer from './components/Bottom';
 import A1Cel from './components/Celebrities/A1Cel';
@@ -29,8 +30,16 @@ function App() {
           <Route path="/Test" element={<Test />} />
           <Route path="/Yoon_Shi_Yoon" element={<Yoon_Shi_Yoon />} />
           <Route path="/Create_Celebrities_Profiles" element={<PostCreationForm />} />
+          <Route path="/ParentComponent" element={<ParentComponent />} />
+
+
           <Route path="/Create_New_Profiles" element={<PostNewForm />} />
           <Route path="/Celebrities/Leo_DN" element={<Leo_DN />} />
+
+          <Route path="/korean/It-Beautiful-Now/:pageId" element={<It_Beautiful_Now />} />
+
+
+
           <Route path="/Admin" element={<Admin />} />
         </Routes>
       </Layout>

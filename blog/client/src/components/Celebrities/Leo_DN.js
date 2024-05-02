@@ -7,7 +7,7 @@
                 import '@fortawesome/fontawesome-free/css/all.css';
                 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
-                function Leo_DN() {
+                function Leo_DN({ pageId }) {
                     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
                     const [birthdated, setBirthdate] = useState('2024-03-26'); // Set initial birthdate
                 
@@ -145,20 +145,21 @@
                     
                         const fetchFollowerCount = async () => {
                             try {
-                                const response = await axios.get(`${API_BASE_URL}/api/follower-count`);
-                                setFollowerCount(response.data.followerCount);
-                                setIsFollowing(response.data.isFollowing);
-                            }catch (error) {
+                                const response = await axios.get(`${API_BASE_URL}/api/follower-count/${pageId}`);
+                                const { followerCount, isFollowing } = response.data;
+                                setFollowerCount(followerCount);
+                                setIsFollowing(isFollowing);
+                            } catch (error) {
                                 console.error('Error fetching follower count:', error);
                             }
                         };
                     
                         const handleFollow = async () => {
                             try {
-                                const ipAddress = '127.0.0.1';
-                                const response = await axios.post(`${API_BASE_URL}/api/follow`, { ipAddress });
-                                setIsFollowing(response.data.isFollowing);
-                                setFollowerCount(response.data.followerCount);
+                                const response = await axios.post(`${API_BASE_URL}/api/follow/${pageId}`);
+                                const { followerCount, isFollowing } = response.data;
+                                setFollowerCount(followerCount);
+                                setIsFollowing(isFollowing);
                             } catch (error) {
                                 console.error('Error following:', error);
                             }
@@ -327,18 +328,11 @@
                                             <p>Vietnam</p>
                                             <p>{birthdated} (age {age})</p>
 
-                                            <p>{isFollowing ? `Followers: ${followerCount}` : 'Follow'}</p>
-                                            <button onClick={handleFollow} className="follow">
-                                                {isFollowing ? 
-                                                <span>
-                                                <i className="fa-solid fa-heart"></i> Following
-                                                </span> 
-                                                : 
-                                                <span>
-                                                    <i className="fa-regular fa-heart"></i> Follow
-                                                </span>
-                                                }
-                                            </button>
+                                            <div>
+            <button onClick={handleFollow}>
+                {isFollowing ? 'Unfollow' : 'Follow'} ({followerCount})
+            </button>
+        </div>
                                             <button className="share-button" onClick={toggleDropdown}>
                                                 <i className="fa-solid fa-share-nodes"></i> Share {'▼'}
                                                 {isDropdownOpen && (
