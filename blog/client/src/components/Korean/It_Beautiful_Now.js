@@ -51,38 +51,13 @@ function It_Beautiful_Now() {
     const shareOptions = ['Copy Link', 'Facebook', 'Twitter', 'Messenger'];
 
 
-    //   function toggleSection(sectionId) {
-    // const sections = document.querySelectorAll('.section');
-    //     sections.forEach(section => {
-    //         if (section.id === sectionId) {
-    //             section.style.display = 'block';
-    //         } else {
-    //             section.style.display = 'none';
-    //         }
-    //     });
-    // }
-
-
-    
-
-
-
-
-
-
-
-
-    
     const today = new Date();
     const uploadDate = new Date('2024-04-02'); // '2024-04-02' represents April 2, 2024
     
     const timeDifference = Math.abs(today.getTime() - uploadDate.getTime());
     const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
 
-
         // Define state variable for admin status
-
-
 
         const [showAd, setShowAd] = useState(true); // Initially show the ad
         const [adClicked, setAdClicked] = useState(false);

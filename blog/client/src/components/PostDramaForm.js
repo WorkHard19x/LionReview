@@ -214,7 +214,7 @@ const handleSubmit = async (e) => {
     e.preventDefault();
     try {
         // Send form data to the server
-        const response = await axios.post('http://localhost:5000/generate-jsx', formData, {
+        const response = await axios.post('http://localhost:5000/korean-drama', formData, {
             headers: {
                 'Content-Type': 'application/json'
             }
