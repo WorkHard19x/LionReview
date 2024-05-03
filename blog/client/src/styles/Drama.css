@@ -1,18 +1,84 @@
 .profile-container-headerd{
     background-color: rgb(26, 25, 25);
-  
   }
+  .profile-containerd-korean{
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    
+  }
+  .korean-title{
+    background-color: rgba(44, 43, 43, 0.884);
+    padding: 0.7rem;
+    margin: 0 -2rem ;
+    padding-left: 2rem;
+
+  }
+  .korean-title i,
+  .korean-title span{
+    color: orange;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: -0.9rem;
+  }
+
+  .border-test p {
+      display: flex;
+      justify-content: space-between; /* Align items on each end of the container */
+  }
+
+  .border-test span {
+    color: rgba(110, 108, 108, 0.925);
+    font-size: 17px;
+    margin-top: -0.5rem;
+  }
+  .outside-drama-ads{
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    bottom: 0;
+    background-color: transparent;
+    color: #fff;
+    text-align: center;
+    padding: 35px 0;
+  }
+  .drama-bottom-ads{
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    bottom: 0;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 35px 0;
+  }
+  .close-btn {
+    position: absolute;
+    right: 14px; /* Adjust right position as needed */
+    cursor: pointer;
+    color: #f7f7f7;
+    background-color: rgb(79, 80, 80);
+    font-size: 16px;
+    padding:0.2rem;
+    top:0;
+}
+
+.border-test{
+  border-top: 1px dashed rgba(110, 108, 108, 0.925);
+}
+
+
   .profile-containerd {
-    max-height: 520px;
     background-color: rgb(26, 25, 25);
+    margin: 0 2rem ;
 
   }
   
   .profile-borderd {
-    border: 1px solid black;
+    border: 2px solid rgba(54, 53, 53, 0.925);
+    border-radius: 3px;
     display: flex;
-    background-color: rgb(238, 238, 238);
-    margin: 0 2rem ;
   }
   
   .video-left,
@@ -165,7 +231,9 @@
     width: 100%
 
 }
-
+.icon.selected {
+  background-color: rgba(51, 106, 224, 0.904); /* Change this to the color you want for selected numbers */
+}
 .icon {
     width: 30px;
     height: 30px;
@@ -177,8 +245,68 @@
     align-items: center;
     border:1px solid #fafcfd; /* Example color */
 }
+.shows{
+  margin: 0 25px;
 
-    .image-container {
+}
+
+.shows-container p{
+  color:white;
+  font-weight: bold;
+  font-size: 22px;
+  margin: 3px 0px;
+}
+.shows-container span{
+  color:rgb(211, 208, 208);
+  font-weight: bold;
+  font-size: 16px;
+
+}
+.shows-container{
+  padding: 20px;
+}
+
+  .image-container {
+    position: relative;
+    width: auto;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    margin-left: 5px;
+  }
+  .image-container img {
+    max-width: 250px;
+    max-height: 150px;
+  }
+  
+
+  .image-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+    color: white;
+
+    margin: 0;
+    font-size: 12px;
+  }
+
+  .more-detail{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .detail{
+    justify-content: center;
+    text-align: center;
+    padding: 20px 20px;
+    border: 2px solid white;
+    border-radius: 8px;
+  }
+
+    /* .image-container {
       position: relative;
       width: auto;
       margin-top: -20px;
@@ -196,7 +324,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+      background-color: rgba(0, 0, 0, 0.5); 
       color: white;
   
       margin: 0;
@@ -216,7 +344,7 @@
       padding: 20px 20px;
       border: 2px solid white;
       border-radius: 8px;
-    }
+    } */
   
   
   
@@ -231,6 +359,9 @@
         text-align: center;
         justify-content: center;
     }
+    .nav-epdisode{
+      width: 80%;
+    }
     .profile-info{
       padding: 0px;
       color: rgba(255, 255, 255, 0.808);
@@ -239,6 +370,11 @@
       width: 25%;
       padding-left: 8px;
       color: rgba(255, 255, 255, 0.808);
+    }
+    .profile-containerd {
+      background-color: rgb(26, 25, 25);
+      margin: 0 0rem ;
+  
     }
   }
   
@@ -254,6 +390,18 @@
         display: flex;
         background-color: rgb(238, 238, 238);
         margin: 0 ;
+
+      }
+      .nav-epdisode{
+        width: 100%;
+
+      }
+      .video{
+        width: 100%;
+      }
+      .video-left,
+      .video-right{
+        width: 0%;
       }
     .image-containerd {
       position: relative;

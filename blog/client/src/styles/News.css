@@ -210,7 +210,6 @@
     word-wrap: break-word; 
 }
 
-
 @media screen and (max-width: 800px) {
     .news-image img {
         width: 250px; /* Ensure the image fills the container horizontally */

@@ -4,9 +4,8 @@ import It_Beautiful_Now from './components/Korean/It_Beautiful_Now';
 import Layout from './components/Layout';
 import Home from './components/Home';
 import News from './components/News';
-import Test from './components/Test';
 import PostNewForm from './components/PostNewForm';
-import ParentComponent from './components/ParentComponent';
+import PostDramaForm from './components/PostDramaForm';
 
 
 import Footer from './components/Bottom';
@@ -27,14 +26,13 @@ function App() {
           <Route path="/Celebrities_Form" element={<A1Cel />} />
           <Route path="/News" element={<News />} />
           <Route path="/News_Yon" element={<News_Yon />} />
-          <Route path="/Test" element={<Test />} />
           <Route path="/Yoon_Shi_Yoon" element={<Yoon_Shi_Yoon />} />
-          <Route path="/Create_Celebrities_Profiles" element={<PostCreationForm />} />
-          <Route path="/ParentComponent" element={<ParentComponent />} />
-
-
           <Route path="/Create_New_Profiles" element={<PostNewForm />} />
-          <Route path="/Celebrities/Leo_DN" element={<Leo_DN />} />
+          <Route path="/Create_Korean_Profiles" element={<PostDramaForm />} />
+          <Route path="/Create_Celebrities_Profiles" element={<PostCreationForm />} />
+
+
+          <Route path="/Celebrities/Leo_DN/:pageId" element={<Leo_DN />} />
 
           <Route path="/korean/It-Beautiful-Now/:pageId" element={<It_Beautiful_Now />} />
 

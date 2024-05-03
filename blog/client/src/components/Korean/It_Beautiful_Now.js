@@ -4,6 +4,8 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import Editable from '../Editable';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
@@ -43,48 +45,39 @@ function It_Beautiful_Now() {
     const [birthdated, setBirthdate] = useState('1986-09-26'); // Set initial birthdate
 
 
-
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
     const shareOptions = ['Copy Link', 'Facebook', 'Twitter', 'Messenger'];
-      function toggleSection(sectionId) {
-    const sections = document.querySelectorAll('.section');
-        sections.forEach(section => {
-            if (section.id === sectionId) {
-                section.style.display = 'block';
-            } else {
-                section.style.display = 'none';
-            }
-        });
-    }
-    const [age, setAge] = useState(calculateAge());
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            setAge(calculateAge());
-        }, 60000); // Update every minute (adjust as needed)
 
-        return () => clearInterval(intervalId); // Clean up interval on unmount
-    }, []);
+    //   function toggleSection(sectionId) {
+    // const sections = document.querySelectorAll('.section');
+    //     sections.forEach(section => {
+    //         if (section.id === sectionId) {
+    //             section.style.display = 'block';
+    //         } else {
+    //             section.style.display = 'none';
+    //         }
+    //     });
+    // }
 
-    useEffect(() => {
-        // Update age whenever birthdate changes
-        setAge(calculateAge());
-    }, [birthdated]);
 
-    function calculateAge() {
-        const today = new Date();
-        const birthYear = parseInt(birthdated.slice(0, 4)); // Extract year from birthdate
-        const birthDate = new Date(birthYear, 7, 18); // Assuming month and day are fixed
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        return age;
-    }
+    
 
+
+
+
+
+
+
+
+    
+    const today = new Date();
+    const uploadDate = new Date('2024-04-02'); // '2024-04-02' represents April 2, 2024
+    
+    const timeDifference = Math.abs(today.getTime() - uploadDate.getTime());
+    const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
 
 
         // Define state variable for admin status
@@ -110,151 +103,261 @@ function It_Beautiful_Now() {
 
        
         
-        const [icons, setIcons] = useState(() => {
-            const storedIcons = localStorage.getItem('icons');
-            return storedIcons ? JSON.parse(storedIcons) : [];
-          });
+
         
-          const [isInputVisible, setInputVisible] = useState(false);
-          const [isAdmin, setIsAdmin] = useState(false);
-          const [currentUrlIndex, setCurrentUrlIndex] = useState(null);
+        const [isInputVisible, setInputVisible] = useState(false);
+        const [isAdmin, setIsAdmin] = useState(false);
+        const [currentUrlIndex, setCurrentUrlIndex] = useState(0); // Initialize with default index
         
-          useEffect(() => {
+        useEffect(() => {
             const userIsAdmin = checkIfUserIsAdmin();
             setIsAdmin(userIsAdmin);
-          }, []);
+        }, []);
         
-          const checkIfUserIsAdmin = () => {
+        const checkIfUserIsAdmin = () => {
             // Example: Replace this logic with your actual admin check logic
             // For simplicity, returning true always in this example
             return true; // Return true if user is admin, false otherwise
-          };
-        
-          const handleAddIcon = () => {
-            const newIcon = { url: "" };
-            setIcons([...icons, newIcon]);
-            setInputVisible(true);
-          };
-        
-          const handleDeleteIcon = (index) => {
-            const newIcons = [...icons];
-            newIcons.splice(index, 1);
-            setIcons(newIcons);
-          };
-        
-          const handleUrlChange = (index, value) => {
-            const newIcons = [...icons];
-            newIcons[index].url = value;
-            setIcons(newIcons);
-          };
-        
-          const handleSave = () => {
-            saveToMongoDB(icons);
-            localStorage.setItem('icons', JSON.stringify(icons));
-            setInputVisible(false);
-          };
-        
-          const handleEnter = (e) => {
-            if (e.key === 'Enter' || e.target.id === 'saveButton') {
-              setInputVisible(false);
-            }
-          };
-          const userName = 'Leo_DN-shows';
+        };
 
-        const saveToMongoDB = async (icons, userName) => {
+        const [icons, setIcons] = useState(() => {
+            const storedIcons = localStorage.getItem('icons');
+            return storedIcons ? JSON.parse(storedIcons) : [
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+                { url: "",},{ url: "",},{ url: "",},
+            ];
+        });
+        const location = useLocation();
+        useEffect(() => {
+            const hash = location.hash;
+            if (hash) {
+                toggleSection(hash.substring(1));
+            } else {
+                toggleSection('shows');
+            }
+        }, [location]);
+    
+        useEffect(() => {
+            localStorage.setItem('icons', JSON.stringify(icons));
+        }, [icons]);
+    
+        function toggleSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.display = section.id === sectionId ? 'block' : 'none';
+            });
+        }
+
+
+    
+
+            const handleAddIcon = () => {
+                const newIcon = { url: '' };
+                setIcons([...icons, newIcon]);
+                setInputVisible(true);
+            };
+
+            const handleDeleteIcon = (index) => {
+                const newIcons = [...icons];
+                newIcons.splice(index, 1);
+                setIcons(newIcons);
+            };
+        
+        const handleUrlChange = (index, value) => {
+            const newIcons = [...icons]; // Create a copy of the icons array
+            newIcons[index].url = value; // Update the specific icon's URL
+            setIcons(newIcons); // Update the state with the modified icons array
+        };
+        
+
+        
+        const handleEnter = (e) => {
+            if (e.key === 'Enter' || e.target.id === 'saveButton') {
+                setInputVisible(false);
+            }
+        };
+        
+
+        const saveToMongoDB = async (icons, userName, userName2, imagesnews) => {
             try {
-                const response = await fetch('http://localhost:5000/api/korenaMovie', {
+                // Your fetch request to save data to MongoDB
+                // Ensure that the icons state is being used here
+                // Example:
+                await fetch('your-api-endpoint', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ icons,userName  }),
-
+                    body: JSON.stringify({ icons, userName, userName2, imagesnews }),
                 });
-                const data = await response.json();
-                if (data.success) {
-                    console.log('Image data saved to MongoDB successfully');
-                    setInputVisible(false); // Hide input after successful save
-
-                } else {
-                    console.error('Error saving image data:', data.error);
-                }
+        
+                // Assuming the save operation is successful, you can update the input visibility state
+                setInputVisible(false);
             } catch (error) {
                 console.error('Error saving image data:', error);
             }
         };
-
-
-
-
+        
         // Function to handle clicking on an icon
         const handleIconClick = (index) => {
             setCurrentUrlIndex(index);
+            setSelectedIndex(index);
         };
 
 
 
+        const userName = 'Leo_DN-shows';
+        const userName2 = 'Leo_DN-news';
+
+
+
+
+
+    const [isVisible, setIsVisible] = useState(true);
+
+    const handleClose = () => {
+        setIsVisible(false);
+        setTimeout(() => {
+          setIsVisible(true);
+        }, 20 * 60 * 1000); // 30 minutes in milliseconds
+      };
+
+
+
+                    const [imageData, setImageData] = useState(() => {
+                    const storedImageData = localStorage.getItem('imageData');
+                    return storedImageData ? JSON.parse(storedImageData) : [
+                        { url: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", title: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", img: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" },
+                        { url: "", title: "", img: "" }
+                        ];
+                });
+                useEffect(() => {
+                    localStorage.setItem('imageData', JSON.stringify(imageData));
+                }, [imageData]);
+                
+                const handleImageDataChange = (index, field, value) => {
+                    const updatedImageData = [...imageData];
+                    updatedImageData[index][field] = value;
+                    setImageData(updatedImageData);
+                };
+
+                const handleAddImage = () => {
+                    const userName2 = 'Leo_DN';
+
+                    setImageData([{ url: "", title: "", img: "", userName2 }, ...imageData]);
+                    setInputVisible(true);
+
+                };
+            
+                const handleDeleteImage = (index) => {
+                    const updatedImageData = imageData.filter((_, i) => i !== index);
+                    setImageData(updatedImageData);
+                };
+
+                const [selectedIndex, setSelectedIndex] = useState(null);
+
+                // const handleIconClickd = (index) => {
+                //     setSelectedIndex(index);
+                // };
 
 
 
 
   return (
     <div className="profile-container-headerd">
-    <div className="profile-containerd">
-        <div className="profile-borderd">
-            <div className="video-left">
-                <div className="vide-left-ads">
-                <div>
-                             <p>h2</p>
-                            <p>h2</p>
-                            <p>h2</p>
-                            <p>h2</p>
-                            <p>h2</p>
-                            <p>h2</p>
-                            <p>h2</p>
-                </div>
+        <div className="profile-containerd">
+            <div className="profile-containerd-korean">
+                <div className='korean-title'>
+                    <i class="fa-solid fa-film"> </i> <span>Beautiful</span>
+                    <div className="border-test">
+                        <p>
+                            <span></span>
+                            <span>{daysDifference} days ago</span>
+
+                        </p>
+                    </div>             
                 </div>
             </div>
-
-
-            <div className="video">
-
-                    {showAd && !adClicked && (
-                        <button className="ad-overlay" onClick={handleStartVideoClick}>
-                        <i className="fas fa-caret-square-right"></i>
-                        </button>
-                    )}
-                     {currentUrlIndex !== null && (
-                        <iframe width="100%" height="100%" src={icons[currentUrlIndex].url} frameBorder="0" scrolling="0" allowFullScreen=""></iframe>
-                    )}
-                    
-                </div> 
-
-{/* <div className="video">
-        {currentUrlIndex !== null && (
-          <iframe width="100%" height="100%" src={icons[currentUrlIndex].url} frameBorder="0" scrolling="0" allowFullScreen=""></iframe>
-        )}
-      </div> */}
-
-
-            <div className="video-right">
-                <div className="vide-right-ads">
-                            <p>h2</p>
-                            <p>h2</p>
-                            <p>h2</p>
-                            <p>h2</p>
-                            <p>h2</p>
-                            <p>h2</p>
-                            <p>h2</p>
+            <div className="profile-borderd">
+                <div className="video-left">
+                    <div className="vide-left-ads">
+                    <div>
+                                <p>h2</p>
+                                <p>h2</p>
+                                <p>h2</p>
+                                <p>h2</p>
+                                <p>h2</p>
+                                <p>h2</p>
+                                <p>h2</p>
                     </div>
+                    </div>
+                </div>
+
+
+                <div className="video">
+
+                        {showAd && !adClicked && (
+                            <button className="ad-overlay" onClick={handleStartVideoClick}>
+                            </button>
+                        )}
+                        {currentUrlIndex !== null && (
+                            <iframe width="100%" height="100%" src={icons[currentUrlIndex].url} frameBorder="0" scrolling="0" allowFullScreen=""></iframe>
+                        )}
+                        
+                    </div> 
+                            {/* <i className="fas fa-caret-square-right"></i> */}
+
+
+                <div className="video-right">
+                    <div className="vide-right-ads">
+                                <p>h2</p>
+                                <p>h2</p>
+                                <p>h2</p>
+                                <p>h2</p>
+                                <p>h2</p>
+                                <p>h2</p>
+                                <p>h2</p>
+                        </div>
+                </div>
+
+
             </div>
-
-
-        </div>
+            
     </div>
- <div className='tittled'>
+<div className='tittled'>
     <a href="#shows" onClick={() => toggleSection('shows')}><span>Episode</span></a>
-    <a href="#cast" onClick={() => toggleSection('Cast')}><span>Cast</span></a>
+    <a href="#cast" onClick={() => toggleSection('cast')}><span>Cast</span></a>
     <span>
         <button onClick={handleFollow} className="followd">
             {isFollowing ? 
@@ -269,10 +372,9 @@ function It_Beautiful_Now() {
             {isFollowing ? <span style={{margin: '-5px 0px', marginRight:'5px'}}>{followerCount}</span> : null}
         </button>
     </span>
-   
-
-
 </div>
+
+
 <div className="section" id="shows">
     <div className="episode-video">
         <div className="nav-epdisode">
@@ -296,7 +398,15 @@ function It_Beautiful_Now() {
                                     />
                                     )}
                                     {/* Updated to use handleIconClick instead of navigating */}
-                                    <div className="icon" style={{ cursor: 'pointer' }} onClick={() => handleIconClick(index)}>{index + 1}</div>
+                                    {/* <div className="icon" style={{ cursor: 'pointer' }} onClick={() => handleIconClick(index)}>{index + 1}</div> */}
+                                    
+                                    
+                                    <div
+                        className={`icon ${selectedIndex === index ? 'selected' : ''}`}
+                        onClick={() => handleIconClick(index)}
+                    >
+                        {index + 1}
+                    </div>
                                     {isAdmin && (
                                     <button onClick={() => handleDeleteIcon(index)}>Delete</button>
                                     )}
@@ -306,72 +416,90 @@ function It_Beautiful_Now() {
                                 {isAdmin && (
                                     <>
                                     <button onClick={handleAddIcon}>Add Icon</button>
-                                    <button id="saveButton"  onClick={() => saveToMongoDB(icons, userName)}>Save</button>
+                                    <button id="saveButton" onClick={(e) => { handleEnter(e); saveToMongoDB(icons, userName); }}>Save</button>
+
                                     </>
                                 )}
                                 </div>
                             </div>
-               
-               
-               
-               
-                </div>
+                         </div>
+                        </div>
+                     </div>
+    </div>
+    <div className="section" id="cast">
+    <div className="shows">
+        <div className="shows-container">
+            <p> <span style={{fontSize:'16px', color:'rgb(13, 104, 241)'}}>{'▶'}</span>Cast: </p>
+        </div>
+        {isAdmin && (
+            <>
+                <button onClick={handleAddImage}>Add Image</button>
+                <button id="saveButton" onClick={(e) => { handleEnter(e); saveToMongoDB(imageData, userName2); }}>Save</button>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            {/* <div class="icon-container">
-            {koreanurl.map((info, index) => (
-                    <div key={index} className="icon">
-                        <img src={info.img} alt={`Image ${index}`} />
+            </>
+        )}
+    <div className="news">
+        {imageData.map((info, index) => (
+                    <div key={index} className="image-container">
+                        <a href={info.url} target="_blank" rel="noopener noreferrer">
+                            <img src={info.img} alt={`Image ${index}`} />
+                        </a>
                         {isAdmin ? (
-                            // Admin view
-                            <div>
-                                <input
-                                    type="text"
-                                    value={info.url}
-                                    onChange={(e) => handlekoreanurlDataChanged(index, 'url', e.target.value)}
-                                    placeholder="Enter new URL"
-                                />
-                                <button onClick={() => handleDeletekoreanurl(index)}>Delete</button>
-                            </div>
-                        ) : (
-                            // User view
-                            <div>
-                                <p className="icon">{info.title}</p>
-                                <p>{info.url}</p>
-                            </div>
-                        )}
+                            (isInputVisible && (
+                                <div>
+                                    <input
+                                        type="text"
+                                        value={info.title}
+                                        onKeyDown={handleEnter}
+                                        onChange={(e) => handleImageDataChange(index, 'title', e.target.value)}
+                                        placeholder="Enter new title"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={info.url}
+                                        onKeyDown={handleEnter}
+                                        onChange={(e) => handleImageDataChange(index, 'url', e.target.value)}
+                                        placeholder="Enter new URL"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={info.img}
+                                        onKeyDown={handleEnter}
+                                        onChange={(e) => handleImageDataChange(index, 'img', e.target.value)}
+                                        placeholder="Enter new image URL"
+                                    />
+                                    <button onClick={() => handleDeleteImage(index)}>Delete</button>
+                                </div>
+                            ))) : (
+                                // User view
+                                <div>
+                                    <p className="image-title">{info.title}</p>
+                                    <p>{info.url}</p>
+                                </div>
+                            )
+                        }
                     </div>
                 ))}
-
-
-                <a href=""><div class="icon">1</div></a>
-                <a href=""><div class="icon">2</div></a>
-                <a href=""><div class="icon">3</div></a>
-        
-            </div> */}
-
-
-            
+            </div>
         </div>
+        </div>
+            {isVisible && (
+                <div className="outside-drama-ads">
+                    <div className="drama-bottom-ads">
+                
+                    
+                    </div>
+                    <span className="close-btn" onClick={handleClose}>X</span>
+                </div>
+            )}
 
-    </div>
-    </div>
 
+                
+            {/* <div className="drama-bottom-ads">
+            <span className="close-btn" onClick={handleClose}>&times;</span>
+
+            </div> */}
     </div>
 
 );

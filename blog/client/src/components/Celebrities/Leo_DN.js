@@ -3,11 +3,14 @@
                 import Editable from '../Editable';
                 import '../../styles/Celebrities-form.css';
                 import axios from 'axios';
-
+                import { useParams } from 'react-router-dom';
+                import { useLocation } from 'react-router-dom';
                 import '@fortawesome/fontawesome-free/css/all.css';
                 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
-                function Leo_DN({ pageId }) {
+                function Leo_DN() {
+                    const { pageId } = useParams(); // Get the pageId from the route parameter
+
                     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
                     const [birthdated, setBirthdate] = useState('2024-03-26'); // Set initial birthdate
                 
@@ -141,7 +144,7 @@
                     
                         useEffect(() => {
                             fetchFollowerCount();
-                        }, []);
+                        }, [pageId]);
                     
                         const fetchFollowerCount = async () => {
                             try {
@@ -164,7 +167,6 @@
                                 console.error('Error following:', error);
                             }
                         };
-
 
                         const [name, setName] = useState(localStorage.getItem(window.location.href + '-name') || 'Leo_DN');
 
@@ -199,6 +201,7 @@
                                 console.error('Error saving image data:', error);
                             }
                         };
+                        
                         const [imagesnews, setimagesnews] = useState(() => {
                             const storedimagesnews = localStorage.getItem('imagesnews');
                             return storedimagesnews ? JSON.parse(storedimagesnews) : [
@@ -225,7 +228,7 @@
                                 ];
                         });
                         useEffect(() => {
-                            localStorage.setItem('imageData', JSON.stringify(imagesnews));
+                            localStorage.setItem('imagesnews', JSON.stringify(imagesnews));
                         }, [imagesnews]);
                         
                         const handleImageDataChanged = (index, field, value) => {
@@ -238,6 +241,8 @@
                             const userNamenews = 'Leo_DN';
 
                             setimagesnews([{ url: "", title: "", img: "", userNamenews }, ...imagesnews]);
+                            setInputVisible(true);
+
                         };
                     
                         const handleDeleteImaged = (index) => {
@@ -284,6 +289,8 @@
                             const userName = 'Leo_DN';
 
                             setImageData([{ url: "", title: "", img: "", userName }, ...imageData]);
+                            setInputVisible(true);
+
                         };
                     
                         const handleDeleteImage = (index) => {
@@ -315,13 +322,20 @@
                             return isLoggedIn && isAdmin;
                         };
 
+                    const [isInputVisible, setInputVisible] = useState(false);
 
-
+                    const handleEnter = (e) => {
+                        if (e.key === 'Enter' || e.target.id === 'saveButton') {
+                            setInputVisible(false);
+                        }
+                    };
                     return (
                         <div className="profile-container-header">
                             <div className="profile-container">
                                 <div className="profile-border">
+ 
                                     <div className="profile-content">
+                                        
                                         <div className="profile-info">
                                              {isAdmin && <h1><Editable initialValue={name} onSave={handleNameChange} /></h1>}
                                             <p>leo</p>
@@ -329,10 +343,18 @@
                                             <p>{birthdated} (age {age})</p>
 
                                             <div>
-            <button onClick={handleFollow}>
-                {isFollowing ? 'Unfollow' : 'Follow'} ({followerCount})
-            </button>
-        </div>
+                                            <button onClick={handleFollow}>
+                                            {isFollowing ? (
+                                                <span style={{ marginRight: '6px' }}>
+                                                    <i className="fa-solid fa-heart" style={{ color: 'red' }}></i> Following
+                                                </span>
+                                            ) : (
+                                                <span>
+                                                    <i className="fa-regular fa-heart"></i> Follow
+                                                </span>
+                                            )} ({followerCount})
+                                            </button>
+                                        </div>
                                             <button className="share-button" onClick={toggleDropdown}>
                                                 <i className="fa-solid fa-share-nodes"></i> Share {'▼'}
                                                 {isDropdownOpen && (
@@ -368,37 +390,49 @@
                                 {isAdmin && (
                                     <>
                                         <button onClick={handleAddImage}>Add Image</button>
-                                        <button onClick={() => saveImageDataToMongoDB(imageData, userName)}>Save to MongoDB</button>
+                                        <button id="saveButton" onClick={(e) => { handleEnter(e); saveImageDataToMongoDB(imageData, userName); }}>Save</button>
+
                                     </>
                                 )}
                             <div className="news">
                                     {imageData.map((info, index) => (
                                         <div key={index} className="image-container">
+                                            <a href={info.url} target="_blank" rel="noopener noreferrer">
+
                                             <img src={info.img} alt={`Image ${index}`} />
+                                            </a>
                                             {isAdmin ? (
                                                 // Admin view
+                                                (isInputVisible && (
+
                                                 <div>
                                                     <input
                                                         type="text"
                                                         value={info.title}
+                                                        onKeyDown={handleEnter}
+
                                                         onChange={(e) => handleImageDataChange(index, 'title', e.target.value)}
                                                         placeholder="Enter new title"
                                                     />
                                                     <input
                                                         type="text"
                                                         value={info.url}
+                                                        onKeyDown={handleEnter}
+
                                                         onChange={(e) => handleImageDataChange(index, 'url', e.target.value)}
                                                         placeholder="Enter new URL"
                                                     />
                                                     <input
                                                         type="text"
                                                         value={info.img}
+                                                        onKeyDown={handleEnter}
+
                                                         onChange={(e) => handleImageDataChange(index, 'img', e.target.value)}
                                                         placeholder="Enter new image URL"
                                                     />
                                                     <button onClick={() => handleDeleteImage(index)}>Delete</button>
                                                 </div>
-                                            ) : (
+                                            ))) : (
                                                 // User view
                                                 <div>
                                                     <p className="image-title">{info.title}</p>
@@ -442,38 +476,49 @@
                                 {isAdmin && (
                                     <>
                                         <button onClick={handleAddImaged}>Add Image</button>
-                                        <button onClick={() => saveImageDataToMongoDB(imagesnews, userNamenews)}>Save to MongoDB</button>
+                                        <button id="saveButton" onClick={(e) => { handleEnter(e); saveImageDataToMongoDB(imagesnews, userNamenews); }}>Save</button>
+
                                     </>
                                 )}
 
                                 <div className="news">
                                     {imagesnews.map((infos, indexs) => (
                                         <div key={indexs} className="image-container">
+                                            <a href={infos.url} target="_blank" rel="noopener noreferrer">
                                             <img src={infos.img} alt={`Image ${indexs}`} />
+                                            </a>
                                             {isAdmin ? (
                                                 // Admin view
+                                                (isInputVisible && (
+
                                                 <div>
                                                     <input
                                                         type="text"
                                                         value={infos.title}
+                                                        onKeyDown={handleEnter}
+
                                                         onChange={(e) => handleImageDataChanged(indexs, 'title', e.target.value)}
                                                         placeholder="Enter new title"
                                                     />
                                                     <input
                                                         type="text"
                                                         value={infos.url}
+                                                        onKeyDown={handleEnter}
+
                                                         onChange={(e) => handleImageDataChanged(indexs, 'url', e.target.value)}
                                                         placeholder="Enter new URL"
                                                     />
                                                     <input
                                                         type="text"
                                                         value={infos.img}
+                                                        onKeyDown={handleEnter}
+
                                                         onChange={(e) => handleImageDataChanged(indexs, 'img', e.target.value)}
                                                         placeholder="Enter new image URL"
                                                     />
                                                     <button onClick={() => handleDeleteImaged(indexs)}>Delete</button>
                                                 </div>
-                                            ) : (
+                                            ))) : (
                                                 // User view
                                                 <div>
                                                     <p className="image-title">{infos.title}</p>
