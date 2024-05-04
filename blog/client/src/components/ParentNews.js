@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Test_3 from './Test_3'; // Import the Test_3 component
+
 import Test_11 from './Test_11'; // Import the Test_3 component
+import PostCreationForm from './PostCreationForm'; // Import the PostNewForm component
 
 import PostNewForm from './PostNewForm'; // Import the PostNewForm component
 
@@ -35,16 +37,24 @@ function ParentNews() {
         // Update the posts state with the new post using the functional form of setState
         setPosts(prevPosts => [{ title, imageUrlnews, url_page }, ...prevPosts]);
     };
+    const updatePostscel = (newPost) => {
+        // Extract required information from the new post
+        const { name, imageUrl, url_pagecel } = newPost;
+        // Update the posts state with the new post using the functional form of setState
+        setPosts(prevPosts => [{ name, imageUrl, url_pagecel }, ...prevPosts]);
+    };
+
     
 
     return (
         <div>
             <PostNewForm updatePosts={updatePosts} /> {/* Render the PostNewForm component */}
-            {error && <div>Error: {error}</div>}
-            {posts.length === 0 && !error && <div>No posts available</div>}
-            {posts.length > 0 && <Test_3 posts={posts.reverse()} />}
-            {posts.length > 0 && <Test_11 posts={posts.reverse()} />}
+            <PostNewForm updatePosts={updatePostscel} /> {/* Render the PostNewForm component */}
 
+            {error && <div>Error: {error}</div>}
+            {/* {posts.length === 0 && !error && <div>No posts available</div>}
+            {posts.length > 0 && <Test_3 posts={posts.reverse()} />}
+            {posts.length > 0 && <Test_11 posts={posts.reverse()} />} */}
         </div>
     );
 }

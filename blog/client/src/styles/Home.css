@@ -164,11 +164,11 @@
 
 .navigation-arrows i:first-child {
   margin-right: auto; /* Push the left arrow to the left */
-  margin-top: 170%;
+  margin-top: 100%;
 }
 .navigation-arrows1 i:first-child {
     margin-left: auto; /* Push the left arrow to the left */
-    margin-top: 170%;
+    margin-top: 100%;
   }
   
   .tooltip,
@@ -277,6 +277,27 @@
   text-align: center;
   }
  
+.text-container-home {
+    flex-grow: 1; /* Allow text container to grow to fill available space */
+    margin-top: -1rem;
+}
+
+.text-container-home p {
+    margin: 0; /* Remove default margins */
+}
+
+.text-container-home a {
+    display: block; /* Make the read more link a block element */
+    margin-top: 0.2rem;
+    margin-left: 0rem;
+    color: rgba(255, 0, 0, 0.767);
+    font-weight:bold;
+    font-size: 23px;
+
+}
+
+
+
   @media screen and (max-width: 1440px) {
     .news img {
       max-height: 200px;

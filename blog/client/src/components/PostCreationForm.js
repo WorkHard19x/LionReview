@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import '../styles/PostCreationForm.css';
+import { useParams } from 'react-router-dom';
+import BoldToggle from './BoldToggle';
 
 
-function PostCreationForm() {
+function PostCreationForm({ updatePosts  }) {
+    const { pageId } = useParams(); // Get the pageId from the route parameter
+
     const [formData, setFormData] = useState({
         name: '',
         birthdate: '',
@@ -188,31 +192,278 @@ function PostCreationForm() {
         nameinstagram: '',
         youtube: '',
         nameyoutube: '',
+        url_pagecel: ''
     });
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData({ ...formData, [name]: value });
+    // };
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //         const response = await axios.post('http://localhost:5000/api/cel', formData);
+    //         console.log('Response:', response.data);
+    //         alert('Form data submitted successfully');
+    //     } catch (error) {
+    //         console.error('Error submitting form data:', error);
+    //         alert('Failed to submit form data');
+    //     }
+    // };
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+        if (name === 'name_url') {
+            const urlPage = `http://localhost:3000/Celebrities/${value}/1`;
+            setFormData(prevState => ({ ...prevState, url_pagecel: urlPage }));
+        }
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    
         try {
-            // Send form data to the server
-            const response = await axios.post('http://localhost:5000/generate-jsx', formData, {
+            console.log('Form data:', formData); // Log the form data to check its content
+    
+            const response = await axios.post('http://localhost:5000/api/cel', formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            console.log('Response:', response.data); // Log the response data for debugging
+    
+            // Reset the form data after successful submission
+            setFormData({
+                name: '',
+                birthdate: '',
+                nickname:'',
+                country: '',
+                imageUrl: '',
+                name_url:'',
+                imageshowUrl: '',
+                showurl: '',
+                showtitle: '',
+                
+                imageshowUrl1: '',
+                showurl1: '',
+                showtitle1: '',
+        
+                imageshowUrl2: '',
+                showurl2: '',
+                showtitle2: '',
+        
+                imageshowUrl3: '',
+                showurl3: '',
+                showtitle3: '',
+        
+                imageshowUrl4: '',
+                showurl4: '',
+                showtitle4: '',
+        
+                imageshowUrl5: '',
+                showurl5: '',
+                showtitle5: '',
+        
+                imageshowUrl6: '',
+                showurl6: '',
+                showtitle6: '',
+        
+                imageshowUrl7: '',
+                showurl7: '',
+                showtitle7: '',
+        
+                imageshowUrl8: '',
+                showurl8: '',
+                showtitle8: '',
+        
+                imageshowUrl9: '',
+                showurl9: '',
+                showtitle9: '',
+        
+                imageshowUrl10: '',
+                showurl10: '',
+                showtitle10: '',
+        
+                imageshowUrl11: '',
+                showurl11: '',
+                showtitle11: '',
+        
+                imageshowUrl12: '',
+                showurl12: '',
+                showtitle12: '',
+        
+                imageshowUrl13: '',
+                showurl13: '',
+                showtitle13: '',
+        
+                imageshowUrl14: '',
+                showurl14: '',
+                showtitle14: '',
+        
+                imageshowUrl15: '',
+                showurl15: '',
+                showtitle15: '',
+        
+                imageshowUrl16: '',
+                showurl16: '',
+                showtitle16: '',
+        
+                imageshowUrl17: '',
+                showurl17: '',
+                showtitle17: '',
+        
+                imageshowUrl18: '',
+                showurl18: '',
+                showtitle18: '',
+        
+                imageshowUrl19: '',
+                showurl19: '',
+                showtitle19: '',
+        
+                imageshowUrl20: '',
+                showurl20: '',
+                showtitle20: '',
+        
+                imagenewsUrl: '',
+                newsurl: '',
+                newstitle: '',
+        
+                imagenewsUrl1: '',
+                newsurl1: '',
+                newstitle1: '',
+        
+                imagenewsUrl2: '',
+                newsurl2: '',
+                newstitle2: '',
+        
+                imagenewsUrl3: '',
+                newsurl3: '',
+                newstitle3: '',
+        
+                imagenewsUrl4: '',
+                newsurl4: '',
+                newstitle4: '',
+        
+                imagenewsUrl5: '',
+                newsurl5: '',
+                newstitle5: '',
+        
+                imagenewsUrl6: '',
+                newsurl6: '',
+                newstitle6: '',
+        
+                imagenewsUrl7: '',
+                newsurl7: '',
+                newstitle7: '',
+        
+                imagenewsUrl8: '',
+                newsurl8: '',
+                newstitle8: '',
+        
+                imagenewsUrl9: '',
+                newsurl9: '',
+                newstitle9: '',
+        
+                imagenewsUrl10: '',
+                newsurl10: '',
+                newstitle10: '',
+        
+                imagenewsUrl11: '',
+                newsurl11: '',
+                newstitle11: '',
+        
+                imagenewsUrl12: '',
+                newsurl12: '',
+                newstitle12: '',
+        
+                imagenewsUrl13: '',
+                newsurl13: '',
+                newstitle13: '',
+        
+                imagenewsUrl14: '',
+                newsurl14: '',
+                newstitle14: '',
+        
+                imagenewsUrl15: '',
+                newsurl15: '',
+                newstitle15: '',
+        
+                imagenewsUrl16: '',
+                newsurl16: '',
+                newstitle16: '',
+        
+                imagenewsUrl17: '',
+                newsurl17: '',
+                newstitle17: '',
+        
+                imagenewsUrl18: '',
+                newsurl18: '',
+                newstitle18: '',
+        
+                imagenewsUrl19: '',
+                newsurl19: '',
+                newstitle19: '',
+        
+                imagenewsUrl20: '',
+                newsurl20: '',
+                newstitle20: '',
+        
+                describle: '',
+        
+                libra: '',
+                tall: '',
+                nationality: '',
+                instagram: '',
+                nameinstagram: '',
+                youtube: '',
+                nameyoutube: '',
+                url_pagecel: '' // Reset url_page
+
+
+            });
+
+            const responsed = await axios.post('http://localhost:5000/generate-jsx', formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
             alert('Form data submitted successfully');
             // Add import statement to App.js
-            const jsFileName = response.data.jsFileName;
+            const jsFileName = responsed.data.jsFileName;
             updateAppJs(jsFileName);
+            updatePosts({
+                name: response.data.name,
+                imageUrl: response.data.imageUrl,
+                name_url: response.data.name_url,
+
+            });
+
+            alert('Form data submitted successfully');
+    
+            // Fetch the updated news after submission
+            fetchNews();
         } catch (error) {
-            console.log('Error submitting form data:', error);
+            console.error('Error submitting form data:', error);
             alert('Failed to submit form data');
         }
     };
+
+const fetchNews = async () => {
+    try {
+        const response = await axios.get('http://localhost:5000/api/cel');
+        // Process the fetched news data as needed
+    } catch (error) {
+        console.error('Error fetching cel:', error);
+        // Handle error if necessary
+    }
+};
+
+
+
+
 
     const updateAppJs = (jsFileName) => {
         axios.post('http://localhost:5000/update-app-js', { jsFileName }, {
@@ -451,7 +702,7 @@ function PostCreationForm() {
             <h2>Create Celebrities Profiles</h2>
                 <div className="input-container">
                     <label>Name_url:</label>
-                    <input type="text" name="name_url" value={formData.name_url.replace(/\b\w/g, (char) => char.toUpperCase()).replace(/\s+/g, '_') } onChange={(e) => handleChange(e.target.name, e.target.value)} />
+                    <input type="text" name="name_url" value={formData.name_url.replace(/\b\w/g, (char) => char.toUpperCase()).replace(/\s+/g, '_') } onChange={handleChange} />
                 </div>
                 <div className="input-container">
                     <label>Name:</label>

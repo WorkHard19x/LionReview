@@ -1,3 +1,10 @@
+import Cel_2 from './components/Celebrities/Cel_2';
+import Cel_1 from './components/Celebrities/Cel_1';
+
+import Testc3 from './components/Celebrities/Test c3';
+import Test_1 from './components/News/Test_1';
+
+import Test_9 from './components/News/Test_9';
 
 
 import Test_3 from './components/News/Test_3';
@@ -40,6 +47,16 @@ function App() {
 
      
 
+
+          <Route path="/News/Test_9/:pageId" element={<Test_9 />} />
+          <Route path="/News/Test_1/:pageId" element={<Test_1 />} />
+          <Route path="/Celebrities/Test c3/:pageId" element={<Testc3 />} />
+
+
+
+
+          <Route path="/Celebrities/Cel_1/:pageId" element={<Cel_1 />} />
+          <Route path="/Celebrities/Cel_2/:pageId" element={<Cel_2 />} />
           <Route path="/Admin" element={<Admin />} />
         </Routes>
       </Layout>

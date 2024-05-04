@@ -1,11 +1,16 @@
 import '../styles/Home.css';
 import '@fortawesome/fontawesome-free/css/all.css';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect  } from 'react';
+
 import Image from "../assets/korean/korean.jpg";
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 const Home = () => {
+  const { pageId } = useParams(); // Get the pageId from the route parameter
+
   const [isBorder1Hovered, setIsBorder1Hovered] = useState(false);
   const [isBorder2Hovered, setIsBorder2Hovered] = useState(false);
   const [isBorder3Hovered, setIsBorder3Hovered] = useState(false);
@@ -317,6 +322,80 @@ const imagesnews = [
   { url: "link2", title: "Not today cause tomorrow better", img: Image },
 ];
 
+
+// const [posts, setPosts] = useState([]);
+// const [error, setError] = useState(null);
+
+// useEffect(() => {
+//     fetchPosts();
+// }, [pageId]);
+
+// const fetchPosts = async () => {
+//     try {
+//         const response = await axios.get(`http://localhost:5000/api/news`);
+//         console.log('Response:', response.data); // Log the response data
+//         setPosts(response.data);
+//         setError(null); // Reset error state if request is successful
+//     } catch (error) {
+//         console.error('Error fetching posts:', error);
+//         setError('Error fetching posts. Please try again.'); // Set error message
+//     }
+// };
+
+// if (error) {
+//     return <div>Error: {error}</div>;
+// }
+
+// if (!posts || !posts.length) {
+//     return <div>No posts available</div>;
+// }
+
+
+const [posts, setPosts] = useState([]);
+const [error, setError] = useState(null);
+const [postcel, setPostscel] = useState([]);
+
+useEffect(() => {
+    fetchPosts();
+    fetchPostcel();
+}, []);
+
+const fetchPosts = async () => {
+    try {
+        const response = await axios.get(`http://localhost:5000/api/news`);
+        console.log('Response:', response.data); // Log the response data
+        setPosts(response.data);
+        setError(null); // Reset error state if request is successful
+    } catch (error) {
+        console.error(`Error fetching new posts:`, error);
+        setError(`Error fetching new posts. Please try again.`); // Set error message
+    }
+};
+
+const fetchPostcel = async () => {
+  try {
+      const response = await axios.get(`http://localhost:5000/api/cel`);
+      console.log('Response:', response.data); // Log the response data
+      setPostscel(response.data);
+      setError(null); // Reset error state if request is successful
+  } catch (error) {
+      console.error(`Error fetching cel posts:`, error);
+      setError(`Error fetching cel posts. Please try again.`); // Set error message
+  }
+};
+if (error) {
+    return <div>Error: {error}</div>;
+}
+
+if (!posts || !posts.length) {
+  return <div>No posts available</div>;
+} else if (!postcel || !postcel.length) {
+  return <div>No posts available</div>;
+}
+
+
+
+
   return (
     <div className="full-size" >
         <div className="container">
@@ -541,12 +620,27 @@ const imagesnews = [
         </div>
         <div className="continue">
           <div className='image-slider-continue' ref={imageSliderRefCelebrities}>
-            {imagesCelebrities.map((info, index) => (
+            {/* {imagesCelebrities.map((info, index) => (
             <a key={index} href={info.url}  rel="noopener noreferrer" className="image-container">
               <img src={info.img} alt={`Image ${index}`} />
               <p className="image-title">{info.title}</p>
             </a> 
+            ))} */}
+            {postcel.slice().reverse().map((post, index) => (
+              <div key={index} >
+                <a href={post.url_pagecel}>
+                  <div className="image-container">
+                      <img src={post.imageUrl} alt={post.title} 
+                      />
+                      <p className="image-title">{post.name}</p>
+                      </div>
+                      </a>
+                    {/* <div className="text-container-home"> 
+                      Read more
+                  </div> */}
+              </div>
             ))}
+
           </div>
           <div className="navigation-arrows">
             <i className="fas fa-arrow-circle-left" onClick={handlePrevClickCelebrities}></i>
@@ -563,19 +657,18 @@ const imagesnews = [
           </a>
         </div>
       <div className="news">
-      {imagesnews.map((info, index) => (
-          <a key={index} href={info.url}  rel="noopener noreferrer" className="image-container">
-            <img src={info.img} alt={`Image ${index}`} />
-            <p className="image-title">{info.title}</p>
-          </a>  
-      ))}
+          {posts.slice().reverse().map((post, index) => (
+            <div key={index} >
+              <a href={post.url_page}>
+                <div className="image-container">
+                    <img src={post.imageUrlnews} alt={post.title} 
+                    />
+                    <p className="image-title">{post.title}</p>
+                </div>
+                </a>
+            </div>
+          ))}
       </div>
-
-
-
-
-
-
     </div>
   );
 };

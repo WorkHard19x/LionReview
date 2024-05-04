@@ -32,29 +32,6 @@ function PostNewForm({ updatePosts  }) {
             setFormData(prevState => ({ ...prevState, url_page: urlPage }));
         }
     };
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         // Send form data to the server
-    //         const response = await axios.post('http://localhost:5000/news-jsx', formData, {
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         });
-    //         alert('Form data submitted successfully');
-    //         // Add import statement to App.js
-    //         const jsFileName = response.data.jsFileName;
-    //         updateAppJs(jsFileName);
-    //     } catch (error) {
-    //         console.log('Error submitting form data:', error);
-    //         alert('Failed to submit form data');
-    //     }
-    // };
-
-
-
-
-    const urlPage = `http://localhost:3000/News/${formData.title_url}/1`;
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -122,12 +99,6 @@ const fetchNews = async () => {
         // Handle error if necessary
     }
 };
-
-
-
-
-
-
 
 
 const updateAppJs = (jsFileName) => {
