@@ -95,26 +95,19 @@ function It_Beautiful_Now() {
             return true; // Return true if user is admin, false otherwise
         };
 
-        const [icons, setIcons] = useState(() => {
-            const storedIcons = localStorage.getItem('icons');
-            return storedIcons ? JSON.parse(storedIcons) : [
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-                { url: "",},{ url: "",},{ url: "",},
-            ];
-        });
+    const localStorageKey = `icons_${pageId}`;
+    
+    const [icons, setIcons] = useState(() => {
+        const storedIcons = localStorage.getItem(localStorageKey);
+        return storedIcons ? JSON.parse(storedIcons) : [
+            { url: "" },
+            { url: "" },
+            { url: "" },
+            { url: "" },
+            { url: "" },
+            { url: "" },
+        ];
+    });
         const location = useLocation();
         useEffect(() => {
             const hash = location.hash;
@@ -139,23 +132,23 @@ function It_Beautiful_Now() {
 
     
 
-            const handleAddIcon = () => {
-                const newIcon = { url: '' };
-                setIcons([...icons, newIcon]);
-                setInputVisible(true);
-            };
-
-            const handleDeleteIcon = (index) => {
-                const newIcons = [...icons];
-                newIcons.splice(index, 1);
-                setIcons(newIcons);
-            };
-        
-        const handleUrlChange = (index, value) => {
-            const newIcons = [...icons]; // Create a copy of the icons array
-            newIcons[index].url = value; // Update the specific icon's URL
-            setIcons(newIcons); // Update the state with the modified icons array
+        const handleAddIcon = () => {
+            const newIcon = { url: null }; // Initialize with null instead of empty string
+            setIcons([...icons, newIcon]);
+            setInputVisible(true);
         };
+
+        const handleDeleteIcon = (index) => {
+            const newIcons = [...icons];
+            newIcons.splice(index, 1);
+            setIcons(newIcons);
+        };
+        
+            const handleUrlChange = (index, value) => {
+                const newIcons = [...icons]; // Create a copy of the icons array
+                newIcons[index].url = value; // Update the specific icon's URL
+                setIcons(newIcons); // Update the state with the modified icons array
+            };
         
 
         
@@ -166,25 +159,117 @@ function It_Beautiful_Now() {
         };
         
 
-        const saveToMongoDB = async (icons, userName, userName2, imagesnews) => {
+
+        const saveToMongoDB = async (icons, pageId) => {
             try {
-                // Your fetch request to save data to MongoDB
-                // Ensure that the icons state is being used here
-                // Example:
-                await fetch('your-api-endpoint', {
+                const urls = icons.map(icon => icon.url); // Extract urls from icons
+                const response = await fetch(`http://localhost:5000/api/korenaMovie/${pageId}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ icons, userName, userName2, imagesnews }),
+                    body: JSON.stringify({ urls }), // Pass urls to the backend
                 });
+                
+                const responseData = await response.json();
+                console.log(responseData);
         
-                // Assuming the save operation is successful, you can update the input visibility state
-                setInputVisible(false);
+                const debugInfo = document.getElementById('debug-info');
+                debugInfo.innerHTML = `Page ID: ${pageId}<br />Saved Data: ${JSON.stringify(urls)}`;
+        
+                console.log('Data saved successfully to MongoDB');
             } catch (error) {
-                console.error('Error saving image data:', error);
+                console.error('Error saving data to MongoDB:', error);
             }
         };
+        
+        
+// const saveToMongoDB = async (urls, pageId) => {
+//     try {
+//         // Your fetch request to save data to MongoDB
+//         const response = await fetch(`http://localhost:5000/api/korenaMovie/${pageId}`, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({ urls }), // Ensure that 'urls' is correctly passed
+//         });
+        
+//         // Log the response from the server
+//         const responseData = await response.json();
+//         console.log(responseData);
+
+//         // Display the pageId and saved data on the website
+//         const debugInfo = document.getElementById('debug-info');
+//         debugInfo.innerHTML = `Page ID: ${pageId}<br />Saved Data: ${JSON.stringify(urls)}`;
+
+//         // Assuming the save operation is successful
+//         console.log('Data saved successfully to MongoDB');
+//     } catch (error) {
+//         console.error('Error saving data to MongoDB:', error);
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+// Frontend look good
+// const saveToMongoDB = async (url, pageId) => {
+//     try {
+//         // Your fetch request to save data to MongoDB
+//         await fetch('http://localhost:5000/api/korenaMovie', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({ url, pageId }),
+//         });
+
+//         // Assuming the save operation is successful
+//         console.log('Data saved successfully to MongoDB');
+//     } catch (error) {
+//         console.error('Error saving data to MongoDB:', error);
+//     }
+// };
+
+
+
+
+
+
+        // const saveToMongoDB = async (icons, userName, userName2, imagesnews, pageId) => {
+        //     try {
+        //         // Filter out icons with null URLs
+        //         const updatedIcons = icons.filter(icon => icon.url !== null);
+
+        //         // Your fetch request to save data to MongoDB
+        //         await fetch('http://localhost:5000/api/korenaMovie', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json'
+        //             },
+        //             body: JSON.stringify({ icons: updatedIcons, userName, userName2, imagesnews, pageId }),
+        //         });
+
+        //         // Assuming the save operation is successful, you can update the input visibility state
+        //         setInputVisible(false);
+        //     } catch (error) {
+        //         console.error('Error saving image data:', error);
+        //     }
+        // };
+
+
+
+
+        
         
         // Function to handle clicking on an icon
         const handleIconClick = (index) => {
@@ -279,6 +364,8 @@ function It_Beautiful_Now() {
                         <p>
                             <span></span>
                             <span>{daysDifference} days ago</span>
+                            <div id="debug-info"></div>
+
 
                         </p>
                     </div>             
@@ -476,7 +563,7 @@ function It_Beautiful_Now() {
 
             </div> */}
     </div>
-
+  
 );
 };
 export default It_Beautiful_Now

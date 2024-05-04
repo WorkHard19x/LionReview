@@ -199,15 +199,34 @@ function PostNewForm() {
 
     });
   
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
+//     const handleChange = (e, inputName) => {
+//         const { value } = e.target;
+//         setFormData(prevData => ({
+//             ...prevData,
+//             [inputName]: value
+//         }));
+//     };
+
+
+// const handleChanged = (name, value) => {
 //     setFormData({ ...formData, [name]: value });
 // };
 
 
-const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+const handleChange = (nameOrEvent, value) => {
+    let name, newValue;
+    if (typeof nameOrEvent === 'string') {
+        name = nameOrEvent;
+        newValue = value;
+    } else {
+        name = nameOrEvent.target.name;
+        newValue = nameOrEvent.target.value;
+    }
+
+    setFormData(prevData => ({
+        ...prevData,
+        [name]: newValue
+    }));
 };
 
 const handleSubmit = async (e) => {
@@ -398,7 +417,7 @@ const [selectedOption, setSelectedOption] = useState(null);
       <div className='Header'>
             <div className='border-all'>
             
-            <form onSubmit={handleSubmit}>
+           
 
 
             <h2>Create News Form</h2>
@@ -414,7 +433,7 @@ const [selectedOption, setSelectedOption] = useState(null);
               <a href="#" onClick={() => setSelectedOption('other')}>Other</a>
             </div>
           </div>
-
+          <form onSubmit={handleSubmit}>
           {/* Inputs */}
           {selectedOption && (
             <div className="input-container">
@@ -422,7 +441,8 @@ const [selectedOption, setSelectedOption] = useState(null);
               <input 
                 type="text" 
                 name={`title_${selectedOption}_url`} 
-                value={formData[`title_${selectedOption}_url`]} 
+                // value={formData[`title_${selectedOption}_url`]} 
+                value={formData[`title_${selectedOption}_url`] ? formData[`title_${selectedOption}_url`].replace(/\b\w/g, (char) => char.toUpperCase()).replace(/\s+/g, '_') : ''}
                 onChange={(e) => handleChange(e.target.name, e.target.value)} 
               />
             </div>
@@ -432,6 +452,7 @@ const [selectedOption, setSelectedOption] = useState(null);
           <div className="input-container">
             <label>Title:</label>
             <input type="text" name="title" value={formData.title} onChange={(e) => handleChange(e.target.name, e.target.value)} />
+
           </div>
 
             <div className="input-container">

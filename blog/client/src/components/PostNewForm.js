@@ -2,9 +2,12 @@ import axios from 'axios';
 import React, { useState, useRef } from 'react';
 import BoldToggle from './BoldToggle';
 import '../styles/PostCreationForm.css';
+import { useParams } from 'react-router-dom';
 
 
-function PostNewForm() {
+function PostNewForm({ updatePosts  }) {
+    const { pageId } = useParams(); // Get the pageId from the route parameter
+
     const summaryTextareaRef = useRef(null);
     const fulldetailTextareaRef = useRef(null);
     const [formData, setFormData] = useState({
@@ -17,43 +20,106 @@ function PostNewForm() {
         fulldetail:'',
         provide:'',
         title_url:'',
+        pageId: pageId,
+        url_page: ''
+
     });
   
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-// };
+    const handleChange = (name, value) => {
+        setFormData({ ...formData, [name]: value });
+        if (name === 'title_url') {
+            const urlPage = `http://localhost:3000/News/${value}/1`;
+            setFormData(prevState => ({ ...prevState, url_page: urlPage }));
+        }
+    };
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //         // Send form data to the server
+    //         const response = await axios.post('http://localhost:5000/news-jsx', formData, {
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         });
+    //         alert('Form data submitted successfully');
+    //         // Add import statement to App.js
+    //         const jsFileName = response.data.jsFileName;
+    //         updateAppJs(jsFileName);
+    //     } catch (error) {
+    //         console.log('Error submitting form data:', error);
+    //         alert('Failed to submit form data');
+    //     }
+    // };
 
 
-const handleChange = (name, value) => {
-    setFormData({ ...formData, [name]: value });
-  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+
+    const urlPage = `http://localhost:3000/News/${formData.title_url}/1`;
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
     
-    // Trim trailing spaces and remove consecutive line breaks from the textarea value
-    const cleanedValue = formData.fulldetail.trim().replace(/\n{2,}/g, '\n');
+        try {
+            console.log('Form data:', formData); // Log the form data to check its content
+    
+            const response = await axios.post('http://localhost:5000/api/news', formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            console.log('Response:', response.data); // Log the response data for debugging
+    
+            // Reset the form data after successful submission
+            setFormData({
+                title: '',
+                author: '',
+                date: '',
+                imageUrlnews: '',
+                imageUrltitle: '',
+                summarytext: '',
+                fulldetail: '',
+                provide: '',
+                title_url: '',
+                pageId: pageId,
+                url_page: '' // Reset url_page
 
-    // Update the state with the cleaned value
-    setFormData({...formData, fulldetail: cleanedValue});
 
-    // Now you can proceed with handling the submission, for example:
-    // Make an API call, update state, etc.
+            });
+
+            const responsed = await axios.post('http://localhost:5000/news-jsx', formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            alert('Form data submitted successfully');
+            // Add import statement to App.js
+            const jsFileName = responsed.data.jsFileName;
+            updateAppJs(jsFileName);
+            updatePosts({
+                title: response.data.title,
+                imageUrlnews: response.data.imageUrlnews,
+                title_url: response.data.title_url,
+
+            });
+
+            alert('Form data submitted successfully');
+    
+            // Fetch the updated news after submission
+            fetchNews();
+        } catch (error) {
+            console.error('Error submitting form data:', error);
+            alert('Failed to submit form data');
+        }
+    };
+
+const fetchNews = async () => {
     try {
-        // Send form data to the server
-        const response = await axios.post('http://localhost:5000/news-jsx', formData, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        alert('Form data submitted successfully');
-        // Add import statement to App.js
-        const jsFileName = response.data.jsFileName;
-        updateAppJs(jsFileName);
+        const response = await axios.get('http://localhost:5000/api/news');
+        // Process the fetched news data as needed
     } catch (error) {
-        console.log('Error submitting form data:', error);
-        alert('Failed to submit form data');
+        console.error('Error fetching news:', error);
+        // Handle error if necessary
     }
 };
 
@@ -61,24 +127,8 @@ const handleChange = (name, value) => {
 
 
 
-// const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//         // Send form data to the server
-//         const response = await axios.post('http://localhost:5000/news-jsx', formData, {
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         });
-//         alert('Form data submitted successfully');
-//         // Add import statement to App.js
-//         const jsFileName = response.data.jsFileName;
-//         updateAppJs(jsFileName);
-//     } catch (error) {
-//         console.log('Error submitting form data:', error);
-//         alert('Failed to submit form data');
-//     }
-// };
+
+
 
 const updateAppJs = (jsFileName) => {
     axios.post('http://localhost:5000/update-app-js', { jsFileName }, {
@@ -110,6 +160,12 @@ const updateAppJs = (jsFileName) => {
                         <label>Title_url:</label>
                         <input type="text" name="title_url" value={formData.title_url.replace(/\b\w/g, (char) => char.toUpperCase()).replace(/\s+/g, '_') } onChange={(e) => handleChange(e.target.name, e.target.value)} />
                 </div>
+                {/* <div className="input-container">
+                    <label>Url Page:</label>
+                    <input type="text" name="url_page" 
+                        value={formData.url_page}
+                        onChange={(e) => handleChange(e.target.name, e.target.value)} />
+                </div> */}
                 <div className="input-container">
                     <label>Title:</label>
                     <input type="text" name="title" value={formData.title} onChange={(e) => handleChange(e.target.name, e.target.value)} />

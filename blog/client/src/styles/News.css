@@ -2,26 +2,28 @@
     background-color: black;
     padding: 0;
     top: 0;
-    display: flex;
+    margin: auto;
 }
 
 
 .News-header{
     display: flex;
-    /* flex-direction: column;  */
-    background-color: rgba(245, 241, 241, 0.842);
     width: 100%;
-    margin: 2rem;
+}
+.news-center{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 75%;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.918);
+    background-color: rgba(245, 241, 241, 0.89);
 
 }
-.news-main-post{
-    background-color: rgba(255, 255, 255, 0.918);
-    border-right: 2px solid rgba(224, 221, 221, 0.938);
-    border-radius: 10px;
 
-    width: 70%;
+.news-main-post{
+    border-radius: 10px;
+    width: 80%;
     padding-top: 1rem;
 }
 .news-tittle{
@@ -48,6 +50,7 @@
     width: auto; /* Ensure the image fills the container horizontally */
     max-height: auto; /* Ensure the image fills the container vertically */
     border-radius: 12px;
+    border: 1px solid black
 
 }
 .news-image span {
@@ -124,55 +127,86 @@
 .new-side{
     display: flex;
     flex-direction: column; 
-    width: 30%;
+    width: 25%;
+    border: 5px;
 }
 .news-side-ads{
     width: 100%;
     height: auto;
     border: 1px solid rgb(240, 6, 6);
 }
-.news-top-pick{
-    border: 2px solid rgba(56, 250, 8, 0.685);
-    width: 100%;
-    max-height:500px ;
-    flex-direction: row;
+.news-top-pick {
+    border: 2px solid rgb(15, 15, 15);
+    max-height: 500px;
+    overflow: auto; /* Enable scrolling when content overflows */
     display: flex;
+    flex-direction: column; /* Display posts in a column layout */
+}
+
+
+.news-top-side-img {
+    display: flex;
+    border: 1px solid rgb(7, 7, 7);
+    border-radius: 10px;
+    margin: 2px; /* Add some margin to separate each post */
+    overflow: auto; /* Enable scrolling when content overflows */
+    min-height: 125px; /* Set minimum height for each post */
+    
+}
+
+.image-container {
+    flex: 0 0 125px; /* Set a fixed width for the image container */
+    max-height: 125px;
+    overflow: hidden; /* Hide overflow content */
+    
+}
+
+.image-container img {
+    width: 100%; /* Ensure images fill their containers */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.text-container {
+    flex-grow: 1; /* Allow text container to grow to fill available space */
+    padding: 10px; /* Add padding to separate text from border */
+}
+
+.text-container p {
+    margin: 0; /* Remove default margins */
+}
+
+.text-container a {
+    display: block; /* Make the read more link a block element */
+    margin-top: 0.2rem;
+    margin-left: 1.5rem;
+    color: red;
+    font-weight:bold;
+    font-size: 23px;
 
 }
-.news-top-side-img{
-    border: 1px solid rgb(245, 179, 179);
-    border-radius: 10px;
-    max-width: 125px;
-    max-height: 125px;
-}
+
+
 
 .news-top-pick-tittle {
     justify-content: center;
     text-align: center;
-    display: flex;
-    width: 100%;
+    max-width: 100%;
     max-height: 125px;
-    margin: auto;
 }
 
 /* start new-comment  */
 
 .news-comment {
-    border: 1px solid rgb(75, 72, 72);
     width: 100%;
-    height: 40%;
+    height: 30%;
     overflow-y: auto; /* Enable vertical scrolling */
+    border: 2px solid rgb(3, 3, 3);
+
 }
 
 .text-comment {
     border: 2px solid white;
     border-radius: 1rem;
-    height: 20%;
-    width: 91%;
-    margin-bottom: 10px;
-    padding: 10px;
-    overflow: auto; /* Enable horizontal scrolling if necessary */
-    flex-shrink: 0;
 }
 
 .text-comment-user {
@@ -180,6 +214,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    
 }
 .text-comment-user span {
     font-weight: bold;
@@ -222,12 +257,32 @@
         margin-right: 0rem;
         margin-left: 0rem;
     }
-   
-    .News-header{
-    margin-left:0rem;
+    .news-top-side-img img{
+        max-width: 0px;
+        max-height: 0px;
     }
+
     .news-main-post{
         width: 100%;
     }
+    .new-side{
+        width: 0;
+    }
+    
+}
+@media screen and (max-width: 1200px) {
+    .news-center{
+        width: 100%;
+        display: flex;
+    }
 
+    .news-main-post{
+        width: 100%;
+        margin: 0;
+    }
+
+    .News{
+        overflow-x: hidden;
+
+    }
 }
