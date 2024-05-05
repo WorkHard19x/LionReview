@@ -62,7 +62,7 @@
                      
                     `
                     {
-                        Leo DN
+                        Test_1
                     }
                 `);
 
@@ -76,7 +76,7 @@
                     const [fulldetail, setNamefulldetail] = useState(localStorage.getItem(window.location.href + '-fulldetail') || 
                     `
                     {
-                        Leo DN
+                        Test_1
                     }
                 `);
                    
@@ -146,12 +146,12 @@
                                 <h1>Test_1</h1>
                             </div>
                             <div className="news-author">
-                                <p>Test_1</p>
-                                <p>2024-05-04</p>
+                                <p>Leo Doan</p>
+                                <p>2024-05-02</p>
                             </div>
             <div className="news-image">
-                <img src="https://t3.ftcdn.net/jpg/06/48/50/58/360_F_648505884_bxioT9qrfODG4SbRZgHvBOLGesjsIa1j.jpg" alt="" style={{height:'450px', width:'500px'}} />
-                <br/><span >Leo DN</span>
+                <img src="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" alt="" style={{height:'450px', width:'500px'}} />
+                <br/><span >Test_1</span>
             </div>
             <div className="news-summary">
                 <p style={{fontWeight: 'bold', fontSize:'19px'}}>Summary: </p> 
@@ -171,7 +171,7 @@
             {!isAdmin && <p>{fulldetail}</p>}
             </div>
             <div className="news-provide">
-                <p>Provided by: <a href="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp"> Link </a> </p>
+                <p>Provided by: <a href="https://www.cnn.com/politics/live-news/trump-hush-money-trial-05-03-24/index.html"> Link </a> </p>
             </div>
         </div>
         <div className="new-side">

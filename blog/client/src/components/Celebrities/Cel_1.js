@@ -18,7 +18,7 @@
                         setIsDropdownOpen(!isDropdownOpen);
                     };
                     const shareOptions = ['Copy Link', 'Facebook', 'Twitter', 'Messenger'];
-                    const shareUrl = '/Cel_1';
+                    const shareUrl = '/Cel 1';
 
                     const handleShareOptionClick = async (option) => {
                         try {
@@ -169,7 +169,7 @@
                             };
 
 
-                        const [name, setName] = useState(localStorage.getItem(window.location.href + '-name') || 'Cel_1');
+                        const [name, setName] = useState(localStorage.getItem(window.location.href + '-name') || 'Cel 1');
 
                         useEffect(() => {
                             localStorage.setItem(window.location.href + '-name', name);
@@ -180,8 +180,8 @@
                         };
 
 
-                        const userName = 'Cel_1-shows'; // Define the userName variable
-                        const userNamenews = 'Cel_1-news'; // Define the userName variable
+                        const userName = 'Cel 1-shows'; // Define the userName variable
+                        const userNamenews = 'Cel 1-news'; // Define the userName variable
                         const saveImageDataToMongoDB = async (imageData, userName,userNamenews, imagesnews) => {
                             try {
                                 const response = await fetch('http://localhost:5000/api/saveImageData', {
@@ -238,7 +238,7 @@
                         };
 
                         const handleAddImaged = () => {
-                            const userNamenews = 'Cel_1';
+                            const userNamenews = 'Cel 1';
 
                             setimagesnews([{ url: "", title: "", img: "", userNamenews }, ...imagesnews]);
                             setInputVisible(true);
@@ -285,7 +285,7 @@
                         };
 
                         const handleAddImage = () => {
-                            const userName = 'Cel_1';
+                            const userName = 'Cel 1';
 
                             setImageData([{ url: "", title: "", img: "", userName }, ...imageData]);
                             setInputVisible(true);
@@ -337,7 +337,7 @@
                                         <div className="profile-info">
                                              {isAdmin && <p><Editable initialValue={name} onSave={handleNameChange} /></p>}
                                             {!isAdmin && <p>{name}</p>}
-                                            <p>Cel_1</p>
+                                            <p>Cel 1</p>
                                             <p>Vietnam</p>
                                             <p>{birthdated} (age {age})</p>
 
@@ -367,7 +367,7 @@
                                         </div>
                                         <div className="profile-image">
                                             <div className="profile-img">
-                                            <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" alt="Cel_1" />
+                                            <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" alt="Cel 1" />
                                             </div>
                                         </div>
                                     </div>

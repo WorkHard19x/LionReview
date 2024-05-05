@@ -354,10 +354,22 @@ const imagesnews = [
 const [posts, setPosts] = useState([]);
 const [error, setError] = useState(null);
 const [postcel, setPostscel] = useState([]);
+const [postkd, setPostskd] = useState([]);
+const [postch, setPostsch] = useState([]);
+const [postjp, setPostsja] = useState([]);
+const [posttw, setPoststw] = useState([]);
+const [postth, setPoststh] = useState([]);
+const [postot, setPostsot] = useState([]);
 
 useEffect(() => {
     fetchPosts();
     fetchPostcel();
+    fetchPostkd();
+    fetchPostch();
+    fetchPostja();
+    fetchPosttw();
+    fetchPostth();
+    fetchPostot();
 }, []);
 
 const fetchPosts = async () => {
@@ -383,15 +395,97 @@ const fetchPostcel = async () => {
       setError(`Error fetching cel posts. Please try again.`); // Set error message
   }
 };
+
+const fetchPostkd = async () => {
+  try {
+      const response = await axios.get(`http://localhost:5000/api/kd`);
+      console.log('Response:', response.data); // Log the response data
+      setPostskd(response.data);
+      setError(null); // Reset error state if request is successful
+  } catch (error) {
+      console.error(`Error fetching cel posts:`, error);
+      setError(`Error fetching cel posts. Please try again.`); // Set error message
+  }
+};
+
+const fetchPostch = async () => {
+  try {
+      const response = await axios.get(`http://localhost:5000/api/ch`);
+      console.log('Response:', response.data); // Log the response data
+      setPostsch(response.data);
+      setError(null); // Reset error state if request is successful
+  } catch (error) {
+      console.error(`Error fetching cel posts:`, error);
+      setError(`Error fetching cel posts. Please try again.`); // Set error message
+  }
+};
+
+const fetchPostja = async () => {
+  try {
+      const response = await axios.get(`http://localhost:5000/api/ja`);
+      console.log('Response:', response.data); // Log the response data
+      setPostsja(response.data);
+      setError(null); // Reset error state if request is successful
+  } catch (error) {
+      console.error(`Error fetching cel posts:`, error);
+      setError(`Error fetching cel posts. Please try again.`); // Set error message
+  }
+};
+
+const fetchPosttw = async () => {
+  try {
+      const response = await axios.get(`http://localhost:5000/api/tw`);
+      console.log('Response:', response.data); // Log the response data
+      setPoststw(response.data);
+      setError(null); // Reset error state if request is successful
+  } catch (error) {
+      console.error(`Error fetching cel posts:`, error);
+      setError(`Error fetching cel posts. Please try again.`); // Set error message
+  }
+};
+
+const fetchPostth = async () => {
+  try {
+      const response = await axios.get(`http://localhost:5000/api/th`);
+      console.log('Response:', response.data); // Log the response data
+      setPoststh(response.data);
+      setError(null); // Reset error state if request is successful
+  } catch (error) {
+      console.error(`Error fetching cel posts:`, error);
+      setError(`Error fetching cel posts. Please try again.`); // Set error message
+  }
+};
+
+
+const fetchPostot = async () => {
+  try {
+      const response = await axios.get(`http://localhost:5000/api/ot`);
+      console.log('Response:', response.data); // Log the response data
+      setPostsot(response.data);
+      setError(null); // Reset error state if request is successful
+  } catch (error) {
+      console.error(`Error fetching cel posts:`, error);
+      setError(`Error fetching cel posts. Please try again.`); // Set error message
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 if (error) {
     return <div>Error: {error}</div>;
 }
 
-if (!posts || !posts.length) {
-  return <div>No posts available</div>;
-} else if (!postcel || !postcel.length) {
-  return <div>No posts available</div>;
-}
+
 
 
 
@@ -481,12 +575,19 @@ if (!posts || !posts.length) {
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderRefk}>
-          {imagesk.map((info, index) => (
-          <a key={index} href={info.url}  rel="noopener noreferrer" className="image-container">
-            <img src={info.img} alt={`Image ${index}`} />
-            <p className="image-title">{info.title}</p>
-          </a> 
-          ))}
+        {postkd.slice().reverse().map((post, index) => (
+              <div key={index} >
+                <a href={post.korean_url}>
+                  <div className="image-container">
+                      <img src={post.img} alt={post.title} 
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                    
+              </div>
+            ))}
+
         </div>
         <div className="navigation-arrows">
           <i className="fas fa-arrow-circle-left" onClick={handlePrevClickk}></i>
@@ -504,12 +605,18 @@ if (!posts || !posts.length) {
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderRefc}>
-          {imagesc.map((info, index) => (
-          <a key={index} href={info.url}  rel="noopener noreferrer" className="image-container">
-            <img src={info.img} alt={`Image ${index}`} />
-            <p className="image-title">{info.title}</p>
-          </a> 
-          ))}
+        {postch.slice().reverse().map((post, index) => (
+              <div key={index} >
+                <a href={post.chinese_url}>
+                  <div className="image-container">
+                      <img src={post.img} alt={post.title} 
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                  
+              </div>
+            ))}
         </div>
         <div className="navigation-arrows">
           <i className="fas fa-arrow-circle-left" onClick={handlePrevClickc}></i>
@@ -527,12 +634,18 @@ if (!posts || !posts.length) {
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderRefj}>
-          {imagesj.map((info, index) => (
-          <a key={index} href={info.url}  rel="noopener noreferrer" className="image-container">
-            <img src={info.img} alt={`Image ${index}`} />
-            <p className="image-title">{info.title}</p>
-          </a> 
-          ))}
+        {postjp.slice().reverse().map((post, index) => (
+              <div key={index} >
+                <a href={post.japan_url}>
+                  <div className="image-container">
+                      <img src={post.img} alt={post.title} 
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                   
+              </div>
+            ))}
         </div>
         <div className="navigation-arrows">
           <i className="fas fa-arrow-circle-left" onClick={handlePrevClickj}></i>
@@ -550,12 +663,18 @@ if (!posts || !posts.length) {
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderReft}>
-          {imagest.map((info, index) => (
-          <a key={index} href={info.url}  rel="noopener noreferrer" className="image-container">
-            <img src={info.img} alt={`Image ${index}`} />
-            <p className="image-title">{info.title}</p>
-          </a> 
-          ))}
+        {posttw.slice().reverse().map((post, index) => (
+              <div key={index} >
+                <a href={post.taiwan_url}>
+                  <div className="image-container">
+                      <img src={post.img} alt={post.title} 
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                   
+              </div>
+            ))}
         </div>
         <div className="navigation-arrows">
           <i className="fas fa-arrow-circle-left" onClick={handlePrevClickt}></i>
@@ -573,12 +692,18 @@ if (!posts || !posts.length) {
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderRefth}>
-          {imagesth.map((info, index) => (
-          <a key={index} href={info.url}  rel="noopener noreferrer" className="image-container">
-            <img src={info.img} alt={`Image ${index}`} />
-            <p className="image-title">{info.title}</p>
-          </a> 
-          ))}
+        {postth.slice().reverse().map((post, index) => (
+              <div key={index} >
+                <a href={post.thailand_url}>
+                  <div className="image-container">
+                      <img src={post.img} alt={post.title} 
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                    
+              </div>
+            ))}
         </div>
         <div className="navigation-arrows">
           <i className="fas fa-arrow-circle-left" onClick={handlePrevClickth}></i>
@@ -596,12 +721,18 @@ if (!posts || !posts.length) {
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderRefo}>
-          {imageso.map((info, index) => (
-          <a key={index} href={info.url}  rel="noopener noreferrer" className="image-container">
-            <img src={info.img} alt={`Image ${index}`} />
-            <p className="image-title">{info.title}</p>
-          </a> 
-          ))}
+        {postot.slice().reverse().map((post, index) => (
+              <div key={index} >
+                <a href={post.other_url}>
+                  <div className="image-container">
+                      <img src={post.img} alt={post.title} 
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                   
+              </div>
+            ))}
         </div>
         <div className="navigation-arrows">
           <i className="fas fa-arrow-circle-left" onClick={handlePrevClicko}></i>
@@ -620,12 +751,7 @@ if (!posts || !posts.length) {
         </div>
         <div className="continue">
           <div className='image-slider-continue' ref={imageSliderRefCelebrities}>
-            {/* {imagesCelebrities.map((info, index) => (
-            <a key={index} href={info.url}  rel="noopener noreferrer" className="image-container">
-              <img src={info.img} alt={`Image ${index}`} />
-              <p className="image-title">{info.title}</p>
-            </a> 
-            ))} */}
+
             {postcel.slice().reverse().map((post, index) => (
               <div key={index} >
                 <a href={post.url_pagecel}>
@@ -635,9 +761,7 @@ if (!posts || !posts.length) {
                       <p className="image-title">{post.name}</p>
                       </div>
                       </a>
-                    {/* <div className="text-container-home"> 
-                      Read more
-                  </div> */}
+                   
               </div>
             ))}
 

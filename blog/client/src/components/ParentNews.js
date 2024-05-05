@@ -43,6 +43,12 @@ function ParentNews() {
         // Update the posts state with the new post using the functional form of setState
         setPosts(prevPosts => [{ name, imageUrl, url_pagecel }, ...prevPosts]);
     };
+    const updatePostsdrama = (newPost) => {
+        // Extract required information from the new post
+        const { title, img, korean_url,chinese_url,japan_url,taiwan_url,thailand_url,other_url } = newPost;
+        // Update the posts state with the new post using the functional form of setState
+        setPosts(prevPosts => [{ title, img, korean_url,chinese_url,japan_url,taiwan_url,thailand_url,other_url }, ...prevPosts]);
+    };
 
     
 
@@ -50,6 +56,7 @@ function ParentNews() {
         <div>
             <PostNewForm updatePosts={updatePosts} /> {/* Render the PostNewForm component */}
             <PostNewForm updatePosts={updatePostscel} /> {/* Render the PostNewForm component */}
+            <PostDramaForm updatePosts={updatePostsdrama} /> {/* Render the PostNewForm component */}
 
             {error && <div>Error: {error}</div>}
             {/* {posts.length === 0 && !error && <div>No posts available</div>}

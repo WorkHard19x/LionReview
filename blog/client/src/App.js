@@ -1,32 +1,29 @@
-import Cel_2 from './components/Celebrities/Cel_2';
+import Korean_7 from './components/Korean/Korean_7';
+import Other_2 from './components/Other/Other_2';
+import Thailand_2 from './components/Thailand/Thailand_2';
+import Taiwan_2 from './components/Taiwan/Taiwan_2';
+import Japan_2 from './components/Japan/Japan_2';
+import Chinese_4 from './components/China/Chinese_4';
+import Korean_2 from './components/Korean/Korean_2';
+import Chinese_3 from './components/China/Chinese_3';
+import Chinese_2 from './components/China/Chinese_2';
 import Cel_1 from './components/Celebrities/Cel_1';
-
-import Testc3 from './components/Celebrities/Test c3';
 import Test_1 from './components/News/Test_1';
-
-import Test_9 from './components/News/Test_9';
-
-
-import Test_3 from './components/News/Test_3';
-
-
-
-
-import Leo_DN from './components/Celebrities/Leo_DN';
-import Yoon_Shi_Yoon from './components/Celebrities/Yoon_Shi_Yoon';
-import It_Beautiful_Now from './components/Korean/It_Beautiful_Now';
-import Layout from './components/Layout';
+import Thailand_1 from './components/Thailand/Thailand_1';
+import Japan_1 from './components/Japan/Japan_1';
+import Other_1 from './components/Other/Other_1';
+import Taiwan_1 from './components/Taiwan/Taiwan_1';
+import Chinese_1 from './components/China/Chinese_1';
+import Korean_1 from './components/Korean/Korean_1';
 import Home from './components/Home';
-import News from './components/News';
+import Layout from './components/Layout';
 import PostNewForm from './components/PostNewForm';
 import PostDramaForm from './components/PostDramaForm';
+import PostCreationForm from './components/PostCreationForm';
 import Footer from './components/Bottom';
-import A1Cel from './components/Celebrities/A1Cel';
-import News_Yon from './components/News/News_Yon';
-import Admin from './components/Admin'; // Import the Admin component
+import Admin from './components/Admin'; 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import PostCreationForm from './components/PostCreationForm';
 
 function App() {
   return (
@@ -34,30 +31,29 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Celebrities_Form" element={<A1Cel />} />
-          <Route path="/News" element={<News />} />
-          <Route path="/News_Yon" element={<News_Yon />} />
-          <Route path="/Yoon_Shi_Yoon" element={<Yoon_Shi_Yoon />} />
+          <Route path="/Admin" element={<Admin />} />
           <Route path="/Create_New_Profiles" element={<PostNewForm />} />
           <Route path="/Create_Drama_Profiles" element={<PostDramaForm />} />
           <Route path="/Create_Celebrities_Profiles" element={<PostCreationForm />} />
-          <Route path="/Celebrities/Leo_DN/:pageId" element={<Leo_DN />} />
-          <Route path="/korean/It-Beautiful-Now/:pageId" element={<It_Beautiful_Now />} />
-          <Route path="/News/Test_3/:pageId" element={<Test_3 />} />
 
-     
-
-
-          <Route path="/News/Test_9/:pageId" element={<Test_9 />} />
+          <Route path="/Korean/Korean_1/:pageId" element={<Korean_1 />} />
+          <Route path="/China/Chinese_1/:pageId" element={<Chinese_1 />} />
+          <Route path="/Taiwan/Taiwan_1/:pageId" element={<Taiwan_1 />} />
+          <Route path="/Other/Other_1/:pageId" element={<Other_1 />} />
+          <Route path="/Japan/Japan_1/:pageId" element={<Japan_1 />} />
+          <Route path="/Thailand/Thailand_1/:pageId" element={<Thailand_1 />} />
           <Route path="/News/Test_1/:pageId" element={<Test_1 />} />
-          <Route path="/Celebrities/Test c3/:pageId" element={<Testc3 />} />
-
-
-
-
           <Route path="/Celebrities/Cel_1/:pageId" element={<Cel_1 />} />
-          <Route path="/Celebrities/Cel_2/:pageId" element={<Cel_2 />} />
-          <Route path="/Admin" element={<Admin />} />
+          <Route path="/China/Chinese_2/:pageId" element={<Chinese_2 />} />
+          <Route path="/China/Chinese_3/:pageId" element={<Chinese_3 />} />
+          <Route path="/Korean/Korean_2/:pageId" element={<Korean_2 />} />
+          <Route path="/China/Chinese_4/:pageId" element={<Chinese_4 />} />
+          <Route path="/Japan/Japan_2/:pageId" element={<Japan_2 />} />
+          <Route path="/Taiwan/Taiwan_2/:pageId" element={<Taiwan_2 />} />
+          <Route path="/Thailand/Thailand_2/:pageId" element={<Thailand_2 />} />
+          <Route path="/Other/Other_2/:pageId" element={<Other_2 />} />
+          <Route path="/Korean/Korean_7/:pageId" element={<Korean_7 />} />
+    
         </Routes>
       </Layout>
       <Footer></Footer>

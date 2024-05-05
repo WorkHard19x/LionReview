@@ -447,7 +447,6 @@ function PostCreationForm({ updatePosts  }) {
             fetchNews();
         } catch (error) {
             console.error('Error submitting form data:', error);
-            alert('Failed to submit form data');
         }
     };
 

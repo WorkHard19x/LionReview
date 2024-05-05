@@ -75,7 +75,7 @@ const Layout = ({ children }) => {
                 <Nav.Link onClick={handleToggleDropdown}>
                   Categories {isDropdownOpen ? '▲' : '▼'}
                 </Nav.Link>
-                <div className={`dropdown-content ${isDropdownOpen ? 'show' : ''}`}>
+                <div className={`dropdown-content-layout ${isDropdownOpen ? 'show' : ''}`}>
                 <div className='row'>
                     <div className='columns'>
                         <NavDropdown.Item href="#action/3.1">

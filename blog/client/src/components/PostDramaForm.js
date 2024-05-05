@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { useState, useRef } from 'react';
 import BoldToggle from './BoldToggle';
 import '../styles/PostCreationForm.css';
+import { useParams } from 'react-router-dom';
 
-
-function PostNewForm() {
+function PostNewForm({ updatePosts  }) {
     const summaryTextareaRef = useRef(null);
     const fulldetailTextareaRef = useRef(null);
     const [formData, setFormData] = useState({
@@ -197,56 +197,234 @@ function PostNewForm() {
         showurl20: '',
         showtitle20: '',
 
+        korean_url:'',
+        chinese_url:'',
+        japan_url:'',
+        taiwan_url:'',
+        thailand_url:'',
+        other_url:'',
+        img:'',
     });
-  
-//     const handleChange = (e, inputName) => {
-//         const { value } = e.target;
-//         setFormData(prevData => ({
-//             ...prevData,
-//             [inputName]: value
-//         }));
-//     };
 
 
-// const handleChanged = (name, value) => {
-//     setFormData({ ...formData, [name]: value });
+    const handleChange = (nameOrEvent, value) => {
+        let name, newValue;
+        if (typeof nameOrEvent === 'string') {
+            name = nameOrEvent;
+            newValue = value;
+        } else {
+            name = nameOrEvent.target.name;
+            newValue = nameOrEvent.target.value;
+        }
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: newValue
+        }));
+
+
+        if (name === 'title_korean_url') {
+            const urlPage = `http://localhost:3000/Korean/${value}/1`;
+            setFormData(prevState => ({ ...prevState, korean_url: urlPage }));
+        }
+        if (name === 'title_chinese_url') {
+            const urlPage = `http://localhost:3000/China/${value}/1`;
+            setFormData(prevState => ({ ...prevState, chinese_url: urlPage }));
+        }
+        if (name === 'title_japan_url') {
+            const urlPage = `http://localhost:3000/Japan/${value}/1`;
+            setFormData(prevState => ({ ...prevState, japan_url: urlPage }));
+        }
+        if (name === 'title_taiwan_url') {
+            const urlPage = `http://localhost:3000/Taiwan/${value}/1`;
+            setFormData(prevState => ({ ...prevState, taiwan_url: urlPage }));
+        }
+        if (name === 'title_thailand_url') {
+            const urlPage = `http://localhost:3000/Thailand/${value}/1`;
+            setFormData(prevState => ({ ...prevState, thailand_url: urlPage }));
+        }
+        if (name === 'title_other_url') {
+            const urlPage = `http://localhost:3000/Other/${value}/1`;
+            setFormData(prevState => ({ ...prevState, other_url: urlPage }));
+        }
+        
+    };
+    
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        let apiUrl = ''; // Initialize apiUrl variable
+    
+    // Determine the API endpoint URL based on the selected option
+        switch (selectedOption) {
+            case 'korean':
+                apiUrl = 'http://localhost:5000/api/kd';
+                break;
+            case 'chinese':
+                apiUrl = 'http://localhost:5000/api/ch';
+                break;
+            case 'japan':
+                apiUrl = 'http://localhost:5000/api/ja';
+                break;
+            case 'taiwan':
+                apiUrl = 'http://localhost:5000/api/tw';
+                break;
+            case 'thailand':
+                apiUrl = 'http://localhost:5000/api/th';
+                break;
+            case 'other':
+                apiUrl = 'http://localhost:5000/api/ot';
+                break;
+            default:
+                // Handle default case or show error message
+                break;
+        }
+        try {
+            console.log('Form data:', formData); // Log the form data to check its content
+    
+            const response = await axios.post(apiUrl, formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            console.log('Response:', response.data); // Log the response data for debugging
+    
+            // Reset the form data after successful submission
+            setFormData({
+                title_korean_url:'',
+                title_chinese_url:'',
+                title_japan_url:'',
+                title_taiwan_url:'',
+                title_thailand_url:'',
+                title_other_url:'',
+                title:'',
+                date: '',
+                img:'',
+                korean_url:'',
+                chinese_url:'',
+                japan_url:'',
+                taiwan_url:'',
+                thailand_url:'',
+                other_url:'',
+
+            });
+
+            const responsed = await axios.post('http://localhost:5000/korean-drama', formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            alert('Form data submitted successfully');
+            // Add import statement to App.js
+            const jsFileName = responsed.data.jsFileName;
+            updateAppJs(jsFileName);
+            updatePosts({
+                title: response.data.title,
+                img: response.data.img,
+                korean_url: response.data.korean_url,
+                chinese_url: response.data.chinese_url,
+                japan_url: response.data.japan_url,
+                taiwan_url: response.data.taiwan_url,
+                thailand_url: response.data.thailand_url,
+                other_url: response.data.other_url,
+            });
+
+            alert('Form data submitted successfully');
+    
+            // Fetch the updated news after submission
+            fetchNews();
+        } catch (error) {
+            console.error('Error submitting form data:', error);
+        }
+    };
+
+const fetchNews = async () => {
+    let apiUrl = ''; // Initialize apiUrl variable
+    
+    // Determine the API endpoint URL based on the selected option
+        switch (selectedOption) {
+            case 'korean':
+                apiUrl = 'http://localhost:5000/api/kd';
+                break;
+            case 'chinese':
+                apiUrl = 'http://localhost:5000/api/ch';
+                break;
+            case 'japan':
+                apiUrl = 'http://localhost:5000/api/ja';
+                break;
+            case 'taiwan':
+                apiUrl = 'http://localhost:5000/api/tw';
+                break;
+            case 'thailand':
+                apiUrl = 'http://localhost:5000/api/th';
+                break;
+            case 'other':
+                apiUrl = 'http://localhost:5000/api/ot';
+                break;
+            default:
+                // Handle default case or show error message
+                break;
+        }
+    try {
+        const response = await axios.get(apiUrl);
+        // const response = await axios.get('http://localhost:5000/api/news');
+        // Process the fetched news data as needed
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        // Handle error if necessary
+    }
+};
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const handleChange = (nameOrEvent, value) => {
+//     let name, newValue;
+//     if (typeof nameOrEvent === 'string') {
+//         name = nameOrEvent;
+//         newValue = value;
+//     } else {
+//         name = nameOrEvent.target.name;
+//         newValue = nameOrEvent.target.value;
+//     }
+
+//     setFormData(prevData => ({
+//         ...prevData,
+//         [name]: newValue
+//     }));
 // };
 
-
-const handleChange = (nameOrEvent, value) => {
-    let name, newValue;
-    if (typeof nameOrEvent === 'string') {
-        name = nameOrEvent;
-        newValue = value;
-    } else {
-        name = nameOrEvent.target.name;
-        newValue = nameOrEvent.target.value;
-    }
-
-    setFormData(prevData => ({
-        ...prevData,
-        [name]: newValue
-    }));
-};
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-        // Send form data to the server
-        const response = await axios.post('http://localhost:5000/korean-drama', formData, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        alert('Form data submitted successfully');
-        // Add import statement to App.js
-        const jsFileName = response.data.jsFileName;
-        updateAppJs(jsFileName);
-    } catch (error) {
-        console.log('Error submitting form data:', error);
-        alert('Failed to submit form data');
-    }
-};
+// const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//         // Send form data to the server
+//         const response = await axios.post('http://localhost:5000/korean-drama', formData, {
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         });
+//         alert('Form data submitted successfully');
+//         // Add import statement to App.js
+//         const jsFileName = response.data.jsFileName;
+//         updateAppJs(jsFileName);
+//     } catch (error) {
+//         console.log('Error submitting form data:', error);
+//         alert('Failed to submit form data');
+//     }
+// };
 
 const updateAppJs = (jsFileName) => {
     axios.post('http://localhost:5000/update-app-js', { jsFileName }, {
@@ -448,13 +626,16 @@ const [selectedOption, setSelectedOption] = useState(null);
             </div>
           )}
 
+
           {/* Common input */}
           <div className="input-container">
             <label>Title:</label>
             <input type="text" name="title" value={formData.title} onChange={(e) => handleChange(e.target.name, e.target.value)} />
-
           </div>
-
+          <div className="input-container">
+            <label>Image URL:</label>
+            <input type="text" name="img" value={formData.img} onChange={(e) => handleChange(e.target.name, e.target.value)} />
+            </div>
             <div className="input-container">
                 <label>Date:</label>
                 <input type="date" name="date" value={formData.date} onChange={(e) => handleChange(e.target.name, e.target.value)} />
