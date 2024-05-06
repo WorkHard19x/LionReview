@@ -113,6 +113,8 @@
     scroll-snap-type: x mandatory;
     max-height: 200px;
     max-width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.39);
+    border-radius: 4px;
   }
   
   .image-slider-continue img {
@@ -189,21 +191,19 @@
     font-size: 20px;
   }
   
-  .tooltip:hover a,
-  .tooltip:hover h1,
-  .tooltip:hover span,
-  .tooltip:hover .tooltiptext,
-  .tooltipk:hover a,
-  .tooltipk:hover h1,
-  .tooltipk:hover span,
-  .tooltipk:hover .tooltiptextk {
+ 
+  
+  .tooltipk:hover h1 {
+    color: rgb(0, 140, 255);
+
+  }
+  .tooltipk:hover span{
     color:  rgba(9, 191, 247, 0.966); /* Change color on hover for all elements */
   }
-  
+
   .tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
-    color: rgba(9, 191, 247, 0.966); /* Change color on hover for all elements */
     text-align: center;
     border-radius: 6px;
     padding: 5px;
@@ -214,21 +214,24 @@
     margin-left: -60px;
     opacity: 0;
     transition: opacity 0.3s;
+    
   }
   .tooltipk .tooltiptextk {
     visibility: hidden;
     width: 120px;
-    color: rgba(9, 191, 247, 0.966); /* Change color on hover for all elements */
     text-align: center;
     border-radius: 6px;
     padding: 5px;
     position: absolute;
     z-index: 1;
-    bottom: 25%;
+    bottom: 20%;
+    margin-left: -3.3rem;
     left: 130%;
-    margin-left: -60px;
     opacity: 0;
     transition: opacity 0.3s;
+  }
+  .tooltipk h1{
+ font-size: 22px;
   }
   
   .tooltip:hover .tooltiptext,
@@ -236,6 +239,7 @@
     visibility: visible;
     opacity: 1;
   }
+ 
   
   .tooltip h1,
   .tooltipk h1 {
@@ -275,6 +279,7 @@
   color: white;
   font-size: 16px;
   text-align: center;
+
   }
  
 .text-container-home {

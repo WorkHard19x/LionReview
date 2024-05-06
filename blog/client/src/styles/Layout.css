@@ -196,6 +196,197 @@ font-size: 21px;
   transform: translate(-50%, -150%);
 }
 
+
+.user-dropdown {
+  position: absolute;
+  margin-top: 0.4rem;
+  right: 0;
+  z-index: 1000;
+  overflow: auto;
+  margin-top: 0rem;
+  background-color: white;
+  border: 1px solid #ccc; /* Add border */
+  border-top: none; /* Remove top border */
+  border-radius: 0 0 5px 5px; /* Optional: Add border radius */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: Add box shadow */
+}
+
+.user-dropdown p {
+  margin: 0;
+  padding: 0.5rem 2rem;
+  z-index: 1000;
+
+}
+.user-dropdown a {
+  color: black;
+  z-index: 1000;
+
+  font-size: 18px;
+}
+
+.user-dropdown p:hover {
+  background-color: #a4a5a7b0; /* Optional: Hover background color */
+}
+
+
+.login-form-overlay {
+  position: fixed;
+  top:20%;
+  margin: auto;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  background-color: transparent;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.profile-form-overlay {
+  position: fixed;
+  top:10%;
+  margin: auto;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile-center{
+  width:35%;
+  margin: auto;
+  justify-content: center;
+  padding: 50px;
+  background-color: #ccc;
+  display: flex;
+}
+.profile-left{
+  width: 25%;
+  background-color: red;
+}
+.profile-right{
+  width: 100%;
+  background-color: blue;
+  text-align: left;
+  padding-left: 2rem;
+
+}
+
+.profile-right-main p{
+  color: white
+}
+
+
+.login-form-container {
+  background-color: rgb(117, 114, 114);
+  padding: 1px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.profile-logout {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  
+
+}
+
+.login-form-container h2{
+  color: black;
+}
+.login-register{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: rgb(105, 132, 133);
+  
+}
+.login-p{
+  width: 50%;
+  text-align: center;
+  font-weight: bold;
+  border-right: 1px dashed  rgb(185, 194, 194);
+}
+.register-p{
+  width: 50%;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* .login-p:hover span{
+  color:rgb(247, 66, 66);
+  border-bottom: 1px solid rgb(241, 6, 6);
+} */
+
+
+.section-login p{
+  color: black;
+  margin-bottom: -0.01rem;
+  margin-left: 0.5rem;
+  font-weight: bold;
+}
+.section-login {
+  justify-content: center;
+  text-align: center;
+}
+.section-login input{
+  padding: 5px;
+}
+.active-link span {
+  color: blue; /* Set the color of the link to blue */
+}
+.login-scale{
+  background-color: rgb(220, 245, 245);
+  min-width: 650px;
+  min-height: 300px;
+  
+  }
+
+.login-gmail  {
+  width: 100%;
+  justify-content: space-between;
+  text-align: center;
+
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.login-in{
+  border:1px solid rgba(63, 63, 243, 0.808);
+  width: 40%;
+  margin: auto;
+  height: 50px;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.login-in i
+{
+  margin-top: -1rem;
+}
+.login-in p{
+  font-size: 16px;
+  
+}
+
+.icon-button {
+  border: none; /* Remove border */
+  background-color: transparent; /* Make background transparent */
+  padding: 0; /* Remove padding */
+}
+
 @media screen and (max-width: 860px) {
   .dropdown-content-layout {
     display: none;

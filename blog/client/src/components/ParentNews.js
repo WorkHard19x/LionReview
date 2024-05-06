@@ -45,9 +45,9 @@ function ParentNews() {
     };
     const updatePostsdrama = (newPost) => {
         // Extract required information from the new post
-        const { title, img, korean_url,chinese_url,japan_url,taiwan_url,thailand_url,other_url } = newPost;
+        const { title, img, korean_url,chinese_url,japan_url,taiwan_url,thailand_url,other_url,all_url } = newPost;
         // Update the posts state with the new post using the functional form of setState
-        setPosts(prevPosts => [{ title, img, korean_url,chinese_url,japan_url,taiwan_url,thailand_url,other_url }, ...prevPosts]);
+        setPosts(prevPosts => [{ title, img, korean_url,chinese_url,japan_url,taiwan_url,thailand_url,other_url,all_url }, ...prevPosts]);
     };
 
     

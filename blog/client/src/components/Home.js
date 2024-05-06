@@ -360,6 +360,7 @@ const [postjp, setPostsja] = useState([]);
 const [posttw, setPoststw] = useState([]);
 const [postth, setPoststh] = useState([]);
 const [postot, setPostsot] = useState([]);
+const [postALL, setPostpostALL] = useState([]);
 
 useEffect(() => {
     fetchPosts();
@@ -472,80 +473,130 @@ const fetchPostot = async () => {
 
 
 
+const [hoveredIndex, setHoveredIndex] = useState(1);
+const [timerPaused, setTimerPaused] = useState(false);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!timerPaused) {
+        // Reset all borders
+        setIsBorder1Hovered(false);
+        setIsBorder2Hovered(false);
+        setIsBorder3Hovered(false);
+        setIsBorder4Hovered(false);
 
+        // Set the next border as hovered
+        switch (hoveredIndex) {
+          case 1:
+            setIsBorder2Hovered(true);
+            setHoveredIndex(2);
+            break;
+          case 2:
+            setIsBorder3Hovered(true);
+            setHoveredIndex(3);
+            break;
+          case 3:
+            setIsBorder4Hovered(true);
+            setHoveredIndex(4);
+            break;
+          case 4:
+            setIsBorder1Hovered(true);
+            setHoveredIndex(1);
+            break;
+          default:
+            break;
+        }
+      }
+    }, 1500);
 
-
-
-
+    return () => clearInterval(interval);
+  }, [hoveredIndex, timerPaused]);
 
 
 
 if (error) {
-    return <div>Error: {error}</div>;
+  return <div>Error: {error}</div>;
 }
-
-
-
-
-
-
   return (
     <div className="full-size" >
         <div className="container">
-          {/* Four borders with images */}
-          <div
-            className={`border border1 ${isBorder1Hovered ? 'show-bg' : ''}`}
-            onMouseEnter={() => setIsBorder1Hovered(true)}
-            onMouseLeave={() => setIsBorder1Hovered(false)}
-          >     
-            <div className="overlay-text">Business Proposal</div>
-            <span className="arrow-icon">
-                <a href="your_link_here">
-                  <i className="fas fa-arrow-circle-right" style={{ fontSize: '37px' }}></i>
-                </a>
-            </span>
-          </div>
-          <div
-            className={`border border2 ${isBorder2Hovered ? 'show-bg' : ''}`}
-            onMouseEnter={() => setIsBorder2Hovered(true)}
-            onMouseLeave={() => setIsBorder2Hovered(false)}
-          >
-              <div className="overlay-text">Business Proposal</div>
-              <span className="arrow-icon">
-                  <a href="your_link_here">
-                    <i className="fas fa-arrow-circle-right" style={{ fontSize: '37px' }}></i>
-                  </a>
-              </span>
-          </div>
-          <div
-            className={`border border3 ${isBorder3Hovered ? 'show-bg' : ''}`}
-            onMouseEnter={() => setIsBorder3Hovered(true)}
-            onMouseLeave={() => setIsBorder3Hovered(false)}
-          >
-            <div className="overlay-text">Business Proposal</div>
-            <span className="arrow-icon">
-                  <a href="your_link_here">
-                    <i className="fas fa-arrow-circle-right" style={{ fontSize: '37px' }}></i>
-                  </a>
-              </span>
-          </div>
-          <div
-            className={`border border4 ${isBorder4Hovered ? 'show-bg' : ''}`}
-            onMouseEnter={() => setIsBorder4Hovered(true)}
-            onMouseLeave={() => setIsBorder4Hovered(false)}
-          >
-            <div className="overlay-text">Business Proposal</div>
-            <span className="arrow-icon">
-                  <a href="your_link_here">
-                    <i className="fas fa-arrow-circle-right" style={{ fontSize: '37px' }}></i>
-                  </a>
-            </span>
-          </div>
+        {/* Four borders with images */}
+        <div
+          className={`border border1 ${isBorder1Hovered ? 'show-bg' : ''}`}
+          onMouseEnter={() => {
+            setIsBorder1Hovered(true);
+            setTimerPaused(true);
+          }}
+          onMouseLeave={() => {
+            setIsBorder1Hovered(false);
+            setTimerPaused(false);
+          }}
+        >
+          <div className="overlay-text">Business Proposal</div>
+          <span className="arrow-icon">
+            <a href="your_link_here">
+              <i className="fas fa-arrow-circle-right" style={{ fontSize: '37px' }}></i>
+            </a>
+          </span>
         </div>
+        <div
+          className={`border border2 ${isBorder2Hovered ? 'show-bg' : ''}`}
+          onMouseEnter={() => {
+            setIsBorder2Hovered(true);
+            setTimerPaused(true);
+          }}
+          onMouseLeave={() => {
+            setIsBorder2Hovered(false);
+            setTimerPaused(false);
+          }}
+        >
+          <div className="overlay-text">Business Proposal</div>
+          <span className="arrow-icon">
+            <a href="your_link_here">
+              <i className="fas fa-arrow-circle-right" style={{ fontSize: '37px' }}></i>
+            </a>
+          </span>
+        </div>
+        <div
+          className={`border border3 ${isBorder3Hovered ? 'show-bg' : ''}`}
+          onMouseEnter={() => {
+            setIsBorder3Hovered(true);
+            setTimerPaused(true);
+          }}
+          onMouseLeave={() => {
+            setIsBorder3Hovered(false);
+            setTimerPaused(false);
+          }}
+        >
+          <div className="overlay-text">Business Proposal</div>
+          <span className="arrow-icon">
+            <a href="your_link_here">
+              <i className="fas fa-arrow-circle-right" style={{ fontSize: '37px' }}></i>
+            </a>
+          </span>
+        </div>
+        <div
+          className={`border border4 ${isBorder4Hovered ? 'show-bg' : ''}`}
+          onMouseEnter={() => {
+            setIsBorder4Hovered(true);
+            setTimerPaused(true);
+          }}
+          onMouseLeave={() => {
+            setIsBorder4Hovered(false);
+            setTimerPaused(false);
+          }}
+        >
+          <div className="overlay-text">Business Proposal</div>
+          <span className="arrow-icon">
+            <a href="your_link_here">
+              <i className="fas fa-arrow-circle-right" style={{ fontSize: '37px' }}></i>
+            </a>
+          </span>
+        </div>
+      </div>
 
         {/* Latest Releases */}
-        <div class="tooltip">
+        {/* <div class="tooltip">
           <a href=""><h1>Latest Releases <span style={{fontSize:'21px'}}>&gt;</span> </h1>
           <span class="tooltiptext"> See all &gt;  </span>
           </a>
@@ -554,7 +605,9 @@ if (error) {
         <div className='image-slider-continue' ref={imageSliderRef}>
           {images.map((info, index) => (
             <a key={index} href={info.url}  rel="noopener noreferrer" className="image-container">
-            <img src={info.img} alt={`Image ${index}`} />
+            <img src={info.img} alt={`Image ${index}`}
+            
+            />
             <p className="image-title">{info.title}</p>
           </a> 
           ))}
@@ -565,12 +618,12 @@ if (error) {
         <div className="navigation-arrows1">
           <i className="fas fa-arrow-circle-right" onClick={handleNextClick}></i>
         </div>
-      </div>
+      </div> */}
         
       {/* Korean */}
       <div class="tooltipk">
-          <a href=""><h1>Korean <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk"> See all &gt;  </span>
+          <a href=""><h1 style={{fontSize:'22px'}}>Korean <span >&gt;</span> </h1>
+          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -580,6 +633,7 @@ if (error) {
                 <a href={post.korean_url}>
                   <div className="image-container">
                       <img src={post.img} alt={post.title} 
+                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
                       />
                       <p className="image-title">{post.title}</p>
                       </div>
@@ -599,8 +653,8 @@ if (error) {
 
       {/* China */}
       <div class="tooltipk">
-          <a href=""><h1>China <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk"> See all &gt;  </span>
+          <a href=""><h1 style={{fontSize:'22px'}}>China <span >&gt;</span> </h1>
+          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -610,6 +664,7 @@ if (error) {
                 <a href={post.chinese_url}>
                   <div className="image-container">
                       <img src={post.img} alt={post.title} 
+                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
                       />
                       <p className="image-title">{post.title}</p>
                       </div>
@@ -628,8 +683,8 @@ if (error) {
 
       {/* Japan */}
       <div class="tooltipk">
-          <a href=""><h1>Japan <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk"> See all &gt;  </span>
+          <a href=""><h1 style={{fontSize:'22px'}} >Japan <span>&gt;</span> </h1>
+          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -639,6 +694,8 @@ if (error) {
                 <a href={post.japan_url}>
                   <div className="image-container">
                       <img src={post.img} alt={post.title} 
+                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+
                       />
                       <p className="image-title">{post.title}</p>
                       </div>
@@ -658,7 +715,7 @@ if (error) {
       {/* Taiwan */}
       <div class="tooltipk">
           <a href=""><h1>Taiwan <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk"> See all &gt;  </span>
+          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -668,6 +725,7 @@ if (error) {
                 <a href={post.taiwan_url}>
                   <div className="image-container">
                       <img src={post.img} alt={post.title} 
+                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
                       />
                       <p className="image-title">{post.title}</p>
                       </div>
@@ -687,7 +745,7 @@ if (error) {
       {/* ThaiLand */}
       <div class="tooltipk">
           <a href=""><h1>ThaiLand <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk"> See all &gt;  </span>
+          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -697,6 +755,7 @@ if (error) {
                 <a href={post.thailand_url}>
                   <div className="image-container">
                       <img src={post.img} alt={post.title} 
+                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
                       />
                       <p className="image-title">{post.title}</p>
                       </div>
@@ -716,7 +775,7 @@ if (error) {
       {/* Other */}
       <div class="tooltipk">
           <a href=""><h1>Other <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk"> See all &gt;  </span>
+          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -726,6 +785,7 @@ if (error) {
                 <a href={post.other_url}>
                   <div className="image-container">
                       <img src={post.img} alt={post.title} 
+                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
                       />
                       <p className="image-title">{post.title}</p>
                       </div>
@@ -746,7 +806,7 @@ if (error) {
         {/* Popular Celebrities */}
         <div class="tooltipk">
           <a href=""><h1>Popular Celebrities <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk"> See all &gt;  </span>
+          <span class="tooltiptextk" style={{fontSize:'16px',marginLeft: '-6rem'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -757,6 +817,7 @@ if (error) {
                 <a href={post.url_pagecel}>
                   <div className="image-container">
                       <img src={post.imageUrl} alt={post.title} 
+                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
                       />
                       <p className="image-title">{post.name}</p>
                       </div>
@@ -777,7 +838,7 @@ if (error) {
       {/* news */}
       <div class="tooltipk">
           <a href=""><h1>News <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk"> See all &gt;  </span>
+          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
       <div className="news">
