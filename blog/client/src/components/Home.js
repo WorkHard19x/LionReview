@@ -621,9 +621,9 @@ if (error) {
       </div> */}
         
       {/* Korean */}
-      <div class="tooltipk">
+      <div className="tooltipk">
           <a href=""><h1 style={{fontSize:'22px'}}>Korean <span >&gt;</span> </h1>
-          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
+          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -652,9 +652,9 @@ if (error) {
       </div>
 
       {/* China */}
-      <div class="tooltipk">
+      <div className="tooltipk">
           <a href=""><h1 style={{fontSize:'22px'}}>China <span >&gt;</span> </h1>
-          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
+          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -682,9 +682,9 @@ if (error) {
       </div>
 
       {/* Japan */}
-      <div class="tooltipk">
+      <div className="tooltipk">
           <a href=""><h1 style={{fontSize:'22px'}} >Japan <span>&gt;</span> </h1>
-          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
+          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -713,9 +713,9 @@ if (error) {
       </div>
 
       {/* Taiwan */}
-      <div class="tooltipk">
+      <div className="tooltipk">
           <a href=""><h1>Taiwan <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
+          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -743,9 +743,9 @@ if (error) {
       </div>
 
       {/* ThaiLand */}
-      <div class="tooltipk">
+      <div className="tooltipk">
           <a href=""><h1>ThaiLand <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
+          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -773,9 +773,9 @@ if (error) {
       </div>
 
       {/* Other */}
-      <div class="tooltipk">
+      <div className="tooltipk">
           <a href=""><h1>Other <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
+          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -804,9 +804,9 @@ if (error) {
 
 
         {/* Popular Celebrities */}
-        <div class="tooltipk">
+        <div className="tooltipk">
           <a href=""><h1>Popular Celebrities <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk" style={{fontSize:'16px',marginLeft: '-6rem'}}> See all &gt;  </span>
+          <span className="tooltiptextk" style={{fontSize:'16px',marginLeft: '-6rem'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
@@ -836,9 +836,9 @@ if (error) {
       </div>
 
       {/* news */}
-      <div class="tooltipk">
+      <div className="tooltipk">
           <a href=""><h1>News <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span class="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
+          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
       <div className="news">

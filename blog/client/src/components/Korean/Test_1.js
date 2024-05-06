@@ -509,35 +509,35 @@
                     <div className="icon-container">
                         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                         {icons.map((icon, index) => (
-    <div key={index} style={{ margin: '4px' }}>
-        {isInputVisible && index === icons.length - 1 && ( // Only show input for the last added icon
-            <input
-                type="text"
-                value={icon.url}
-                onChange={(e) => handleUrlChange(index, e.target.value)}
-                onKeyDown={handleEnter}
-                style={{ width: '100%', boxSizing: 'border-box' }}
-            />
-        )}
-        <div
-            className={`icon ${selectedIndex === index ? 'selected' : ''}`}
-            onClick={() => handleIconClick(index)}
-        >
-            {index + 1}
-        </div>
-        {isAdmin && (
-            <button onClick={() => handleDeleteIcon(index)}>Delete</button>
-        )}
-    </div>
-))}
-<div style={{ margin: '5px' }}>
-    {isAdmin && (
-        <>
-            <button onClick={() => { handleAddIcon(); setInputVisible(true); }}>Add Icon</button>
-            <button id="saveButton" onClick={(e) => { handleEnter(e); saveToMongoDB(icons, userName); setInputVisible(false); }}>Save</button>
-        </>
-    )}
-</div>
+                            <div key={index} style={{ margin: '4px' }}>
+                                {isInputVisible && index === icons.length - 1 && ( // Only show input for the last added icon
+                                    <input
+                                        type="text"
+                                        value={icon.url}
+                                        onChange={(e) => handleUrlChange(index, e.target.value)}
+                                        onKeyDown={handleEnter}
+                                        style={{ width: '100%', boxSizing: 'border-box' }}
+                                    />
+                                )}
+                                <div
+                                    className={`icon ${selectedIndex === index ? 'selected' : ''}`}
+                                    onClick={() => handleIconClick(index)}
+                                >
+                                    {index + 1}
+                                </div>
+                                {isAdmin && (
+                                    <button onClick={() => handleDeleteIcon(index)}>Delete</button>
+                                )}
+                            </div>
+                        ))}
+                            <div style={{ margin: '5px' }}>
+                                {isAdmin && (
+                                    <>
+                                        <button onClick={() => { handleAddIcon(); setInputVisible(true); }}>Add Icon</button>
+                                        <button id="saveButton" onClick={(e) => { handleEnter(e); saveToMongoDB(icons, userName); setInputVisible(false); }}>Save</button>
+                                    </>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>

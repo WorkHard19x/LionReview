@@ -517,7 +517,7 @@ const [registerColor, setRegisterColor] = useState('white');
                                                   <div className='login-in'>
                                                   <a href="#">
                                                       <p>Register with Gmail 
-                                                      <i class="fa-brands fa-google" style={{marginLeft:'1rem', fontSize:'2rem'}}></i>
+                                                      <i className="fa-brands fa-google" style={{marginLeft:'1rem', fontSize:'2rem'}}></i>
                                                       </p>
                                                   </a>
                                               </div>
