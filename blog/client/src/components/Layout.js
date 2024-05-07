@@ -4,6 +4,7 @@ import { FaSearch, FaUser, FaBars } from 'react-icons/fa';
 import '../styles/Layout.css';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Search from './Search'; // Import the Search component
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
@@ -22,6 +23,7 @@ const Layout = ({ children }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [registrationMessage, setRegistrationMessage] = useState('');
+  const [loginErrorMessage, setLoginErrorMessage] = useState('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -163,16 +165,15 @@ const handleLogin = async () => {
       
       // Store user's name in local storage
       sessionStorage.setItem('loggedInUserEmail', data.email); // Or localStorage.setItem('loggedInUserEmail', enteredEmail);
-
+      localStorage.setItem('email', data.password);
       localStorage.setItem('name', data.name);
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('email', data.username);
-      
-      console.log('Login successful');
+
     } else {
       // Login failed, handle the error
       console.error('Login failed');
-      setRegistrationMessage('Email or Password incorrect');
+      setLoginErrorMessage('Email or Password incorrect');
     }
   } catch (error) {
     console.error('Error occurred during login:', error);
@@ -214,7 +215,6 @@ const handleLogin = async () => {
         setIsLoggedIn(false);
         setIsUserDropdownOpen(false); // Close the user dropdown
         localStorage.removeItem('isLoggedIn'); // Remove login status from local storage
-        window.location.hash = '/login';
 
       }else {
         // Handle error if logout fails
@@ -465,7 +465,7 @@ const [registerColor, setRegisterColor] = useState('white');
               </Form>
             )}
             {/* Show the search button */}
-            <Button variant="outline-light" onClick={handleSearchButtonClick} className="mr-sm-3"><FaSearch /></Button>
+            <Search components={yourComponentsArray} /> {/* Pass the components array as props */}
            
 
               {isLoginFormOpen && (
@@ -486,6 +486,7 @@ const [registerColor, setRegisterColor] = useState('white');
                                 </p>
                               </div>
                                   <div className="section-login" id="login">
+                                  {loginErrorMessage && <p style={{ color: 'red', fontWeight:'bold' }}>{loginErrorMessage}</p>}
                                         <h2>Login</h2>
                                         <p>Username</p>
                                         <input type="text" placeholder="Username" value={email} onChange={handleEmailChange} />

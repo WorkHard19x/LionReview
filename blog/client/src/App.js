@@ -2,6 +2,7 @@ import Test_1 from './components/Korean/Test_1';
 
 import Home from './components/Home';
 import Layout from './components/Layout';
+import Search from './components/Search';
 import PostNewForm from './components/PostNewForm';
 import PostDramaForm from './components/PostDramaForm';
 import PostCreationForm from './components/PostCreationForm';
@@ -20,7 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Admin" element={<Admin />} />
           <Route path="/Profile" element={<Profile />} />
-
+          <Route path="/Search" element={<Search />} />
           <Route path="/Create_New_Profiles" element={<PostNewForm />} />
           <Route path="/Create_Drama_Profiles" element={<PostDramaForm />} />
           <Route path="/Create_Celebrities_Profiles" element={<PostCreationForm />} />
