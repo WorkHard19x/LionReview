@@ -474,7 +474,7 @@ const renderInputs = () => {
 
         inputs.push(
             <div className="Imageshow_url" key={i}>
-                <label>{`Image_url ${i}:`}</label>
+                <label>{`Cast_Image_url ${i}:`}</label>
                 <input
                     type="text"
                     name={inputName}
@@ -598,7 +598,7 @@ const [selectedOption, setSelectedOption] = useState(null);
            
 
 
-            <h2>Create News Form</h2>
+            <h2 style={{marginTop:"2.5rem"}}>Create Drama Form</h2>
 
             <div className="dropdown">
             <button className="dropbtn">Dropdown</button>
@@ -647,19 +647,19 @@ const [selectedOption, setSelectedOption] = useState(null);
             </div>
                 {/* Iamge_url  */}
 
-            <div className='new_title'>
-                    {renderInputs()}
+                <div className='new_title'>
+                    {renderInputsshowtitle()}
             </div>
 
                 {/* Cast_url  */}
             <div className='new_title'>
                     {renderInputsshowurl()}
             </div>
-
-                {/* <!-- CastName --> */}
             <div className='new_title'>
-                    {renderInputsshowtitle()}
+                    {renderInputs()}
             </div>
+                {/* <!-- CastName --> */}
+            
 
             <div className="buttons">
                 <button type="submit" className="submit-button">Submit</button>

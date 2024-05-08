@@ -1,0 +1,47 @@
+.search-page {
+    background-color: rgba(0, 0, 0, 0.884); /* Set background color to black */
+    color: white; /* Set text color to white */
+    padding: 20px; /* Add some padding */
+  }
+  
+  .search-nav {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to next row */
+    justify-content: space-between; /* Space items evenly */
+  }
+  
+  .search-main {
+    width: 100%; /* Ensure the main content takes full width */
+  }
+  
+/* Update your CSS file */
+/* Update your CSS file */
+.search-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center items horizontally */
+  }
+  
+  .search-result {
+    flex: 0 0 calc(20% - 20px); /* Adjust the width to fit 5 items per row */
+    margin: 10px; /* Add margin between items */
+    text-align: center;
+  }
+  
+  .result-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .result-item img {
+    max-width: 100%; /* Ensure images don't exceed container width */
+    border: 1px solid white;
+    border-radius: 10px;
+}
+  
+  .result-item p {
+    
+    margin-top: 5px; /* Add space between image and title */
+  }
+  
+  

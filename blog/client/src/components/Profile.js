@@ -70,46 +70,48 @@ function Profile() {
   const [user, setUser] = useState({
     name: '', // Initialize name as empty string
     email: '',
+    is_admin: false,
+
     // Add more fields as needed
   });
 
-  useEffect(() => {
-    const loggedInUserEmail = sessionStorage.getItem('loggedInUserEmail') || localStorage.getItem('loggedInUserEmail');
-    const sessionToken = sessionStorage.getItem('sessionToken') || localStorage.getItem('sessionToken');
-
-    // Make the API call using the logged-in user's email
-    const fetchUserData = async () => {
-        try {
-            const response = await fetch(`${API_BASE_URL}/login?email=${loggedInUserEmail}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${sessionToken}` // Include sessionToken in the Authorization header
-                },
-            });
-
-            if (response.ok) {
-                const userDataArray = await response.json();
-                // Find the user object with the logged-in user's email
-                const loggedInUser = userDataArray.find(user => user.email === loggedInUserEmail);
-                if (loggedInUser) {
-                    setUser(loggedInUser);
-                    console.log('User data:', loggedInUser);
-                } else {
-                    console.error('Logged-in user not found in response');
-                }
-            } else {
-                console.error('Failed to fetch user data');
-            }
-        } catch (error) {
-            console.error('Error occurred while fetching user data:', error);
-        }
-    };
-
-    fetchUserData();
-}, []);
+  // Define fetchUserData function
+  const fetchUserData = async () => {
+    try {
+      const loggedInUserEmail = sessionStorage.getItem('loggedInUserEmail') || localStorage.getItem('loggedInUserEmail');
+      const sessionToken = sessionStorage.getItem('sessionToken') || localStorage.getItem('sessionToken');
   
-function handleResetPassword() {
+      const response = await fetch(`${API_BASE_URL}/login?email=${loggedInUserEmail}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${sessionToken}`
+        },
+      });
+  
+      if (response.ok) {
+        const userDataArray = await response.json();
+        const loggedInUser = userDataArray.find(user => user.email === loggedInUserEmail);
+        if (loggedInUser) {
+          setUser(loggedInUser);
+          console.log('User data:', loggedInUser);
+        } else {
+          console.error('Logged-in user not found in response');
+        }
+      } else {
+        console.error('Failed to fetch user data');
+      }
+    } catch (error) {
+      console.error('Error occurred while fetching user data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  
+  function handleResetPassword() {
     // Validate if all fields are filled
     const loggedInUserEmail = sessionStorage.getItem('loggedInUserEmail') || localStorage.getItem('loggedInUserEmail');
 
@@ -163,11 +165,41 @@ function handleResetPassword() {
 }
 
 
+const userId = '663ab463f2ec3cc95dac205f';
+  const isAdmin = true;
 
-
+  // Make a POST request to update the user's admin status when the component mounts
+  useEffect(() => {
+    const apiUrl = 'http://localhost:5000/api/user/updateAdmin';
+    const requestBody = {
+      user_id: userId,
+      is_admin: isAdmin
+    };
+  
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestBody)
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('User admin status updated successfully');
+        // Fetch user data again after updating admin status
+        fetchUserData();
+      } else {
+        console.error('Failed to update user admin status');
+      }
+    })
+    .catch(error => {
+      console.error('Error updating user admin status:', error);
+    });
+  }, []);
   // Your existing code for toggleSection, user data fetching, and JSX return
 
 
+  console.log('User data:', user); // Print user data to console for debugging
 
   
   return (
@@ -176,6 +208,7 @@ function handleResetPassword() {
     <div className="profile-b">
       <div className="profile-tog">
         <div className="profile-tog-p">
+          
           <div className="profile-side-l">
             <p className="profile-side-l-p">
               <a href="#Profile" onClick={() => { toggleSection('Profile') }} className="active-link">
@@ -193,11 +226,14 @@ function handleResetPassword() {
               </a>
             </p>
           </div>
+          
           <div className="profile-side-r">
             <div className="section-profile" id="Profile">
               <p style={{ color: 'black', fontWeight: 'bold' }}>Name: {user.name}</p>
               <p style={{ color: 'black', fontWeight: 'bold' }}>Email: {user.email}</p>
               <p style={{ color: 'black', fontWeight: 'bold' }}>Level: {user.lever}</p>
+              <p style={{ color: 'black', fontWeight: 'bold' }}>Admin: {user.is_admin ? 'Yes' : 'No'}</p>
+
 
             </div>
             <div className="section-profile" id="Subscriber">
@@ -240,6 +276,7 @@ function handleResetPassword() {
                     />
                 </p>
                 <button onClick={handleResetPassword} >Reset Password</button>
+
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             </div>
           </div>
@@ -252,3 +289,4 @@ function handleResetPassword() {
 }
 
 export default Profile;
+

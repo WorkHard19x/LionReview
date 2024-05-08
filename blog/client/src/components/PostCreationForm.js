@@ -9,7 +9,7 @@ function PostCreationForm({ updatePosts  }) {
     const { pageId } = useParams(); // Get the pageId from the route parameter
 
     const [formData, setFormData] = useState({
-        name: '',
+        title: '',
         birthdate: '',
         nickname:'',
         country: '',
@@ -237,7 +237,7 @@ function PostCreationForm({ updatePosts  }) {
     
             // Reset the form data after successful submission
             setFormData({
-                name: '',
+                title: '',
                 birthdate: '',
                 nickname:'',
                 country: '',
@@ -435,7 +435,7 @@ function PostCreationForm({ updatePosts  }) {
             const jsFileName = responsed.data.jsFileName;
             updateAppJs(jsFileName);
             updatePosts({
-                name: response.data.name,
+                title: response.data.title,
                 imageUrl: response.data.imageUrl,
                 name_url: response.data.name_url,
 
@@ -705,7 +705,7 @@ const fetchNews = async () => {
                 </div>
                 <div className="input-container">
                     <label>Name:</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} />
+                    <input type="text" name="title" value={formData.title} onChange={handleChange} />
                 </div>
 
                 <div className="input-container">

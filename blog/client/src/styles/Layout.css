@@ -28,6 +28,10 @@
 .mr-sm-2, .mr-sm-3, .mr-sm-4 {
   padding: 5px;
 }
+.mr-sm-3:hover{
+
+  color:white
+}
 .navbar-toggler{
   padding: 5px;
 

@@ -3,13 +3,14 @@ import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-boots
 import { FaSearch, FaUser, FaBars } from 'react-icons/fa';
 import '../styles/Layout.css';
 import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import Search from './Search'; // Import the Search component
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 
 const Layout = ({ children }) => {
+  const [searchQuery, setSearchQuery] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Placeholder for dropdown state
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 650);
@@ -24,6 +25,9 @@ const Layout = ({ children }) => {
   const [email, setEmail] = useState('');
   const [registrationMessage, setRegistrationMessage] = useState('');
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -84,6 +88,10 @@ const Layout = ({ children }) => {
     setIsSearchVisible(true); // Show the search input when the search button is clicked
   };
 
+  
+
+
+
   const handleToggleLoginForm = () => {
     setIsLoginFormOpen(!isLoginFormOpen);
   };
@@ -103,45 +111,10 @@ const Layout = ({ children }) => {
     setPassword(passwordValue);
   };
   
-
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
   };
 
-  // const handleLogin = async () => {
-  //   try {
-  //     const response = await fetch(`${API_BASE_URL}/login`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         email: email,
-  //         password: password,
-  //       }),
-  //     });
-  
-  //     if (response.ok) {
-  //       // Login successful
-  //       const data = await response.json();
-  //       setUsername(data.username); // Set the username from the response data
-  //       setName(data.name); // Set the name state with the received data
-  //       setIsLoggedIn(true);
-  //       setIsLoginFormOpen(false);
-  //       localStorage.setItem('isLoggedIn', 'true');
-  //       localStorage.setItem('name', data.name); // Set the name in local storage
-  //       localStorage.setItem('email', data.username); // Set the name in local storage
-  //       console.log('Login successful');
-  //     } else {
-  //       // Login failed, handle the error
-  //       console.error('Login failed');
-  //       setRegistrationMessage('Gmail or Password incorrect');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error occurred during login:', error);
-  //     alert('Error occurred during login');
-  //   }
-  // };
 const handleLogin = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/login`, {
@@ -215,6 +188,7 @@ const handleLogin = async () => {
         setIsLoggedIn(false);
         setIsUserDropdownOpen(false); // Close the user dropdown
         localStorage.removeItem('isLoggedIn'); // Remove login status from local storage
+        // navigate('/');
 
       }else {
         // Handle error if logout fails
@@ -301,7 +275,6 @@ const handleSubmit = async (e) => {
   
 
 
-  const location = useLocation();
   useEffect(() => {
       const hash = location.hash;
       if (hash) {
@@ -355,6 +328,68 @@ function toggleSection(sectionId) {
 
 const [loginColor, setLoginColor] = useState('blue');
 const [registerColor, setRegisterColor] = useState('white');
+
+
+
+
+
+
+
+
+
+const [query, setQuery] = useState('');
+
+  const handleSubmitSearch = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/search', { query });
+      setSearchResults(response.data);
+      navigate(`/search?q=${encodeURIComponent(query)}`);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+      setSearchResults([]);
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSubmitSearch();
+    }
+  };
+  const getImageUrl = (result) => {
+    if (result.korean_url || result.chinese_url || result.japan_url || result.taiwan_url || result.thailand_url || result.other_url) {
+      return result.img;
+    } else if (result.url_page) {
+      return result.imageUrlnews;
+    } else if (result.url_pagecel) {
+      return result.imageUrl;
+    } else {
+      // Default image URL or handle as needed
+      return '';
+    }
+  };
+  
+  const getRedirectUrl = (result) => {
+    if (result.korean_url) {
+      return result.korean_url;
+    } else if (result.chinese_url) {
+      return result.url_pagecel;
+    } else if (result.japan_url) {
+      return result.url_pagecel;
+    } else if (result.taiwan_url) {
+      return result.url_pagecel;
+    } else if (result.thailand_url) {
+      return result.url_pagecel;
+    } else if (result.other_url) {
+      return result.url_pagecel;
+    } else if (result.url_page) {
+      return result.url_page;
+    } else if (result.url_pagecel) {
+      return result.url_pagecel;
+    } else {
+      // Default redirect URL or handle as needed
+      return '';
+    }
+  };
 
   return (
     <div>
@@ -458,16 +493,26 @@ const [registerColor, setRegisterColor] = useState('white');
               <Nav.Link href="#movies" style={{ marginLeft: '1rem' }} ref={menuRef}>Movies</Nav.Link>
             </div>
           )}
-          <div className="search-login">
-            {isSearchVisible && (
-              <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              </Form>
-            )}
-            {/* Show the search button */}
-            <Search components={yourComponentsArray} /> {/* Pass the components array as props */}
-           
-
+            <div className="search-login">
+              <div className='Search-nav'>
+                  {isSearchVisible ? (
+                    <input
+                      type="text"
+                      value={query}
+                      className="mr-sm-2"
+                      onChange={(e) => setQuery(e.target.value)}
+                      onKeyPress={handleKeyPress} // Trigger search on Enter key press
+                      placeholder="Search..."
+                    />
+                  ) : (
+                    <Button variant="outline-light" onClick={handleSearchButtonClick} className="mr-sm-3">
+                      <FaSearch />
+                    </Button>
+                  )}
+                  <button onClick={handleSubmitSearch} className="mr-sm-3" style={{ display: isSearchVisible ? 'inline-block' : 'none' }}>
+                  <FaSearch />
+                  </button>
+              </div>
               {isLoginFormOpen && (
                     <div className="login-form-overlay">
                       <div className="login-form-container">
