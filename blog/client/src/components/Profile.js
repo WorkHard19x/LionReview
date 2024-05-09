@@ -79,7 +79,17 @@ function Profile() {
   const fetchUserData = async () => {
     try {
       const loggedInUserEmail = sessionStorage.getItem('loggedInUserEmail') || localStorage.getItem('loggedInUserEmail');
-      const sessionToken = sessionStorage.getItem('sessionToken') || localStorage.getItem('sessionToken');
+    console.log('Logged In User Email:', loggedInUserEmail);
+    
+    const sessionToken = sessionStorage.getItem('sessionToken') || localStorage.getItem('sessionToken');
+    console.log('Session Token:', sessionToken);
+    
+    if (!loggedInUserEmail || !sessionToken) {
+      setUser(null);
+      console.log('User not logged in. Clearing user state.');
+      return;
+    }
+      
   
       const response = await fetch(`${API_BASE_URL}/login?email=${loggedInUserEmail}`, {
         method: 'GET',
@@ -97,14 +107,18 @@ function Profile() {
           console.log('User data:', loggedInUser);
         } else {
           console.error('Logged-in user not found in response');
+          setUser(null); // Reset user state if user not found
         }
       } else {
         console.error('Failed to fetch user data');
+        setUser(null); // Reset user state if fetch failed
       }
     } catch (error) {
       console.error('Error occurred while fetching user data:', error);
+      setUser(null);
     }
   };
+  
 
   useEffect(() => {
     fetchUserData();
@@ -164,43 +178,6 @@ function Profile() {
     });
 }
 
-
-const userId = '663ab463f2ec3cc95dac205f';
-  const isAdmin = true;
-
-  // Make a POST request to update the user's admin status when the component mounts
-  useEffect(() => {
-    const apiUrl = 'http://localhost:5000/api/user/updateAdmin';
-    const requestBody = {
-      user_id: userId,
-      is_admin: isAdmin
-    };
-  
-    fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestBody)
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log('User admin status updated successfully');
-        // Fetch user data again after updating admin status
-        fetchUserData();
-      } else {
-        console.error('Failed to update user admin status');
-      }
-    })
-    .catch(error => {
-      console.error('Error updating user admin status:', error);
-    });
-  }, []);
-  // Your existing code for toggleSection, user data fetching, and JSX return
-
-
-  console.log('User data:', user); // Print user data to console for debugging
-
   
   return (
     <div className='Profile-m'>
@@ -229,25 +206,30 @@ const userId = '663ab463f2ec3cc95dac205f';
           
           <div className="profile-side-r">
             <div className="section-profile" id="Profile">
-              <p style={{ color: 'black', fontWeight: 'bold' }}>Name: {user.name}</p>
-              <p style={{ color: 'black', fontWeight: 'bold' }}>Email: {user.email}</p>
-              <p style={{ color: 'black', fontWeight: 'bold' }}>Level: {user.lever}</p>
-              <p style={{ color: 'black', fontWeight: 'bold' }}>Admin: {user.is_admin ? 'Yes' : 'No'}</p>
-
-
+            {user  ? (
+              <>
+                <p style={{ color: 'black', fontWeight: 'bold' }}>Name: {user.name}</p>
+                <p style={{ color: 'black', fontWeight: 'bold' }}>Email: {user.email}</p>
+              </>
+            ) : (
+              <p style={{ color: 'red', fontWeight: 'bold' }}>User data not available</p>
+            )}
+            {user && user.is_admin &&(
+                  <p style={{ color: 'black', fontWeight: 'bold' }}>Admin: {user.is_admin ? 'Yes' : 'No'}</p>
+            )}
             </div>
             <div className="section-profile" id="Subscriber">
-              <p style={{ color: 'black', fontWeight: 'bold' }}>Name: {user.name}</p>
+              {/* <p style={{ color: 'black', fontWeight: 'bold' }}>Name: {user.name}</p>
               <p style={{ color: 'black', fontWeight: 'bold' }}>Type: {user.email}</p>
               <p style={{ color: 'black', fontWeight: 'bold' }}>Date: {user.date}</p>
-                <button  >Cancel Subcriber</button>
+                <button  >Cancel Subcriber</button> */}
 
             </div>
             <div className="section-profile" id="Security">
             {successMessage && <p style={{ color: 'red', fontWeight:'bold' }}>{successMessage}</p>}
 
-                <p style={{ color: 'black', fontWeight: 'bold' }}>Name: {user.name}</p>
-                <p style={{ color: 'black', fontWeight: 'bold' }}>Email: {user.email}</p>
+                {/* <p style={{ color: 'black', fontWeight: 'bold' }}>Name: {user.name}</p>
+                <p style={{ color: 'black', fontWeight: 'bold' }}>Email: {user.email}</p> */}
                 <p style={{ color: 'black', fontWeight: 'bold' }}>Current Password:
                     <input
                     type="text"
@@ -289,4 +271,3 @@ const userId = '663ab463f2ec3cc95dac205f';
 }
 
 export default Profile;
-

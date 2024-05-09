@@ -90,8 +90,6 @@ const Layout = ({ children }) => {
 
   
 
-
-
   const handleToggleLoginForm = () => {
     setIsLoginFormOpen(!isLoginFormOpen);
   };
@@ -114,48 +112,68 @@ const Layout = ({ children }) => {
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
   };
+  const [sessionToken, setSessionToken] = useState('');
 
-const handleLogin = async () => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
+  const handleLogin = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+  
+      if (response.ok) {
+        // Login successful
+        const data = await response.json();
+        console.log('Login response data:', data);
+  
+        // Check if data.sessionToken is received
+        if (data.sessionToken) {
+          // Update session token state with the value from the response data
+          setSessionToken(data.sessionToken);
+          console.log('Session Token Set:', data.sessionToken);
+        }
+  
+        setUsername(data.username);
+        setName(data.name);
+        setIsLoggedIn(true);
+        setIsLoginFormOpen(false);
+  
+        // Store user data and session token
+        localStorage.setItem('email', data.email);
+        localStorage.setItem('name', data.name);
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userData', JSON.stringify(data)); // Store user data as JSON string
+        sessionStorage.setItem('loggedInUserEmail', data.email);
+        setSessionToken(data.sessionToken);
+        sessionStorage.setItem('sessionToken', data.sessionToken);
 
-    if (response.ok) {
-      // Login successful
-      const data = await response.json();
-      setUsername(data.username);
-      setName(data.name);
-      setIsLoggedIn(true);
-      setIsLoginFormOpen(false);
-      
-      // Store user's name in local storage
-      sessionStorage.setItem('loggedInUserEmail', data.email); // Or localStorage.setItem('loggedInUserEmail', enteredEmail);
-      localStorage.setItem('email', data.password);
-      localStorage.setItem('name', data.name);
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('email', data.username);
+        // Log the session token from state
+        console.log('Session Token:', data.sessionToken);
+        window.location.reload();
 
-    } else {
-      // Login failed, handle the error
-      console.error('Login failed');
-      setLoginErrorMessage('Email or Password incorrect');
+      } else {
+        // Login failed, handle the error
+        console.error('Login failed');
+        setLoginErrorMessage('Email or Password incorrect');
+      }
+    } catch (error) {
+      console.error('Error occurred during login:', error);
+      alert('Error occurred during login');
     }
-  } catch (error) {
-    console.error('Error occurred during login:', error);
-    alert('Error occurred during login');
-  }
-};
-
-
-
+  };
+  
+  
+  useEffect(() => {
+    if (sessionToken !== '') {
+      console.log('Session Token:', sessionToken);
+    }
+  }, [sessionToken]);
 
 
   
@@ -164,12 +182,42 @@ const handleLogin = async () => {
       console.log('Name after login:', name);
     }
   }, [name]);
+
+  const [user, setUser] = useState(null); // Initialize user state to null
+
+  useEffect(() => {
+    // Fetch session token from local storage
+    const sessionToken = localStorage.getItem('sessionToken');
+    if (sessionToken) {
+      // User is logged in
+      setIsLoggedIn(true);
+      // Other initialization logic...
+    } else {
+      // User is logged out
+      setIsLoggedIn(false);
+    }
   
+    const userData = localStorage.getItem('userData');
+  
+    // If user data exists and is in the expected format, set it to the user state
+    try {
+      const parsedUserData = JSON.parse(userData);
+      if (parsedUserData && typeof parsedUserData === 'object') {
+        setUser(parsedUserData);
+      } else {
+        // Handle invalid user data
+        console.error('Invalid user data:', userData);
+      }
+    } catch (error) {
+      // Handle parsing error
+      console.error('Error parsing user data:', error);
+    }
+  }, []);
   
 
   const handleLogout = async () => {
-    console.log("Logout button clicked"); // Check if handleLogout is triggered
-
+    console.log("Logout button clicked");
+  
     try {
       const response = await fetch(`${API_BASE_URL}/logout`, {
         method: 'POST',
@@ -183,14 +231,22 @@ const handleLogin = async () => {
       if (response.ok) {
         // Logout successful
         console.log('Logout successful');
-      
+  
+        // Clear user data from local storage
+        localStorage.removeItem('isLoggedIn'); // Remove login status
+        localStorage.removeItem('userData'); // Remove user data
+        localStorage.removeItem('name'); // Remove user's name
+        localStorage.removeItem('email'); // Remove user's email
+        sessionStorage.removeItem('loggedInUserEmail');
+        sessionStorage.removeItem('sessionToken');
+
         // Update state to reflect user is logged out
         setIsLoggedIn(false);
         setIsUserDropdownOpen(false); // Close the user dropdown
-        localStorage.removeItem('isLoggedIn'); // Remove login status from local storage
-        // navigate('/');
+        setUser(null); // Update the user state to null after logout
+        window.location.reload();
 
-      }else {
+      } else {
         // Handle error if logout fails
         console.error('Logout failed');
       }
@@ -199,6 +255,8 @@ const handleLogin = async () => {
       alert('Error occurred during logout');
     }
   };
+  
+  
   
   
   

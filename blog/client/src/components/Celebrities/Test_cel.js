@@ -298,47 +298,66 @@
                         };
 
                         // Define state variable for admin status
-                        const [isAdmin, setIsAdmin] = useState(false);
-                        const [isLoggedIn, setIsLoggedIn] = useState(false);      
+              
+                        const [user, setUser] = useState({
+                            name: '', // Initialize name as empty string
+                            email: '',
+                            is_admin: false,
                         
+                            // Add more fields as needed
+                          });
                         
-                        useEffect(() => {
-                            // Check if the user is logged in and admin when the component mounts
-                            checkUserStatus();
-                        }, []);
-                    
-                        // Function to check if the user is logged in and admin
-                        const checkUserStatus = async () => {
+                          // Define fetchUserData function
+                          const fetchUserData = async () => {
                             try {
-                                const response = await axios.get(`${API_BASE_URL}/api/user/isAdmin`, { withCredentials: true });
-                                const { isAdmin } = response.data;
-                                setIsAdmin(isAdmin);
-                                setIsLoggedIn(true); // User is logged in if this endpoint call succeeds
+                              const loggedInUserEmail = sessionStorage.getItem('loggedInUserEmail') || localStorage.getItem('loggedInUserEmail');
+                            
+                            const sessionToken = sessionStorage.getItem('sessionToken') || localStorage.getItem('sessionToken');
+                            
+                            if (!loggedInUserEmail || !sessionToken) {
+                              setUser(null);
+                              console.log('User not logged in. Clearing user state.');
+                              return;
+                            }
+                              
+                          
+                              const response = await fetch(`${API_BASE_URL}/login?email=${loggedInUserEmail}`, {
+                                method: 'GET',
+                                headers: {
+                                  'Content-Type': 'application/json',
+                                  'Authorization': `Bearer ${sessionToken}`
+                                },
+                              });
+                          
+                              if (response.ok) {
+                                const userDataArray = await response.json();
+                                const loggedInUser = userDataArray.find(user => user.email === loggedInUserEmail);
+                                if (loggedInUser) {
+                                  setUser(loggedInUser);
+                                  console.log('User data:', loggedInUser);
+                                } else {
+                                  console.error('Logged-in user not found in response');
+                                  setUser(null); // Reset user state if user not found
+                                }
+                              } else {
+                                console.error('Failed to fetch user data');
+                                setUser(null); // Reset user state if fetch failed
+                              }
                             } catch (error) {
-                                console.error('Error checking user status:', error);
-                                setIsLoggedIn(false); // User is not logged in if there's an error
+                              console.error('Error occurred while fetching user data:', error);
+                              setUser(null);
                             }
-                        };
-                    
-                        // Effect to check if user is admin
-                        useEffect(() => {
-                            const userIsLoggedIn = checkIfUserIsLoggedIn();
-                            setIsLoggedIn(userIsLoggedIn);
-                    
-                            if (userIsLoggedIn) {
-                                const userIsAdmin = checkIfUserIsAdmin();
-                                setIsAdmin(userIsAdmin);
-                            }
-                        }, []);
+                          };
+                          
+                        
+                          useEffect(() => {
+                            fetchUserData();
+                          }, []);
+                        
+                       
                     
                         // Function to check if user is admin (you need to implement this)
-                        const checkIfUserIsLoggedIn = () => {
-                            return localStorage.getItem('token') !== null;
-                        };
-                        const checkIfUserIsAdmin = () => {
-                            const userRole = localStorage.getItem('role');
-                            return userRole === 'admin';
-                        };
+
 
 
                         const [isInputVisible, setInputVisible] = useState(false);
@@ -355,9 +374,11 @@
                                 <div className="profile-border">
                                     <div className="profile-content">
                                         <div className="profile-info">
-                                        {isLoggedIn && isAdmin && <p><Editable initialValue={name} onSave={handleNameChange} /></p>}
-                                        {isLoggedIn && !isAdmin && <p>{name}</p>}
-                                        {!isLoggedIn && <p>Login to access admin features</p>}
+                                        {user && user.is_admin ? (
+                                         <p><Editable initialValue={name} onSave={handleNameChange} /></p>
+                                        ) : (
+                                        <p>{name}</p>
+                                         )}
 
                                             <p>leo</p>
                                             <p>Vietnam</p>
@@ -406,7 +427,7 @@
                                     <p> <span style={{fontSize:'16px', color:'rgb(13, 104, 241)'}}>{'▶'}</span>Shows </p>
                                     <span>A list of all movies, series and dramas starring Yoon Shi Yoon, all in one place.</span>
                                 </div>
-                                {isAdmin && (
+                                {user && user.is_admin && (
                                     <>
                                         <button onClick={handleAddImage}>Add Image</button>
                                         <button id="saveButton" onClick={(e) => { handleEnter(e); saveImageDataToMongoDB(imageData, userName); }}>Save</button>
@@ -418,7 +439,7 @@
                                             <a href={info.url} target="_blank" rel="noopener noreferrer">
                                             <img src={info.img} alt={`Image ${index}`} />
                                             </a>
-                                            {isAdmin ? (
+                                            {user && user.is_admin ? (
                                                 // Admin view
                                                 (isInputVisible && (
                                                 <div>
@@ -449,7 +470,6 @@
                                                 // User view
                                                 <div>
                                                     <p className="image-title">{info.title}</p>
-                                                    <p>{info.url}</p>
                                                 </div>
                                             )}
                                         </div>
@@ -485,7 +505,7 @@
                                 <div className="shows-container">
                                     <p> <span style={{fontSize:'16px', color:'rgb(13, 104, 241)'}}>{'▶'}</span>News </p>
                                 </div>
-                                {isAdmin && (
+                                {user && user.is_admin && (
                                     <>
                                         <button onClick={handleAddImaged}>Add Image</button>
                                         <button id="saveButton" onClick={(e) => { handleEnter(e); saveImageDataToMongoDB(imagesnews, userNamenews); }}>Save</button>
@@ -498,7 +518,7 @@
                                             <a href={infos.url} target="_blank" rel="noopener noreferrer">
                                             <img src={infos.img} alt={`Image ${indexs}`} />
                                             </a>
-                                            {isAdmin ? (
+                                            {user && user.is_admin ? (
                                                 // Admin view
                                                 (isInputVisible && (
                                                 <div>

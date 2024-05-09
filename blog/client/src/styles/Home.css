@@ -130,7 +130,7 @@
   }
 
   .navigation-arrows {
-    margin-top: 10px;
+    margin-top: 2rem;
     display: flex;
     position: absolute;
     align-items: center; /* Center items vertically */
@@ -138,7 +138,7 @@
     left: 0;
 }
 .navigation-arrows1 {
-    margin-top: 10px;
+    margin-top: 2rem;
     display: flex;
     position: absolute;
     align-items: center; /* Center items vertically */
