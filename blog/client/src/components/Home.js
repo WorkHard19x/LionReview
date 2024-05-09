@@ -819,7 +819,7 @@ if (error) {
                       <img src={post.imageUrl} alt={post.title} 
                       style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
                       />
-                      <p className="image-title">{post.name}</p>
+                      <p className="image-title">{post.title}</p>
                       </div>
                       </a>
                    

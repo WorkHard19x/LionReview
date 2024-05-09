@@ -1,3 +1,5 @@
+import News_Test_1 from './components/News/Test_1';
+
 
 import Test_cel from './components/Celebrities/Test_cel';
 import Home from './components/Home';
@@ -23,9 +25,9 @@ function App() {
           <Route path="/Create_New_Profiles" element={<PostNewForm />} />
           <Route path="/Create_Drama_Profiles" element={<PostDramaForm />} />
           <Route path="/Create_Celebrities_Profiles" element={<PostCreationForm />} />
-          <Route path="/Celebrities/Test_cel/:pageId" element={<Test_cel />} />
 
-   
+          <Route path="/News/Test_1/:pageId" element={<News_Test_1 />} />
+          <Route path="/Celebrities/Test_cel/:pageId" element={<Test_cel />} />
         </Routes>
       </Layout>
       <Footer></Footer>
