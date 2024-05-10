@@ -21,7 +21,8 @@ function PostNewForm({ updatePosts  }) {
         provide:'',
         title_url:'',
         pageId: pageId,
-        url_page: ''
+        url_page: '',
+        genres: [], // Change to array for multiple genres
 
     });
   
@@ -59,7 +60,8 @@ function PostNewForm({ updatePosts  }) {
                 provide: '',
                 title_url: '',
                 pageId: pageId,
-                url_page: '' // Reset url_page
+                url_page: '', // Reset url_page
+                genres: [], // Change to array for multiple genres
 
 
             });
@@ -116,7 +118,16 @@ const updateAppJs = (jsFileName) => {
     });
 };
 
+const [selectedOption, setSelectedOption] = useState(null);
 
+const handleGenreChange = (genre) => {
+    // Toggle genre selection
+    const updatedGenres = formData.genres.includes(genre)
+        ? formData.genres.filter((g) => g !== genre)
+        : [...formData.genres, genre];
+
+    setFormData({ ...formData, genres: updatedGenres });
+};
 
   return (
       <div className='Header'>
@@ -126,6 +137,35 @@ const updateAppJs = (jsFileName) => {
 
 
             <h2>Create News Form</h2>
+            <div className="genre-selection">
+                    <div className="checkbox-container">
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('Korean')} onChange={() => handleGenreChange('Korean')} />
+                            Korean
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('China')} onChange={() => handleGenreChange('China')} />
+                            China
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('Japan')} onChange={() => handleGenreChange('Japan')} />
+                            Japan
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('Taiwan')} onChange={() => handleGenreChange('Taiwan')} />
+                            Taiwan
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('Thailand')} onChange={() => handleGenreChange('Thailand')} />
+                            Thailand
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('Other')} onChange={() => handleGenreChange('Other')} />
+                            Other
+                        </label>
+                        {/* Add more genres as needed */}
+                    </div>
+                </div>
                 <div className="input-container">
                         <label>Title_url:</label>
                         <input type="text" name="title_url" value={formData.title_url.replace(/\b\w/g, (char) => char.toUpperCase()).replace(/\s+/g, '_') } onChange={(e) => handleChange(e.target.name, e.target.value)} />

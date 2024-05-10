@@ -1,0 +1,120 @@
+.Drama-nav {
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    padding: 2rem; /* Adjust padding to ensure spacing from container border */
+    margin-left: 2rem;
+    margin-top: 2rem;
+    margin-right: 2rem;
+  }
+  .Drama-main{
+    margin: 0;
+    padding: 0;
+    margin-top: -2rem;
+
+  }
+  .Drama-nav img {
+    border-radius: 10px;
+    border:1px solid rgb(90, 89, 89);
+    margin-top:  2rem;
+    margin-right:  2rem;
+  }
+  
+  .image-container {
+    position: relative; /* Ensure position context for absolute positioning */
+  }
+  
+  .image-titles {
+    /* position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(207, 199, 199, 0.5); 
+    color: white;
+    padding: 0.5rem;
+    margin: 0; */
+    margin-right: 2rem;
+    margin-top: -0.1rem;
+    background-color: transparent; 
+
+  }
+
+   .Drama-title{
+    background-color: rgb(24, 23, 23);
+   }
+   .Drama-title h1{
+    color: white;
+   }
+.Drama-header{
+    padding: 40px;
+    width: 100%;
+    height: 50px;
+    color: white;
+    margin-top: 2rem;
+}
+.Drama-header-inside{
+    width: 95%;
+    display: flex;
+}
+.dropdowns {
+    position: relative;
+    display: inline-block;
+    margin-top: 1rem;
+    margin-left: 3rem;
+}
+
+.dropbtnn {
+    background-color: #58ac5a;
+    color: white;
+    padding: 6px;
+    border-radius: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-contentt {
+    display: none;
+    position: absolute;
+    background-color: rgb(24, 23, 23);
+    border: 1px solid rgba(51, 50, 50, 0.699);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-contentt a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-contentt span{
+  color: white;
+}
+.dropdown-contentt a:hover {background-color: #1bfc074f;}
+
+.dropdowns:hover .dropdown-contentt {display: block;}
+
+.dropdowns:hover .dropbtnn {background-color: #949e95;}
+
+
+   @media screen and (max-width: 650px) {
+    .Drama-nav {
+        display: flex;
+        color: white;
+        justify-content: center;
+        padding: 0rem; /* Adjust padding to ensure spacing from container border */
+        border: 1px solid white;
+        margin-left: 0rem;
+        margin-right: 0rem;
+      }
+    .Drama-nav img {
+        border-radius: 10px;
+        margin-top:  2rem;
+      }
+      .image-container img{
+        width: 220px;
+        height: 200px;
+      }
+}

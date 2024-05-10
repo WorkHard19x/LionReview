@@ -622,7 +622,7 @@ if (error) {
         
       {/* Korean */}
       <div className="tooltipk">
-          <a href=""><h1 style={{fontSize:'22px'}}>Korean <span >&gt;</span> </h1>
+          <a href="/Korean_page"><h1 style={{fontSize:'22px'}}>Korean <span >&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
@@ -653,7 +653,7 @@ if (error) {
 
       {/* China */}
       <div className="tooltipk">
-          <a href=""><h1 style={{fontSize:'22px'}}>China <span >&gt;</span> </h1>
+          <a href="/China_page"><h1 style={{fontSize:'22px'}}>China <span >&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
@@ -683,7 +683,7 @@ if (error) {
 
       {/* Japan */}
       <div className="tooltipk">
-          <a href=""><h1 style={{fontSize:'22px'}} >Japan <span>&gt;</span> </h1>
+          <a href="/Japan_page"><h1 style={{fontSize:'22px'}} >Japan <span>&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
@@ -714,7 +714,7 @@ if (error) {
 
       {/* Taiwan */}
       <div className="tooltipk">
-          <a href=""><h1>Taiwan <span style={{fontSize:'21px'}}>&gt;</span> </h1>
+          <a href="/Taiwan_page"><h1>Taiwan <span style={{fontSize:'21px'}}>&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
@@ -744,7 +744,7 @@ if (error) {
 
       {/* ThaiLand */}
       <div className="tooltipk">
-          <a href=""><h1>ThaiLand <span style={{fontSize:'21px'}}>&gt;</span> </h1>
+          <a href="/Thailand_page"><h1>ThaiLand <span style={{fontSize:'21px'}}>&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
@@ -774,7 +774,7 @@ if (error) {
 
       {/* Other */}
       <div className="tooltipk">
-          <a href=""><h1>Other <span style={{fontSize:'21px'}}>&gt;</span> </h1>
+          <a href="/Other_page"><h1>Other <span style={{fontSize:'21px'}}>&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
@@ -837,7 +837,7 @@ if (error) {
 
       {/* news */}
       <div className="tooltipk">
-          <a href=""><h1>News <span style={{fontSize:'21px'}}>&gt;</span> </h1>
+          <a href="/News_page"><h1>News <span style={{fontSize:'21px'}}>&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>

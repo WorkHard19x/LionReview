@@ -166,6 +166,17 @@ label{
 
 
 
+.checkbox-container{
+    margin-bottom: 1rem;
+}
+
+
+
+
+
+
+
+
   @media screen and (max-width: 1000px) {
     .dropdown {
         position: absolute;

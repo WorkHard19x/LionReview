@@ -204,6 +204,8 @@ function PostNewForm({ updatePosts  }) {
         thailand_url:'',
         other_url:'',
         img:'',
+        genres: [], // Change to array for multiple genres
+
     });
 
 
@@ -305,6 +307,8 @@ function PostNewForm({ updatePosts  }) {
                 taiwan_url:'',
                 thailand_url:'',
                 other_url:'',
+                genres: [], // Change to array for multiple genres
+
 
             });
 
@@ -329,9 +333,9 @@ function PostNewForm({ updatePosts  }) {
             });
 
             alert('Form data submitted successfully');
-    
             // Fetch the updated news after submission
             fetchNews();
+            window.location.reload();
         } catch (error) {
             console.error('Error submitting form data:', error);
         }
@@ -591,6 +595,15 @@ const renderInputsImagenews_url = () => {
 
 const [selectedOption, setSelectedOption] = useState(null);
 
+const handleGenreChange = (genre) => {
+    // Toggle genre selection
+    const updatedGenres = formData.genres.includes(genre)
+        ? formData.genres.filter((g) => g !== genre)
+        : [...formData.genres, genre];
+
+    setFormData({ ...formData, genres: updatedGenres });
+};
+
   return (
       <div className='Header'>
             <div className='border-all'>
@@ -611,6 +624,41 @@ const [selectedOption, setSelectedOption] = useState(null);
               <a href="#" onClick={() => setSelectedOption('other')}>Other</a>
             </div>
           </div>
+
+          <div className="genre-selection">
+                    <div className="checkbox-container">
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('romantic')} onChange={() => handleGenreChange('romantic')} />
+                            Romantic
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('costume')} onChange={() => handleGenreChange('costume')} />
+                            Costume & Period
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('action')} onChange={() => handleGenreChange('action')} />
+                            Action
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('crime')} onChange={() => handleGenreChange('crime')} />
+                            Crime & Mystery
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('thriller')} onChange={() => handleGenreChange('thriller')} />
+                            Thriller & Suspense
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('animation')} onChange={() => handleGenreChange('animation')} />
+                            Animation
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('fantasy')} onChange={() => handleGenreChange('fantasy')} />
+                            Fantasy
+                        </label>
+                        {/* Add more genres as needed */}
+                    </div>
+                </div>
+
           <form onSubmit={handleSubmit}>
           {/* Inputs */}
           {selectedOption && (

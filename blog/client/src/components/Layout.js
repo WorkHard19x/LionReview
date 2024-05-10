@@ -465,7 +465,7 @@ const [query, setQuery] = useState('');
                 <div className={`dropdown-content-layout ${isDropdownOpen ? 'show' : ''}`}>
                 <div className='row'>
                     <div className='columns'>
-                        <NavDropdown.Item href="#action/3.1">
+                        <NavDropdown.Item href="/Korean_page">
                         <span className="image-container">
                             <img
                             src="/images/korean.jpg"
@@ -476,7 +476,7 @@ const [query, setQuery] = useState('');
                         </span>
                         </NavDropdown.Item>
 
-                        <NavDropdown.Item href="#action/3.1">
+                        <NavDropdown.Item href="/China_page">
                         <span className="image-container2">
                             <img
                             src="/images/chinese.jpg"
@@ -487,7 +487,7 @@ const [query, setQuery] = useState('');
                         </span>
                         </NavDropdown.Item>
 
-                        <NavDropdown.Item href="#action/3.1">
+                        <NavDropdown.Item href="/Japan_page">
                         <span className="image-container3">
                             <img
                             src="/images/japan.jpg"
@@ -498,7 +498,7 @@ const [query, setQuery] = useState('');
                         </span>
                         </NavDropdown.Item>
 
-                        <NavDropdown.Item href="#action/3.1">
+                        <NavDropdown.Item href="/Taiwan_page">
                         <span className="image-container4">
                             <img
                             src="/images/taiwan.jpg"
@@ -509,7 +509,7 @@ const [query, setQuery] = useState('');
                         </span>
                         </NavDropdown.Item>
 
-                        <NavDropdown.Item href="#action/3.1">
+                        <NavDropdown.Item href="/Thailand_page">
                         <span className="image-container5">
                             <img
                             src="/images/thailand.jpg"
@@ -520,7 +520,7 @@ const [query, setQuery] = useState('');
                         </span>
                         </NavDropdown.Item>
 
-                        <NavDropdown.Item href="#action/3.1">
+                        <NavDropdown.Item href="/Other_page">
                         <span className="image-container6">
                             <img
                             src="/images/hongkong.jpg"
