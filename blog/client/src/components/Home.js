@@ -360,6 +360,7 @@ const [postjp, setPostsja] = useState([]);
 const [posttw, setPoststw] = useState([]);
 const [postth, setPoststh] = useState([]);
 const [postot, setPostsot] = useState([]);
+const [posttravel, setPoststravel] = useState([]);
 const [postALL, setPostpostALL] = useState([]);
 
 useEffect(() => {
@@ -371,6 +372,7 @@ useEffect(() => {
     fetchPosttw();
     fetchPostth();
     fetchPostot();
+    fetchPoststravel();
 }, []);
 
 const fetchPosts = async () => {
@@ -383,6 +385,18 @@ const fetchPosts = async () => {
         console.error(`Error fetching new posts:`, error);
         setError(`Error fetching new posts. Please try again.`); // Set error message
     }
+};
+
+const fetchPoststravel = async () => {
+  try {
+      const response = await axios.get(`http://localhost:5000/api/travel`);
+      console.log('Response:', response.data); // Log the response data
+      setPoststravel(response.data);
+      setError(null); // Reset error state if request is successful
+  } catch (error) {
+      console.error(`Error fetching new posts:`, error);
+      setError(`Error fetching new posts. Please try again.`); // Set error message
+  }
 };
 
 const fetchPostcel = async () => {
@@ -801,10 +815,40 @@ if (error) {
           <i className="fas fa-arrow-circle-right" onClick={handleNextClicko}></i>
         </div>
       </div>
+            {/* Best Travel */}
+            <div className="tooltipk">
+          <a href="/MainPage/Travel_page"><h1>Best Travel <span style={{fontSize:'21px'}}>&gt;</span> </h1>
+          <span className="tooltiptextk" style={{fontSize:'16px',marginLeft: '-4rem'}}> See all &gt;  </span>
+          </a>
+        </div>
+        <div className="continue">
+          <div className='image-slider-continue' ref={imageSliderRefCelebrities}>
 
+            {posttravel.slice().reverse().map((post, index) => (
+              <div key={index} >
+                <a href={post.provide} target="_blank">
+                  <div className="image-container">
+                      <img src={post.imageUrlnews} alt={post.title} 
+                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                   
+              </div>
+            ))}
+
+          </div>
+          <div className="navigation-arrows">
+            <i className="fas fa-arrow-circle-left" onClick={handlePrevClickCelebrities}></i>
+          </div>
+          <div className="navigation-arrows1">
+            <i className="fas fa-arrow-circle-right" onClick={handleNextClickCelebrities}></i>
+          </div>
+      </div>
 
         {/* Popular Celebrities */}
-        <div className="tooltipk">
+        {/* <div className="tooltipk">
           <a href=""><h1>Popular Celebrities <span style={{fontSize:'21px'}}>&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px',marginLeft: '-6rem'}}> See all &gt;  </span>
           </a>
@@ -833,7 +877,7 @@ if (error) {
           <div className="navigation-arrows1">
             <i className="fas fa-arrow-circle-right" onClick={handleNextClickCelebrities}></i>
           </div>
-      </div>
+      </div> */}
 
       {/* news */}
       <div className="tooltipk">
@@ -847,8 +891,12 @@ if (error) {
               <a href={post.url_page}>
                 <div className="image-container">
                     <img src={post.imageUrlnews} alt={post.title} 
+                    style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+
                     />
-                    <p className="image-title">{post.title}</p>
+                    <p className="image-title" 
+                    style={{textAlign:'center'}}
+                    >{post.title}</p>
                 </div>
                 </a>
             </div>
