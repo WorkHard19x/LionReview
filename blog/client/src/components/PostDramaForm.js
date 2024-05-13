@@ -287,7 +287,9 @@ function PostNewForm({ updatePosts  }) {
                     'Content-Type': 'application/json'
                 }
             });
-    
+            const { id } = response.data;
+            localStorage.setItem('objectId', id);
+
             console.log('Response:', response.data); // Log the response data for debugging
     
             // Reset the form data after successful submission
@@ -317,7 +319,7 @@ function PostNewForm({ updatePosts  }) {
                     'Content-Type': 'application/json'
                 }
             });
-            alert('Form data submitted successfully');
+
             // Add import statement to App.js
             const jsFileName = responsed.data.jsFileName;
             updateAppJs(jsFileName);
@@ -333,9 +335,11 @@ function PostNewForm({ updatePosts  }) {
             });
 
             alert('Form data submitted successfully');
+
+            window.location.reload();
+
             // Fetch the updated news after submission
             fetchNews();
-            window.location.reload();
         } catch (error) {
             console.error('Error submitting form data:', error);
         }

@@ -269,7 +269,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(233, 13, 13, 0.5); /* Semi-transparent background for readability */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
     color: white;
     padding: 0.5rem;
     margin: 0;

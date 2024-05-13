@@ -375,16 +375,16 @@ useEffect(() => {
     fetchPoststravel();
 }, []);
 
-const fetchPosts = async () => {
-    try {
-        const response = await axios.get(`http://localhost:5000/api/news`);
-        console.log('Response:', response.data); // Log the response data
-        setPosts(response.data);
-        setError(null); // Reset error state if request is successful
-    } catch (error) {
-        console.error(`Error fetching new posts:`, error);
-        setError(`Error fetching new posts. Please try again.`); // Set error message
-    }
+const fetchPostkd = async () => {
+  try {
+      const response = await axios.get(`http://localhost:5000/api/kd`);
+      console.log('Response:', response.data); // Log the response data
+      setPostskd(response.data);
+      setError(null); // Reset error state if request is successful
+  } catch (error) {
+      console.error(`Error fetching cel posts:`, error);
+      setError(`Error fetching cel posts. Please try again.`); // Set error message
+  }
 };
 
 const fetchPoststravel = async () => {
@@ -399,6 +399,19 @@ const fetchPoststravel = async () => {
   }
 };
 
+const fetchPosts = async () => {
+    try {
+        const response = await axios.get(`http://localhost:5000/api/news`);
+        console.log('Response:', response.data); // Log the response data
+        setPosts(response.data);
+        setError(null); // Reset error state if request is successful
+    } catch (error) {
+        console.error(`Error fetching new posts:`, error);
+        setError(`Error fetching new posts. Please try again.`); // Set error message
+    }
+};
+
+
 const fetchPostcel = async () => {
   try {
       const response = await axios.get(`http://localhost:5000/api/cel`);
@@ -411,17 +424,17 @@ const fetchPostcel = async () => {
   }
 };
 
-const fetchPostkd = async () => {
-  try {
-      const response = await axios.get(`http://localhost:5000/api/kd`);
-      console.log('Response:', response.data); // Log the response data
-      setPostskd(response.data);
-      setError(null); // Reset error state if request is successful
-  } catch (error) {
-      console.error(`Error fetching cel posts:`, error);
-      setError(`Error fetching cel posts. Please try again.`); // Set error message
-  }
-};
+// const fetchPostkd = async () => {
+//   try {
+//       const response = await axios.get(`http://localhost:5000/api/kd`);
+//       console.log('Response:', response.data); // Log the response data
+//       setPostskd(response.data);
+//       setError(null); // Reset error state if request is successful
+//   } catch (error) {
+//       console.error(`Error fetching cel posts:`, error);
+//       setError(`Error fetching cel posts. Please try again.`); // Set error message
+//   }
+// };
 
 const fetchPostch = async () => {
   try {
@@ -525,7 +538,12 @@ const [timerPaused, setTimerPaused] = useState(false);
 
     return () => clearInterval(interval);
   }, [hoveredIndex, timerPaused]);
-
+  postkd.sort((a, b) => new Date(b.date) - new Date(a.date));
+  postch.sort((a, b) => new Date(b.date) - new Date(a.date));
+  postjp.sort((a, b) => new Date(b.date) - new Date(a.date));
+  posttw.sort((a, b) => new Date(b.date) - new Date(a.date));
+  postth.sort((a, b) => new Date(b.date) - new Date(a.date));
+  postot.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 
 if (error) {
@@ -636,13 +654,13 @@ if (error) {
         
       {/* Korean */}
       <div className="tooltipk">
-          <a href="/Korean_page"><h1 style={{fontSize:'22px'}}>Korean <span >&gt;</span> </h1>
+          <a href="/MainPage/Korean_page"><h1 style={{fontSize:'22px'}}>Korean <span >&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderRefk}>
-        {postkd.slice().reverse().map((post, index) => (
+        {postkd.map((post, index) => (
               <div key={index} >
                 <a href={post.korean_url}>
                   <div className="image-container">
@@ -673,7 +691,7 @@ if (error) {
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderRefc}>
-        {postch.slice().reverse().map((post, index) => (
+        {postch.map((post, index) => (
               <div key={index} >
                 <a href={post.chinese_url}>
                   <div className="image-container">
@@ -703,7 +721,7 @@ if (error) {
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderRefj}>
-        {postjp.slice().reverse().map((post, index) => (
+        {postjp.map((post, index) => (
               <div key={index} >
                 <a href={post.japan_url}>
                   <div className="image-container">
@@ -734,7 +752,7 @@ if (error) {
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderReft}>
-        {posttw.slice().reverse().map((post, index) => (
+        {posttw.map((post, index) => (
               <div key={index} >
                 <a href={post.taiwan_url}>
                   <div className="image-container">
@@ -764,7 +782,7 @@ if (error) {
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderRefth}>
-        {postth.slice().reverse().map((post, index) => (
+        {postth.map((post, index) => (
               <div key={index} >
                 <a href={post.thailand_url}>
                   <div className="image-container">
@@ -794,7 +812,7 @@ if (error) {
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderRefo}>
-        {postot.slice().reverse().map((post, index) => (
+        {postot.map((post, index) => (
               <div key={index} >
                 <a href={post.other_url}>
                   <div className="image-container">

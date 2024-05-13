@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import '../styles/Drama_page.css';
+import '../../styles/Drama_page.css';
 
 const Korean_page = () => {
     const [error, setError] = useState(null);
@@ -40,6 +40,7 @@ const location = useLocation();
             section.style.display = 'none'; // Hide all sections by default
         });
     }
+    postkd.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
     // Update your JSX to wrap the image and title in a container
@@ -82,6 +83,7 @@ const location = useLocation();
                     </div>
             </div>
                     <div className='Drama-nav'>
+                        
                         {postkd.map((post, index) => {
                             return (
                                 // Only display posts matching the selected genre
