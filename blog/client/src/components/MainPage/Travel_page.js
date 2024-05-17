@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import '../../styles/Drama_page.css';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 const News_page = () => {
     const [error, setError] = useState(null);
@@ -13,7 +14,7 @@ const News_page = () => {
 
     const fetchPoststravel = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/travel`);
+            const response = await axios.get(`${API_BASE_URL}/api/travel`);
             console.log('Response:', response.data); // Log the response data
             setPoststravel(response.data);
             setError(null); // Reset error state if request is successful
@@ -60,7 +61,7 @@ const location = useLocation();
                                         <a href="#" onClick={() => { toggleSection('') }} >
                                                 <span>All</span>
                                         </a>
-                                        <a href="#Korean" onClick={() => { toggleSection('Korean') }} >
+                                        {/* <a href="#Korean" onClick={() => { toggleSection('Korean') }} >
                                                 <span>Korean</span>
                                         </a>
                                         <a href="#China" onClick={() => { toggleSection('China') }} >
@@ -77,14 +78,14 @@ const location = useLocation();
                                         </a>
                                         <a href="#Other" onClick={() => { toggleSection('Other') }} >
                                                 <span>Other</span>
-                                        </a>
+                                        </a> */}
                                        
                                         </div>
                                     </div>
                     </div>
             </div>
                     <div className='Drama-nav'>
-                        {postkd.map((post, index) => {
+                        {postkd.slice().reverse().map((post, index) => {
                             return (
                                 // Only display posts matching the selected genre
                                 (!selectedGenre || (post.genres && post.genres.some(genre => genre.toLowerCase() === selectedGenre.toLowerCase()))) && (
@@ -94,7 +95,7 @@ const location = useLocation();
                                                 <img src={post.imageUrlnews} alt={post.title} 
                                                 style={{width:'250px', height:"150px"}}
                                                 />
-                                                <p className="image-titles">{post.title}</p>
+                                                <p className="image-title">{post.title}</p>
                                             </div>
                                         </a>
                                     </div>

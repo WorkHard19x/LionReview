@@ -73,23 +73,23 @@
   }
   
   .border1::after {
-    background-image: url('../assets/korean/korean.jpg');
+    background-image: url('https://cdn.myanimelist.net/images/anime/1535/115023.jpg');
 }
   
   /* Repeat for border2, border3, and border4 */
   
   .border2::after {
-    background-image: url('../assets/korean/korean.jpg');
+    background-image: url('https://cdn.myanimelist.net/images/anime/1925/139564.jpg');
   }
   
   
   .border3::after {
-    background-image: url('../assets/korean/korean.jpg');
+    background-image: url('https://cdn.myanimelist.net/images/anime/1587/141789.jpg');
   }
 
   
   .border4::after {
-    background-image: url('../assets/korean/korean.jpg');
+    background-image: url('https://cdn.myanimelist.net/images/anime/1100/142255.jpg');
   }
   
   .continue {
@@ -111,7 +111,6 @@
     display: flex;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-    max-height: 200px;
     max-width: 100%;
     border: 1px solid rgba(255, 255, 255, 0.39);
     border-radius: 4px;
@@ -268,13 +267,14 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
     color: white;
-    padding: 0.5rem;
-    margin: 0;
+    padding: 1rem;
+    font-size: 15px;
   }
-
+.image-container p{
+  margin-right: 2rem;
+}
   .image-slider-continue p {
   color: white;
   font-size: 16px;
@@ -379,12 +379,7 @@
         left: 10px;
         z-index: 2;
       }
-      .image-slider-continue img {
-        scroll-snap-align: start;
-        max-height: 120px;
-        margin-right: 10px; /* Add some spacing between images */
-        border-radius: 10px;
-      }
+
       .navigation-arrows i:first-child {
         margin-right: auto; /* Push the left arrow to the left */
         margin-top: 108%;

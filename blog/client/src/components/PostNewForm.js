@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import BoldToggle from './BoldToggle';
 import '../styles/PostCreationForm.css';
 import { useParams } from 'react-router-dom';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 
 function PostNewForm({ updatePosts  }) {
@@ -40,7 +41,7 @@ function PostNewForm({ updatePosts  }) {
         try {
             console.log('Form data:', formData); // Log the form data to check its content
     
-            const response = await axios.post('http://localhost:5000/api/news', formData, {
+            const response = await axios.post(`${API_BASE_URL}/api/news`, formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -66,7 +67,7 @@ function PostNewForm({ updatePosts  }) {
 
             });
 
-            const responsed = await axios.post('http://localhost:5000/news-jsx', formData, {
+            const responsed = await axios.post(`${API_BASE_URL}/news-jsx`, formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -93,7 +94,7 @@ function PostNewForm({ updatePosts  }) {
 
 const fetchNews = async () => {
     try {
-        const response = await axios.get('http://localhost:5000/api/news');
+        const response = await axios.get(`${API_BASE_URL}/api/news`);
         // Process the fetched news data as needed
     } catch (error) {
         console.error('Error fetching news:', error);
@@ -103,7 +104,7 @@ const fetchNews = async () => {
 
 
 const updateAppJs = (jsFileName) => {
-    axios.post('http://localhost:5000/update-app-js', { jsFileName }, {
+    axios.post(`${API_BASE_URL}/update-app-js`, { jsFileName }, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -212,7 +213,7 @@ const handleGenreChange = (genre) => {
                 <span>
                     <BoldToggle type="b" textareaRef={summaryTextareaRef} />
                     <BoldToggle type="i" textareaRef={summaryTextareaRef} />
-                    <BoldToggle type="br" textareaRef={summaryTextareaRef} />
+                    <BoldToggle type="p" textareaRef={summaryTextareaRef} />
                     <BoldToggle type="color" textareaRef={summaryTextareaRef} />
                     <BoldToggle type="link" textareaRef={summaryTextareaRef} />
                     <BoldToggle type="img" textareaRef={summaryTextareaRef} />
@@ -230,7 +231,7 @@ const handleGenreChange = (genre) => {
                 <span>
                     <BoldToggle type="b" textareaRef={fulldetailTextareaRef} />
                     <BoldToggle type="i" textareaRef={fulldetailTextareaRef} />
-                    <BoldToggle type="br" textareaRef={fulldetailTextareaRef} />
+                    <BoldToggle type="p" textareaRef={fulldetailTextareaRef} />
                     <BoldToggle type="color" textareaRef={fulldetailTextareaRef} />
                     <BoldToggle type="link" textareaRef={fulldetailTextareaRef} />
                     <BoldToggle type="img" textareaRef={fulldetailTextareaRef} />

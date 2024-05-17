@@ -7,7 +7,7 @@
 .categories-movies {
   margin-right: auto;
   display: flex;
-   z-index: 5;
+   z-index: 1000;
 }
 
 .categories-movies a {
@@ -48,6 +48,9 @@
   overflow: auto;
 }
 
+
+
+
 .row {
   display: flex;
 }
@@ -59,7 +62,13 @@
 
 .columns-second {
   margin-top: 1.5rem;
+  display: flex; /* Display the elements in a row */
+  flex-wrap: wrap;
 }
+
+
+
+
 
 .columns-second span {
   color: white;
@@ -73,8 +82,10 @@ font-size: 21px;
 
 .columns-second a {
   display: flex;
-  text-align: left;
-  padding-left: 4rem;
+  flex: 1;
+  padding-left: 2rem;
+  padding-right: 2rem;
+
   color: rgb(190, 187, 187);
   font-size: large;
 }
@@ -88,7 +99,8 @@ font-size: 21px;
   color: white;
 }
 
-.dropdown-content-layout.show {
+.dropdown-content-layout.show,
+.dropdown-content-layout-anime.show {
   display: block;
 }
 
@@ -204,8 +216,8 @@ font-size: 21px;
 .user-dropdown {
   position: absolute;
   margin-top: 0.4rem;
-  right: 0;
   z-index: 1000;
+  right: 0;
   overflow: auto;
   margin-top: 0rem;
   background-color: white;
@@ -224,7 +236,7 @@ font-size: 21px;
 .user-dropdown a {
   color: black;
   z-index: 1000;
-
+right:0;
   font-size: 18px;
 }
 
@@ -286,7 +298,8 @@ font-size: 21px;
 
 
 .login-form-container {
-  background-color: rgb(117, 114, 114);
+  background: url("../../public/images/background.jpg") no-repeat;
+  background-size: cover; 
   padding: 1px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -294,6 +307,7 @@ font-size: 21px;
 
 
 .profile-logout {
+  
   position: fixed;
   top: 50%;
   left: 50%;
@@ -312,7 +326,7 @@ font-size: 21px;
 .login-register{
   display: flex;
   justify-content: space-evenly;
-  background-color: rgb(105, 132, 133);
+  background-color: rgba(146, 233, 236, 0.651);
   
 }
 .login-p{
@@ -331,13 +345,23 @@ font-size: 21px;
   color:rgb(247, 66, 66);
   border-bottom: 1px solid rgb(241, 6, 6);
 } */
-
+.login-background{
+  background-color: transparent !important; /* Ensure transparency */
+  margin-left: 12rem;
+  margin-right: 11rem;
+  backdrop-filter: blur(40px);
+  border-radius: 10px;
+}
 
 .section-login p{
-  color: black;
+  color: rgb(255, 255, 255);
   margin-bottom: -0.01rem;
   margin-left: 0.5rem;
   font-weight: bold;
+}
+.section-login h2{
+  color: rgb(255, 255, 255);
+
 }
 .section-login {
   justify-content: center;
@@ -350,17 +374,17 @@ font-size: 21px;
   color: blue; /* Set the color of the link to blue */
 }
 .login-scale{
-  background-color: rgb(220, 245, 245);
+  /* background-color: rgba(24, 231, 231, 0.699); */
+  /* background: url("../../public/images/background.jpg") no-repeat; */
+  /* background-size: cover;  */
   min-width: 650px;
   min-height: 300px;
-  
   }
 
 .login-gmail  {
   width: 100%;
   justify-content: space-between;
   text-align: center;
-
   margin-top: 2rem;
   padding: 1rem;
 }
@@ -412,11 +436,18 @@ font-size: 21px;
     top: 5.4rem; /* Adjust the top position to fit under the logo */
     display: flex;
     left: 0;
+    right:0;
     flex-direction: column;
     background-color: rgb(32, 32, 32);
     padding: 20px ;
+    text-align: center;
   }
 
+  .user-dropdown {
+
+    left: 0;
+  
+  }
   .dropdown-content-layout {
     display: none;
     position: absolute;
@@ -429,7 +460,7 @@ font-size: 21px;
   }
 
   .categories-movies > span {
-    margin-bottom: 5px; /* Add margin between links */
+    margin-bottom: 1rem; /* Add margin between links */
   }
 
 

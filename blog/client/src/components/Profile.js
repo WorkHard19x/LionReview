@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 
 import '../styles/Profiles.css';
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
@@ -177,8 +178,36 @@ function Profile() {
         setErrorMessage('An error occurred. Please try again later.');
     });
 }
+const [isUserDropdowncreate, setIsUserDropdowncreate] = useState(false); // State for user dropdown
 
-  
+const userDrop = useRef(null); // Reference for the user dropdown
+
+const handleOutsideClick = (event) => {
+  if (
+    userDrop.current && !userDrop.current.contains(event.target)
+
+  ) {
+    setIsUserDropdowncreate(false);
+  }
+};
+
+useEffect(() => {
+  if (isUserDropdowncreate) {
+    // Bind the event listener for clicks outside the dropdown and menu
+    document.addEventListener('mousedown', handleOutsideClick);
+  } else {
+    // Unbind the event listener when dropdown and menu are closed
+    document.removeEventListener('mousedown', handleOutsideClick);
+  }
+
+  return () => {
+    document.removeEventListener('mousedown', handleOutsideClick);
+  };
+}, [isUserDropdowncreate ]);
+
+const handleToggleUserDrop = () => {
+  setIsUserDropdowncreate(!isUserDropdowncreate);
+};
   return (
     <div className='Profile-m'>
   <div className="profile-n">
@@ -215,7 +244,22 @@ function Profile() {
               <p style={{ color: 'red', fontWeight: 'bold' }}>User data not available</p>
             )}
             {user && user.is_admin &&(
+                  <>
                   <p style={{ color: 'black', fontWeight: 'bold' }}>Admin: {user.is_admin ? 'Yes' : 'No'}</p>
+                  <p className="Link-drama-hover" onClick={handleToggleUserDrop} style={{ marginRight: "1rem", fontWeight:"bold"}}>
+                      <p >Link-Drama {isUserDropdowncreate ? '▲' : '▼'}</p>
+                  </p>
+                  <div className={`dropdown-content-layout-anime ${isUserDropdowncreate ? 'show' : ''}`}>
+                    <div className='row'>
+                        <div className='columns-second-anime'>
+                            <p><a href="/Create_Drama_Profiles" target="_blank">Anime</a></p>
+                            <p><a href="/Create_Travel_Profiles" target="_blank">Travel</a></p>
+                            <p><a href="/Create_New_Profiles" target="_blank">News</a></p>
+
+                        </div>
+                    </div>      
+                  </div>
+                  </>
             )}
             </div>
             <div className="section-profile" id="Subscriber">

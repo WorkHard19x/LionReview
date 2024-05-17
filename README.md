@@ -8,7 +8,7 @@
 - Support for text-based and photo-based blog formats
 - Easy authoring in react
 - Easy customization of site layout and formatting
-- Support for Windows and Linux hosting Flask
+- Support for Windows  Flask
 - Quick search of post content, including simple search queries
   
 ## Structure
@@ -21,6 +21,7 @@
 
 1. Install react, Python, .NET SDK, Flask, MongoDB, Node.js
 1. cd (your folder)\blog-web\blog\client
+1. cd (your folder)\blog-web\blog\backend
 1. npm install react-bootstrap, react-icons, react-router-dom.
  
 
@@ -33,10 +34,6 @@
 - Server-side Languages (Python Flask): Handles server-side logic, data processing, and communication with databases. Flask, a Python web framework, provides a lightweight and flexible platform for building web applications, allowing you to create dynamic content, handle user requests, and manage session data effectively
 - Databases(MongoDB): Stores user registration information in a NoSQL document database
 - MongoDB (handled by Flask-PyMongo): Store user information such as name, email, hashed password, registration, time, etc
-- Flask_mail:
-    - Integrates email functionality into your Flask application, enabling the sending of emails such as visitor's contracts to Gmail
-    - Implement email verification with registration, ensuring active and valid user emails
-    - Forget-password feature with two-factor authentication (2FA), requiring users to enter a verification code for added security
 - Flask sessions: Store user authentication state and information between requests
 - Bcrypt (handled by Passlib): Securely hash user passwords before storing them in the database
 

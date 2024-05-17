@@ -377,7 +377,7 @@ useEffect(() => {
 
 const fetchPostkd = async () => {
   try {
-      const response = await axios.get(`http://localhost:5000/api/kd`);
+      const response = await axios.get(`${API_BASE_URL}/api/kd`);
       console.log('Response:', response.data); // Log the response data
       setPostskd(response.data);
       setError(null); // Reset error state if request is successful
@@ -389,7 +389,7 @@ const fetchPostkd = async () => {
 
 const fetchPoststravel = async () => {
   try {
-      const response = await axios.get(`http://localhost:5000/api/travel`);
+      const response = await axios.get(`${API_BASE_URL}/api/travel`);
       console.log('Response:', response.data); // Log the response data
       setPoststravel(response.data);
       setError(null); // Reset error state if request is successful
@@ -401,7 +401,7 @@ const fetchPoststravel = async () => {
 
 const fetchPosts = async () => {
     try {
-        const response = await axios.get(`http://localhost:5000/api/news`);
+        const response = await axios.get(`${API_BASE_URL}/api/news`);
         console.log('Response:', response.data); // Log the response data
         setPosts(response.data);
         setError(null); // Reset error state if request is successful
@@ -414,7 +414,7 @@ const fetchPosts = async () => {
 
 const fetchPostcel = async () => {
   try {
-      const response = await axios.get(`http://localhost:5000/api/cel`);
+      const response = await axios.get(`${API_BASE_URL}/api/cel`);
       console.log('Response:', response.data); // Log the response data
       setPostscel(response.data);
       setError(null); // Reset error state if request is successful
@@ -438,7 +438,7 @@ const fetchPostcel = async () => {
 
 const fetchPostch = async () => {
   try {
-      const response = await axios.get(`http://localhost:5000/api/ch`);
+      const response = await axios.get(`${API_BASE_URL}/api/ch`);
       console.log('Response:', response.data); // Log the response data
       setPostsch(response.data);
       setError(null); // Reset error state if request is successful
@@ -450,7 +450,7 @@ const fetchPostch = async () => {
 
 const fetchPostja = async () => {
   try {
-      const response = await axios.get(`http://localhost:5000/api/ja`);
+      const response = await axios.get(`${API_BASE_URL}/api/ja`);
       console.log('Response:', response.data); // Log the response data
       setPostsja(response.data);
       setError(null); // Reset error state if request is successful
@@ -462,7 +462,7 @@ const fetchPostja = async () => {
 
 const fetchPosttw = async () => {
   try {
-      const response = await axios.get(`http://localhost:5000/api/tw`);
+      const response = await axios.get(`${API_BASE_URL}/api/tw`);
       console.log('Response:', response.data); // Log the response data
       setPoststw(response.data);
       setError(null); // Reset error state if request is successful
@@ -474,7 +474,7 @@ const fetchPosttw = async () => {
 
 const fetchPostth = async () => {
   try {
-      const response = await axios.get(`http://localhost:5000/api/th`);
+      const response = await axios.get(`${API_BASE_URL}/api/th`);
       console.log('Response:', response.data); // Log the response data
       setPoststh(response.data);
       setError(null); // Reset error state if request is successful
@@ -487,7 +487,7 @@ const fetchPostth = async () => {
 
 const fetchPostot = async () => {
   try {
-      const response = await axios.get(`http://localhost:5000/api/ot`);
+      const response = await axios.get(`${API_BASE_URL}/api/ot`);
       console.log('Response:', response.data); // Log the response data
       setPostsot(response.data);
       setError(null); // Reset error state if request is successful
@@ -651,27 +651,72 @@ if (error) {
           <i className="fas fa-arrow-circle-right" onClick={handleNextClick}></i>
         </div>
       </div> */}
+
+{/* ALL */}
+<div className="tooltipk">
+          <a href="/MainPage/Anime_page"><h1>Latest Releases <span style={{fontSize:'21px'}}>&gt;</span> </h1>
+          <span className="tooltiptextk" style={{fontSize:'16px', marginLeft:'-5rem'}}> See all &gt;  </span>
+          </a>
+        </div>
+        <div className="continue">
+        <div className='image-slider-continue' ref={imageSliderReft}>
+        {postkd.map((post, index) => (
+              <div key={index} >
+                <a href={post.korean_url}>
+                  <div className="image-container">
+                  <div className="image-titles">
+                          <p  style={{color:"black"}}>{post.episode}</p>
+                      </div>
+                      <img src={post.img} alt={post.title} 
+                      style={{height: '250px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                   
+              </div>
+          
+            ))}
+        </div>
+        <div className="navigation-arrows">
+          <i className="fas fa-arrow-circle-left" onClick={handlePrevClickt}></i>
+        </div>
+        <div className="navigation-arrows1">
+          <i className="fas fa-arrow-circle-right" onClick={handleNextClickt}></i>
+        </div>
+      </div>
+
+
+
+
+
+
         
       {/* Korean */}
       <div className="tooltipk">
-          <a href="/MainPage/Korean_page"><h1 style={{fontSize:'22px'}}>Korean <span >&gt;</span> </h1>
+          <a href="/MainPage/Anime_page#Action"><h1 style={{fontSize:'22px'}}>Action <span >&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
         <div className="continue">
         <div className='image-slider-continue' ref={imageSliderRefk}>
         {postkd.map((post, index) => (
+          (post.genres.includes("Action")) && (
               <div key={index} >
                 <a href={post.korean_url}>
                   <div className="image-container">
+                      <div className="image-titles">
+                          <p  style={{color:"black"}}>{post.episode}</p>
+                      </div>
                       <img src={post.img} alt={post.title} 
-                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+                      style={{height: '250px', width:'250px', margin:'2rem',  border: '1px solid white' }}
                       />
                       <p className="image-title">{post.title}</p>
                       </div>
                       </a>
                     
               </div>
+        )
             ))}
 
         </div>
@@ -683,9 +728,189 @@ if (error) {
         </div>
       </div>
 
-      {/* China */}
+      {/* Japan */}
       <div className="tooltipk">
-          <a href="/China_page"><h1 style={{fontSize:'22px'}}>China <span >&gt;</span> </h1>
+          <a href="/MainPage/Anime_page#Adventure"><h1 style={{fontSize:'22px'}} >Adventure <span>&gt;</span> </h1>
+          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
+          </a>
+        </div>
+        <div className="continue">
+        <div className='image-slider-continue' ref={imageSliderRefj}>
+        {postkd.map((post, index) => (
+          (post.genres.includes("Adventure")) && (
+              <div key={index} >
+                <a href={post.korean_url}>
+                  <div className="image-container">
+                  <div className="image-titles">
+                          <p  style={{color:"black"}}>{post.episode}</p>
+                      </div>
+                      <img src={post.img} alt={post.title} 
+                      style={{height: '250px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                   
+              </div>
+          )
+            ))}
+        </div>
+        <div className="navigation-arrows">
+          <i className="fas fa-arrow-circle-left" onClick={handlePrevClickj}></i>
+        </div>
+        <div className="navigation-arrows1">
+          <i className="fas fa-arrow-circle-right" onClick={handleNextClickj}></i>
+        </div>
+      </div>
+
+
+
+      {/* Japan */}
+      <div className="tooltipk">
+          <a href="/MainPage/Anime_page#Fantasy"><h1 style={{fontSize:'22px'}} >Fantasy <span>&gt;</span> </h1>
+          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
+          </a>
+        </div>
+        <div className="continue">
+        <div className='image-slider-continue' ref={imageSliderRefj}>
+        {postkd.map((post, index) => (
+          (post.genres.includes("Fantasy")) && (
+              <div key={index} >
+                <a href={post.korean_url}>
+                  <div className="image-container">
+                  <div className="image-titles">
+                          <p  style={{color:"black"}}>{post.episode}</p>
+                      </div>
+                      <img src={post.img} alt={post.title} 
+                      style={{height: '250px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                   
+              </div>
+          )
+            ))}
+        </div>
+        <div className="navigation-arrows">
+          <i className="fas fa-arrow-circle-left" onClick={handlePrevClickj}></i>
+        </div>
+        <div className="navigation-arrows1">
+          <i className="fas fa-arrow-circle-right" onClick={handleNextClickj}></i>
+        </div>
+      </div>
+
+      Taiwan
+      <div className="tooltipk">
+          <a href="/MainPage/Anime_page#Science"><h1>Science Fiction <span style={{fontSize:'21px'}}>&gt;</span> </h1>
+          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
+          </a>
+        </div>
+        <div className="continue">
+        <div className='image-slider-continue' ref={imageSliderReft}>
+        {postkd.map((post, index) => (
+          (post.genres.includes("Science")) && (
+              <div key={index} >
+                <a href={post.korean_url}>
+                  <div className="image-container">
+                  <div className="image-titles">
+                          <p  style={{color:"black"}}>{post.episode}</p>
+                      </div>
+                      <img src={post.img} alt={post.title} 
+                      style={{height: '250px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                   
+              </div>
+          )
+            ))}
+        </div>
+        <div className="navigation-arrows">
+          <i className="fas fa-arrow-circle-left" onClick={handlePrevClickt}></i>
+        </div>
+        <div className="navigation-arrows1">
+          <i className="fas fa-arrow-circle-right" onClick={handleNextClickt}></i>
+        </div>
+      </div>
+
+      {/* ThaiLand */}
+      <div className="tooltipk">
+          <a href="/MainPage/Anime_page#Historical"><h1>Historical <span style={{fontSize:'21px'}}>&gt;</span> </h1>
+          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
+          </a>
+        </div>
+        <div className="continue">
+        <div className='image-slider-continue' ref={imageSliderRefth}>
+        {postkd.map((post, index) => (
+          (post.genres.includes("Historical")) && (
+              <div key={index} >
+                <a href={post.korean_url}>
+                  <div className="image-container">
+                  <div className="image-titles">
+                          <p  style={{color:"black"}}>{post.episode}</p>
+                      </div>
+                      <img src={post.img} alt={post.title} 
+                      style={{height: '250px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                    
+              </div>
+          )
+            ))}
+        </div>
+        <div className="navigation-arrows">
+          <i className="fas fa-arrow-circle-left" onClick={handlePrevClickth}></i>
+        </div>
+        <div className="navigation-arrows1">
+          <i className="fas fa-arrow-circle-right" onClick={handleNextClickth}></i>
+        </div>
+      </div>
+
+      {/* Other */}
+      <div className="tooltipk">
+          <a href="/MainPage/Anime_page#Mystery"><h1>Mystery <span style={{fontSize:'21px'}}>&gt;</span> </h1>
+          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
+          </a>
+        </div>
+        <div className="continue">
+        <div className='image-slider-continue' ref={imageSliderRefo}>
+        {postkd.map((post, index) => (
+          (post.genres.includes("Mystery")) && (
+              <div key={index} >
+                <a href={post.korean_url}>
+                  <div className="image-container">
+                  <div className="image-titles">
+                          <p  style={{color:"black"}}>{post.episode}</p>
+                      </div>
+                      <img src={post.img} alt={post.title} 
+                      style={{height: '250px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                   
+              </div>
+          )
+            ))}
+        </div>
+        <div className="navigation-arrows">
+          <i className="fas fa-arrow-circle-left" onClick={handlePrevClicko}></i>
+        </div>
+        <div className="navigation-arrows1">
+          <i className="fas fa-arrow-circle-right" onClick={handleNextClicko}></i>
+        </div>
+      </div>
+      
+            {/* Best Movie */}
+
+      <div className="tooltipk">
+          <a href="/MainPage/Movie_page"><h1 style={{fontSize:'22px'}}>Movie <span >&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
@@ -695,8 +920,11 @@ if (error) {
               <div key={index} >
                 <a href={post.chinese_url}>
                   <div className="image-container">
+                  <div className="image-titles">
+                          <p  style={{color:"black"}}>{post.episode}</p>
+                      </div>
                       <img src={post.img} alt={post.title} 
-                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+                      style={{height: '250px', width:'250px', margin:'2rem',  border: '1px solid white' }}
                       />
                       <p className="image-title">{post.title}</p>
                       </div>
@@ -713,128 +941,42 @@ if (error) {
         </div>
       </div>
 
-      {/* Japan */}
-      <div className="tooltipk">
-          <a href="/Japan_page"><h1 style={{fontSize:'22px'}} >Japan <span>&gt;</span> </h1>
-          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
-          </a>
-        </div>
-        <div className="continue">
-        <div className='image-slider-continue' ref={imageSliderRefj}>
-        {postjp.map((post, index) => (
-              <div key={index} >
-                <a href={post.japan_url}>
-                  <div className="image-container">
-                      <img src={post.img} alt={post.title} 
-                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
 
-                      />
-                      <p className="image-title">{post.title}</p>
-                      </div>
-                      </a>
-                   
-              </div>
-            ))}
-        </div>
-        <div className="navigation-arrows">
-          <i className="fas fa-arrow-circle-left" onClick={handlePrevClickj}></i>
-        </div>
-        <div className="navigation-arrows1">
-          <i className="fas fa-arrow-circle-right" onClick={handleNextClickj}></i>
-        </div>
-      </div>
-
-      {/* Taiwan */}
-      <div className="tooltipk">
-          <a href="/Taiwan_page"><h1>Taiwan <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
-          </a>
-        </div>
-        <div className="continue">
-        <div className='image-slider-continue' ref={imageSliderReft}>
-        {posttw.map((post, index) => (
-              <div key={index} >
-                <a href={post.taiwan_url}>
-                  <div className="image-container">
-                      <img src={post.img} alt={post.title} 
-                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
-                      />
-                      <p className="image-title">{post.title}</p>
-                      </div>
-                      </a>
-                   
-              </div>
-            ))}
-        </div>
-        <div className="navigation-arrows">
-          <i className="fas fa-arrow-circle-left" onClick={handlePrevClickt}></i>
-        </div>
-        <div className="navigation-arrows1">
-          <i className="fas fa-arrow-circle-right" onClick={handleNextClickt}></i>
-        </div>
-      </div>
-
-      {/* ThaiLand */}
-      <div className="tooltipk">
-          <a href="/Thailand_page"><h1>ThaiLand <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
-          </a>
-        </div>
-        <div className="continue">
-        <div className='image-slider-continue' ref={imageSliderRefth}>
-        {postth.map((post, index) => (
-              <div key={index} >
-                <a href={post.thailand_url}>
-                  <div className="image-container">
-                      <img src={post.img} alt={post.title} 
-                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
-                      />
-                      <p className="image-title">{post.title}</p>
-                      </div>
-                      </a>
-                    
-              </div>
-            ))}
-        </div>
-        <div className="navigation-arrows">
-          <i className="fas fa-arrow-circle-left" onClick={handlePrevClickth}></i>
-        </div>
-        <div className="navigation-arrows1">
-          <i className="fas fa-arrow-circle-right" onClick={handleNextClickth}></i>
-        </div>
-      </div>
-
-      {/* Other */}
-      <div className="tooltipk">
-          <a href="/Other_page"><h1>Other <span style={{fontSize:'21px'}}>&gt;</span> </h1>
-          <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
-          </a>
-        </div>
-        <div className="continue">
-        <div className='image-slider-continue' ref={imageSliderRefo}>
-        {postot.map((post, index) => (
-              <div key={index} >
-                <a href={post.other_url}>
-                  <div className="image-container">
-                      <img src={post.img} alt={post.title} 
-                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
-                      />
-                      <p className="image-title">{post.title}</p>
-                      </div>
-                      </a>
-                   
-              </div>
-            ))}
-        </div>
-        <div className="navigation-arrows">
-          <i className="fas fa-arrow-circle-left" onClick={handlePrevClicko}></i>
-        </div>
-        <div className="navigation-arrows1">
-          <i className="fas fa-arrow-circle-right" onClick={handleNextClicko}></i>
-        </div>
-      </div>
             {/* Best Travel */}
             <div className="tooltipk">
+          <a href="/MainPage/Travel_page"><h1>Best Travel <span style={{fontSize:'21px'}}>&gt;</span> </h1>
+          <span className="tooltiptextk" style={{fontSize:'16px',marginLeft: '-4rem'}}> See all &gt;  </span>
+          </a>
+        </div>
+        <div className="continue">
+          <div className='image-slider-continue' ref={imageSliderRefCelebrities}>
+
+            {posttravel.slice().reverse().map((post, index) => (
+              <div key={index} >
+                <a href={post.provide} target="_blank">
+                  <div className="image-container">
+                      <img src={post.imageUrlnews} alt={post.title} 
+                      style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+                      />
+                      <p className="image-title">{post.title}</p>
+                      </div>
+                      </a>
+                   
+              </div>
+            ))}
+
+          </div>
+          <div className="navigation-arrows">
+            <i className="fas fa-arrow-circle-left" onClick={handlePrevClickCelebrities}></i>
+          </div>
+          <div className="navigation-arrows1">
+            <i className="fas fa-arrow-circle-right" onClick={handleNextClickCelebrities}></i>
+          </div>
+      </div>
+
+
+{/* Best Travel */}
+<div className="tooltipk">
           <a href="/MainPage/Travel_page"><h1>Best Travel <span style={{fontSize:'21px'}}>&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px',marginLeft: '-4rem'}}> See all &gt;  </span>
           </a>
@@ -899,7 +1041,7 @@ if (error) {
 
       {/* news */}
       <div className="tooltipk">
-          <a href="/News_page"><h1>News <span style={{fontSize:'21px'}}>&gt;</span> </h1>
+          <a href="/MainPage/News_page"><h1>News <span style={{fontSize:'21px'}}>&gt;</span> </h1>
           <span className="tooltiptextk" style={{fontSize:'16px'}}> See all &gt;  </span>
           </a>
         </div>
@@ -909,7 +1051,7 @@ if (error) {
               <a href={post.url_page}>
                 <div className="image-container">
                     <img src={post.imageUrlnews} alt={post.title} 
-                    style={{height: '150px', width:'250px', margin:'2rem',  border: '1px solid white' }}
+                      style={{height: '250px', width:'250px', margin:'2rem',  border: '1px solid white' }}
 
                     />
                     <p className="image-title" 

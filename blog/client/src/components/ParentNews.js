@@ -19,7 +19,7 @@ function ParentNews() {
 
     const fetchPosts = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/news');
+            const response = await axios.get(`${API_BASE_URL}/api/news`);
             console.log('Response:', response.data); // Log the response data
             const reversedPosts = response.data.reverse(); // Reverse the array of posts
             setPosts(reversedPosts);

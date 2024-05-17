@@ -9,9 +9,8 @@
   .korean-title{
     background-color: rgba(44, 43, 43, 0.884);
     padding: 0.7rem;
-    margin: 0 -2rem ;
     padding-left: 2rem;
-
+    width: 96.5%;
   }
   .korean-title i,
   .korean-title span{
@@ -75,39 +74,71 @@
 
   }
   
-  .profile-borderd {
+  /* .profile-borderd {
+    display: flex; 
+    justify-content: center;
     border: 2px solid rgba(54, 53, 53, 0.925);
+    width: 70%;
+    margin: auto;
     border-radius: 3px;
-    display: flex;
-  }
+    margin-top: -1rem;
+} */
+.profile-borderd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgba(54, 53, 53, 0.925);
+  width: 70%;
+  margin: auto;
+  border-radius: 3px;
+  margin-top: -1rem;
+  position: relative; /* Add position relative */
+}
+
+.video {
+  width: 100%; /* Ensure the video container occupies the full width */
+  height: 0; /* Initially set the height to 0 */
+  padding-top: 40.5%; /* 16:9 aspect ratio (9 / 16 * 100) */
+  position: relative; /* Add position relative */
+}
+
+.video iframe {
+  position: absolute; /* Position the iframe absolutely within the video container */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensure the iframe occupies the full width */
+  height: 100%; /* Ensure the iframe occupies the full height */
+}
+.profile-borderd iframe {
+    max-width: 100%; /* Ensure the iframe doesn't exceed the container width */
+    max-height: 100%; /* Ensure the iframe doesn't exceed the container height */
+}
+
   
   .video-left,
   .video-right{
     width: 20%;
-    height: 520px;
     background-color: rgb(241, 232, 148);
+
   }
   .vide-left-ads,
   .vide-right-ads{
     background-color: rgb(245, 84, 44);
+
     width: 70%;
     margin: auto;
-    display: block;
     text-align: center;
-    justify-content: center;
     padding-top: 1px;
-    height: 100%;
 
   }
-  .video{
+  /* .video{
     width:60%;
     height: auto;
     display: flex;
     justify-content: center;
     text-align: center;
     color: rgba(255, 255, 255, 0.808);
-    background-color: rgb(214, 196, 36);
-  }
+  } */
 
   .ad-overlay {
     position: absolute;
@@ -214,6 +245,7 @@
     width: 100%;
     
   }
+
   
   .nav-epdisode{
     width: 60%;
@@ -222,7 +254,8 @@
     text-align: center;
     display: flex;
   }
-  
+ 
+
   .icon-container {
     display: flex;
     margin: 1rem;
@@ -286,10 +319,21 @@
     right: 0;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
     color: white;
-
     margin: 0;
     font-size: 12px;
   }
+  .image-titles {
+    position: absolute;
+    top: 20px;
+    right: 3px;
+    margin: 0;
+  }
+.image-titles p{
+  background-color: rgba(214, 13, 13, 0.5); /* Semi-transparent background for readability */
+  border-radius: 5px;
+}
+
+
 
   .more-detail{
     margin-top: 40px;
@@ -345,10 +389,103 @@
       border: 2px solid white;
       border-radius: 8px;
     } */
-  
-  
-  
+  /* .episode-video-img{
+    border:1px solid white;
+    width: 25%;
+  }
+  .nav-epdisoded p{
+    margin-left: 2rem;
+    color: white;
+  }
+  .nav-epdisoded{
+    width: 60%;
+    margin: auto;
+    background-color: rgba(95, 94, 94, 0.616);
+    display: flex;
+  } */
+  .summary-main {
+    display: flex;
+}
+
+.summary-nav {
+    display: flex;
+    width: 100%;
+    background-color: rgba(95, 94, 94, 0.616);
+    margin-bottom: 0.3rem;
+}
+
+.summary-first{
+  box-sizing: border-box; /* Include padding and border in the width */
+  margin-left: 22rem;
+  margin-top: 1rem;
+}
+.summary-first img{
+  border-radius: 5px;
+}
+.summary-second {
+    width: 40%;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+.summary-second p{
+    color:rgba(255, 255, 255, 0.795)
+}
+
+.summary-seconds {
+  width: 60%;
+  margin-top: 1rem;
+  border: 1px solid rgb(61, 60, 60);
+  background-color: #3d3a3a;
+  justify-content: center;
+  margin: auto;
+  box-sizing: border-box; /* Include padding and border in the width */
+}
+.summary-seconds p{
+  color:rgba(255, 255, 255, 0.795)
+}
   @media screen and (max-width: 960px) {
+    .profile-borderd {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid rgba(54, 53, 53, 0.925);
+      width: 100%;
+      margin: auto;
+      border-radius: 3px;
+      margin-top: -1rem;
+      position: relative; /* Add position relative */
+    }
+    
+    .video {
+      width: 100%; /* Ensure the video container occupies the full width */
+      height: 0; /* Initially set the height to 0 */
+      padding-top: 40%; /* 16:9 aspect ratio (9 / 16 * 100) */
+      position: relative; /* Add position relative */
+    }
+    .video iframe {
+      position: absolute; /* Position the iframe absolutely within the video container */
+      top: 0;
+      left: 0;
+      width: 100%; /* Ensure the iframe occupies the full width */
+      height: 100%; /* Ensure the iframe occupies the full height */
+    }
+    .korean-title{
+      background-color: rgba(44, 43, 43, 0.884);
+      padding: 0.7rem;
+      padding-left: 2rem;
+      width: 94%;
+    }
+    .summary-second {
+      width: 60%;
+      margin-left: 0rem;
+      margin-top: 1rem;
+      box-sizing: border-box; /* Include padding and border in the width */
+  }
+  .summary-seconds {
+    width: 100%;
+
+}
     .vide-left-ads,
     .vide-right-ads{
         background-color: rgb(245, 84, 44);
@@ -360,6 +497,9 @@
         justify-content: center;
     }
     .nav-epdisode{
+      width: 80%;
+    }
+    .nav-epdisoded{
       width: 80%;
     }
     .profile-info{
@@ -374,27 +514,53 @@
     .profile-containerd {
       background-color: rgb(26, 25, 25);
       margin: 0 0rem ;
-  
     }
+
+    .summary-first{
+      box-sizing: border-box; /* Include padding and border in the width */
+      margin: auto;
+    }
+    .summary-nav {
+      display: flex;
+      width: 100%;
+      background-color: rgba(95, 94, 94, 0.616);
+  }
+    
   }
   
   
   
   @media screen and (max-width: 650px) {
+    .video {
+      width: 100%; /* Ensure the video container occupies the full width */
+      height: 0; /* Initially set the height to 0 */
+      padding-top: 55%; /* 16:9 aspect ratio (9 / 16 * 100) */
+      position: relative; /* Add position relative */
+    }
     .profile-infod {
       min-width: 20%;
       color: rgba(255, 255, 255, 0.808);
+    }
+    .korean-title{
+      background-color: rgba(44, 43, 43, 0.884);
+      padding: 0.7rem;
+      padding-left: 2rem;
+      width: 90.5%;
     }
     .profile-borderd {
         border: 1px solid black;
         display: flex;
         background-color: rgb(238, 238, 238);
         margin: 0 ;
-
       }
       .nav-epdisode{
         width: 100%;
-
+      }
+      .nav-epdisoded{
+        width: 100%;
+      }
+      .nav-epdisoded p{
+        margin-left: 1rem;    
       }
       .video{
         width: 100%;
@@ -418,4 +584,5 @@
     .image-container p{
       font-size: 10px;
     }
+
   }

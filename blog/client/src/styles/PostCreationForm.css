@@ -20,7 +20,10 @@
     justify-content: space-between; /* Align items on opposite ends */
     margin-bottom: 10px; /* Add margin between input containers */
 }
-
+.ep input{
+    width: 88.5%;
+    margin-bottom: 0.5rem;
+}
 .input-container label {
     color: rgb(255, 255, 255);
     font-weight: bold;

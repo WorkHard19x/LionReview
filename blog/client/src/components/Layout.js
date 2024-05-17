@@ -16,6 +16,8 @@ const Layout = ({ children }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 650);
   const [isSearchVisible, setIsSearchVisible] = useState(false); // State to track if search input is visible
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false); // State for user dropdown
+  const [isUserDropdowncreate, setIsUserDropdowncreate] = useState(false); // State for user dropdown
+
   const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
@@ -45,23 +47,26 @@ const Layout = ({ children }) => {
   const dropdownRef = useRef(null);
   const menuRef = useRef(null);
   const userDropdownRef = useRef(null); // Reference for the user dropdown
+  const userDrop = useRef(null); // Reference for the user dropdown
 
   // Function to handle outside click
   const handleOutsideClick = (event) => {
     if (
       dropdownRef.current && !dropdownRef.current.contains(event.target) &&
       menuRef.current && !menuRef.current.contains(event.target)&&
-      userDropdownRef.current && !userDropdownRef.current.contains(event.target)
+      userDropdownRef.current && !userDropdownRef.current.contains(event.target)&&
+      userDrop.current && !userDrop.current.contains(event.target)
+
     ) {
       setIsDropdownOpen(false);
       setIsMenuOpen(false); // Close the menu when clicking outside or clicking FaBars again
       setIsUserDropdownOpen(false); // Close the user dropdown when clicking outside
-
+      setIsUserDropdowncreate(false);
     }
   };
 
   useEffect(() => {
-    if (isDropdownOpen || isMenuOpen || isUserDropdownOpen) {
+    if (isDropdownOpen || isMenuOpen || isUserDropdownOpen || isUserDropdowncreate) {
       // Bind the event listener for clicks outside the dropdown and menu
       document.addEventListener('mousedown', handleOutsideClick);
     } else {
@@ -72,13 +77,16 @@ const Layout = ({ children }) => {
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
-  }, [isDropdownOpen, isMenuOpen, isUserDropdownOpen]);
+  }, [isDropdownOpen, isMenuOpen, isUserDropdownOpen,isUserDropdowncreate ]);
 
   const handleToggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   const handleToggleUserDropdown = () => {
     setIsUserDropdownOpen(!isUserDropdownOpen);
+  };
+  const handleToggleUserDrop = () => {
+    setIsUserDropdownOpen(!isUserDropdowncreate);
   };
   const handleToggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -399,7 +407,7 @@ const [query, setQuery] = useState('');
 
   const handleSubmitSearch = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/search', { query });
+      const response = await axios.post(`${API_BASE_URL}/api/search`, { query });
       setSearchResults(response.data);
       navigate(`/search?q=${encodeURIComponent(query)}`);
     } catch (error) {
@@ -449,30 +457,37 @@ const [query, setQuery] = useState('');
     }
   };
 
+
+
+
+
+
+  
   return (
     <div>
       <div style={{ backgroundColor: 'rgb(17, 17, 17)' }}>
         <Navbar variant="dark" expand="lg" style={{ padding: '1rem', marginLeft: '20px' }}>
           <Navbar.Brand href="/">
-            <img src="/images/logo.png" alt="Your Logo" style={{ maxHeight: '50px', marginRight: '1rem' }} />
+            <img src="/images/logo.png" alt="Your Logo" style={{ maxHeight: '50px', marginRight: '1rem',background:'transparent' }} />
           </Navbar.Brand>
+          
           {(isMenuOpen || !isSmallScreen) && (
             <div className="categories-movies" ref={dropdownRef}>
               <span style={{ position: 'relative' }}>
                 <Nav.Link onClick={handleToggleDropdown}>
-                  Categories {isDropdownOpen ? '▲' : '▼'}
+                  Genres {isDropdownOpen ? '▲' : '▼'}
                 </Nav.Link>
                 <div className={`dropdown-content-layout ${isDropdownOpen ? 'show' : ''}`}>
                 <div className='row'>
-                    <div className='columns'>
-                        <NavDropdown.Item href="/MainPage/Korean_page">
+                    {/* <div className='columns'>
+                        <NavDropdown.Item href="/MainPage/Anime_page">
                         <span className="image-container">
                             <img
                             src="/images/korean.jpg"
                             alt='Korean'
                             style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
                             />
-                            <span className="overlay">Korean </span>
+                            <span className="overlay">Action </span>
                         </span>
                         </NavDropdown.Item>
 
@@ -483,7 +498,7 @@ const [query, setQuery] = useState('');
                             alt='Korean'
                             style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
                             />
-                            <span className="overlay2">China </span>
+                            <span className="overlay2">Adventure </span>
                         </span>
                         </NavDropdown.Item>
 
@@ -494,7 +509,7 @@ const [query, setQuery] = useState('');
                             alt='Korean'
                             style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
                             />
-                            <span className="overlay3">Japan </span>
+                            <span className="overlay3">Fantasy </span>
                         </span>
                         </NavDropdown.Item>
 
@@ -505,7 +520,7 @@ const [query, setQuery] = useState('');
                             alt='Korean'
                             style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
                             />
-                            <span className="overlay4">Taiwan </span>
+                            <span className="overlay4">Science Fiction </span>
                         </span>
                         </NavDropdown.Item>
 
@@ -516,7 +531,7 @@ const [query, setQuery] = useState('');
                             alt='Korean'
                             style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
                             />
-                            <span className="overlay5">Thailand </span>
+                            <span className="overlay5">Historical </span>
                         </span>
                         </NavDropdown.Item>
 
@@ -527,29 +542,34 @@ const [query, setQuery] = useState('');
                             alt='Korean'
                             style={{height: '150px', width:'210px', margin:'2rem',  border: '1px solid white' }}
                             />
-                            <span className="overlay6">Other </span>
+                            <span className="overlay6">Mystery </span>
                         </span>
                         </NavDropdown.Item>
                         
-                    </div>
+                    </div> */}
                     <div className='columns-second'>
-                    <span style={{ color: 'blue',paddingLeft:'4.5rem' ,fontSize:'21px' }}>{'\u25B6'}<span style={{color:'white'}}>Genres</span></span>
-
-                    <p><a href="#action/3.1">Romantic</a></p>
-                    <p><a href="#action/3.1">Costume & Period</a></p>
-                    <p><a href="#action/3.1">Action</a></p>
-                    <p><a href="#action/3.1">Crime& Mystery</a></p>
-                    <p><a href="#action/3.1">Thriller & Suspense</a></p>
-                    <p><a href="#action/3.1">Animation</a></p>
-                    <p><a href="#action/3.1">Fantasy</a></p>
-
-
+                    <p><a href="/MainPage/Anime_page">All</a></p>
+                    <p><a href="/MainPage/Anime_page#Action">Action</a></p>
+                    <p><a href="/MainPage/Anime_page#Adventure">Adventure</a></p>
+                    <p><a href="/MainPage/Anime_page#Comedy">Comedy</a></p>
+                    <p><a href="/MainPage/Anime_page#Drama">Drama</a></p>
+                    <p><a href="/MainPage/Anime_page#Fantasy">Fantasy</a></p>
+                    <p><a href="/MainPage/Anime_page#Historical">Historical</a></p>
+                    <p><a href="/MainPage/Anime_page#Mystery">Mystery</a></p>
+                    <p><a href="/MainPage/Anime_page#Science">Science Fiction</a></p>
+                    <p><a href="/MainPage/Anime_page#Sport">Sport</a></p>
+                    <p><a href="/MainPage/Anime_page#Supernatural">Supernatural</a></p>
                     </div>
                 </div>
                 </div>
               </span>
-              <Nav.Link href="#movies" style={{ marginLeft: '1rem' }} ref={menuRef}>Movies</Nav.Link>
+              <Nav.Link href="/MainPage/Movie_page" style={{ marginLeft: '1rem' }} ref={menuRef}>Movies</Nav.Link>
             </div>
+
+                    
+
+
+
           )}
             <div className="search-login">
               <div className='Search-nav'>
@@ -588,24 +608,32 @@ const [query, setQuery] = useState('');
                                   </a>
                                 </p>
                               </div>
-                                  <div className="section-login" id="login">
-                                  {loginErrorMessage && <p style={{ color: 'red', fontWeight:'bold' }}>{loginErrorMessage}</p>}
-                                        <h2>Login</h2>
-                                        <p>Username</p>
-                                        <input type="text" placeholder="Username" value={email} onChange={handleEmailChange} />
-                                        <p>Password</p>
-                                        <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-                                        <p>
-                                        <Button variant="outline-dark" onClick={handleLogin} style={{marginBottom:'1rem'}}>Login</Button>
-                                        </p>
+                                  <div className='login-background'>
+                                          <div className="section-login" id="login">
+                                            {loginErrorMessage && <p style={{ color: 'red', fontWeight:'bold',fontSize:'20px' }}>{loginErrorMessage}</p>}
+                                                  <h2>Login</h2>
+                                                  <p>Username</p>
+                                                  <input type="text" placeholder="Username" value={email} onChange={handleEmailChange} />
+                                                  <p>Password</p>
+                                                  <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+                                                  <p>
+                                                  <Button variant="outline-dark" onClick={handleLogin} style={{marginBottom:'1rem'}}>Login</Button>
+                                                  </p>
+                                            </div>
                                   </div>
+                                  
+                                  <div className='login-background'>
+
                                   <div className="section-login" id="register" style={{display: 'none'}}>
                                       <form onSubmit={handleSubmit}>
-                                      {registrationMessage && <p style={{ color: 'red' }}>{registrationMessage}</p>}
+                                      {registrationMessage && <p style={{ color: 'red', fontSize:'20px' }}>{registrationMessage}</p>}
 
                                         <h2>Register</h2>
                                         <p>Name</p>
-                                        <input type="text" placeholder="Name" value={name} onChange={handleNameChange} />
+                                        <input type="text"
+                                         placeholder="Name" 
+                                         value={name.replace(/\b\w/g, (c) => c.toUpperCase())} 
+                                         onChange={handleNameChange} />
                                         <p>Gmail</p>
                                         <input type="text" placeholder="Gmail" value={email} onChange={handleEmailChange} />
                                         <p>Password</p>
@@ -617,6 +645,7 @@ const [query, setQuery] = useState('');
                                         <Button variant="outline-dark" onClick={handleSubmit} style={{marginBottom:'1rem'}}>Register</Button>
                                         </p>
                                         </form>
+                                        
                                         {/* <div className="login-gmail">
                                                   <div className='login-in'>
                                                   <a href="#">
@@ -627,11 +656,14 @@ const [query, setQuery] = useState('');
                                               </div>
                                         </div> */}
                                   </div>
+                                  </div>
+
                           </div>
                       </div>
                     </div>
 
                   )}
+
               {isLoggedIn ? (
                 <div className="user-profile">
                   <div className="profile-info">

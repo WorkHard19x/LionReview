@@ -17,8 +17,8 @@ function BoldToggle({ textareaRef, type }) {
       case 'i':
         insertTextAtPosition(textarea, '<em>', '</em>');
         break;
-      case 'br':
-          insertTextAtPosition(textarea, '<br/>');
+      case 'p':
+        insertTextAtPosition(textarea, '<p>', '</p>');
           break;
       case 'color':
         const color = prompt('Enter color:');

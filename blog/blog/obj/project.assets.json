@@ -465,11 +465,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\acquy\\OneDrive\\blog-web\\blog\\blog\\blog.csproj",
+      "projectUniqueName": "D:\\blog-web\\blog\\blog\\blog.csproj",
       "projectName": "blog",
-      "projectPath": "C:\\Users\\acquy\\OneDrive\\blog-web\\blog\\blog\\blog.csproj",
+      "projectPath": "D:\\blog-web\\blog\\blog\\blog.csproj",
       "packagesPath": "C:\\Users\\acquy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\acquy\\OneDrive\\blog-web\\blog\\blog\\obj\\",
+      "outputPath": "D:\\blog-web\\blog\\blog\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\acquy\\AppData\\Roaming\\NuGet\\NuGet.Config"

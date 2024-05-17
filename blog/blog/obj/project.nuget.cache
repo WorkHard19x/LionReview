@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pszM7CpmbRIKE6DQ10C/FYUGEGtWq5PjsXZykLxnvpDVwrm0eCbATuIYY9IIRTpUiCTj9eFDbWkZdbFzMVJ18A==",
+  "dgSpecHash": "n1PqZV2eDDffNy9ve+VcP5OXaJQ+o1lw9UclcXWj9iWFrRy2ylaq9zVr3TqeW3GIdQt5O61m2XkCJ3Q3J+iaSQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\acquy\\OneDrive\\blog-web\\blog\\blog\\blog.csproj",
+  "projectFilePath": "D:\\blog-web\\blog\\blog\\blog.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\acquy\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.4\\microsoft.aspnetcore.openapi.8.0.4.nupkg.sha512",
     "C:\\Users\\acquy\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

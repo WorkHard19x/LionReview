@@ -2,11 +2,12 @@ import axios from 'axios';
 import React, { useState, useRef } from 'react';
 import BoldToggle from './BoldToggle';
 import '../styles/PostCreationForm.css';
-import { useParams } from 'react-router-dom';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 function PostNewForm({ updatePosts  }) {
     const summaryTextareaRef = useRef(null);
     const fulldetailTextareaRef = useRef(null);
+
     const [formData, setFormData] = useState({
         title_korean_url:'',
         title_chinese_url:'',
@@ -14,189 +15,21 @@ function PostNewForm({ updatePosts  }) {
         title_taiwan_url:'',
         title_thailand_url:'',
         title_other_url:'',
-
         title:'',
         date: '',
+        episode: '',
         ep1: '',
         ep2: '',
         ep3: '',
-        ep4: '',
-        ep5: '',
-        ep6: '',
-        ep7: '',
-        ep8: '',
-        ep9: '',
-        ep10: '',
-        ep11: '',
-        ep12: '',
-        ep13: '',
-        ep14: '',
-        ep15: '',
-        ep16: '',
-        ep17: '',
-        ep18: '',
-        ep19: '',
-        ep20: '',
-        ep21: '',
-        ep22: '',
-        ep23: '',
-        ep24: '',
-        ep25: '',
-        ep26: '',
-        ep27: '',
-        ep28: '',
-        ep29: '',
-        ep31: '',
-        ep32: '',
-        ep33: '',
-        ep34: '',
-        ep35: '',
-        ep36: '',
-        ep37: '',
-        ep38: '',
-        ep39: '',
-        ep40: '',
-        ep41: '',
-        ep42: '',
-        ep43: '',
-        ep44: '',
-        ep45: '',
-        ep45: '',
-        ep46: '',
-        ep47: '',
-        ep48: '',
-        ep49: '',
-        ep50: '',
-        ep51: '',
-        ep52: '',
-        ep53: '',
-        ep54: '',
-        ep55: '',
-        ep56: '',
-        ep57: '',
-        ep58: '',
-        ep59: '',
-        ep60: '',
-        ep61: '',
-        ep62: '',
-        ep63: '',
-        ep64: '',
-        ep65: '',
-        ep66: '',
-        ep67: '',
-        ep68: '',
-        ep69: '',
-        ep70: '',
-        ep71: '',
-        ep72: '',
-        ep73: '',
-        ep74: '',
-        ep75: '',
-        ep76: '',
-        ep77: '',
-        ep78: '',
-        ep79: '',
-        ep80: '',
-        ep81: '',
-        ep82: '',
-        ep83: '',
-        ep84: '',
-        ep85: '',
-        ep86: '',
-        ep87: '',
-        ep88: '',
-        ep89: '',
-        ep90: '',
-        ep91: '',
-        ep92: '',
-        ep93: '',
-        ep94: '',
-        ep95: '',
-        ep96: '',
-        ep97: '',
-        ep98: '',
-        ep99: '',
-        ep100: '',
         imageshowUrl1: '',
         showurl1: '',
         showtitle1: '',
-
         imageshowUrl2: '',
         showurl2: '',
         showtitle2: '',
-
         imageshowUrl3: '',
         showurl3: '',
         showtitle3: '',
-
-        imageshowUrl4: '',
-        showurl4: '',
-        showtitle4: '',
-
-        imageshowUrl5: '',
-        showurl5: '',
-        showtitle5: '',
-
-        imageshowUrl6: '',
-        showurl6: '',
-        showtitle6: '',
-
-        imageshowUrl7: '',
-        showurl7: '',
-        showtitle7: '',
-
-        imageshowUrl8: '',
-        showurl8: '',
-        showtitle8: '',
-
-        imageshowUrl9: '',
-        showurl9: '',
-        showtitle9: '',
-
-        imageshowUrl10: '',
-        showurl10: '',
-        showtitle10: '',
-
-        imageshowUrl11: '',
-        showurl11: '',
-        showtitle11: '',
-
-        imageshowUrl12: '',
-        showurl12: '',
-        showtitle12: '',
-
-        imageshowUrl13: '',
-        showurl13: '',
-        showtitle13: '',
-
-        imageshowUrl14: '',
-        showurl14: '',
-        showtitle14: '',
-
-        imageshowUrl15: '',
-        showurl15: '',
-        showtitle15: '',
-
-        imageshowUrl16: '',
-        showurl16: '',
-        showtitle16: '',
-
-        imageshowUrl17: '',
-        showurl17: '',
-        showtitle17: '',
-
-        imageshowUrl18: '',
-        showurl18: '',
-        showtitle18: '',
-
-        imageshowUrl19: '',
-        showurl19: '',
-        showtitle19: '',
-
-        imageshowUrl20: '',
-        showurl20: '',
-        showtitle20: '',
-
         korean_url:'',
         chinese_url:'',
         japan_url:'',
@@ -204,6 +37,9 @@ function PostNewForm({ updatePosts  }) {
         thailand_url:'',
         other_url:'',
         img:'',
+        summarytext:'',
+        fulldetail:'',
+
         genres: [], // Change to array for multiple genres
 
     });
@@ -225,11 +61,11 @@ function PostNewForm({ updatePosts  }) {
 
 
         if (name === 'title_korean_url') {
-            const urlPage = `http://localhost:3000/Korean/${value}/1`;
+            const urlPage = `http://localhost:3000/Anime/${value}/1`;
             setFormData(prevState => ({ ...prevState, korean_url: urlPage }));
         }
         if (name === 'title_chinese_url') {
-            const urlPage = `http://localhost:3000/China/${value}/1`;
+            const urlPage = `http://localhost:3000/Movie/${value}/1`;
             setFormData(prevState => ({ ...prevState, chinese_url: urlPage }));
         }
         if (name === 'title_japan_url') {
@@ -258,22 +94,22 @@ function PostNewForm({ updatePosts  }) {
     // Determine the API endpoint URL based on the selected option
         switch (selectedOption) {
             case 'korean':
-                apiUrl = 'http://localhost:5000/api/kd';
+                apiUrl = `${API_BASE_URL}/api/kd`;
                 break;
             case 'chinese':
-                apiUrl = 'http://localhost:5000/api/ch';
+                apiUrl = `${API_BASE_URL}/api/ch`;
                 break;
             case 'japan':
-                apiUrl = 'http://localhost:5000/api/ja';
+                apiUrl = `${API_BASE_URL}/api/ja`;
                 break;
             case 'taiwan':
-                apiUrl = 'http://localhost:5000/api/tw';
+                apiUrl = `${API_BASE_URL}/api/tw`;
                 break;
             case 'thailand':
-                apiUrl = 'http://localhost:5000/api/th';
+                apiUrl = `${API_BASE_URL}/api/th`;
                 break;
             case 'other':
-                apiUrl = 'http://localhost:5000/api/ot';
+                apiUrl = `${API_BASE_URL}/api/ot`;
                 break;
             default:
                 // Handle default case or show error message
@@ -302,6 +138,7 @@ function PostNewForm({ updatePosts  }) {
                 title_other_url:'',
                 title:'',
                 date: '',
+                episode: '',
                 img:'',
                 korean_url:'',
                 chinese_url:'',
@@ -309,12 +146,13 @@ function PostNewForm({ updatePosts  }) {
                 taiwan_url:'',
                 thailand_url:'',
                 other_url:'',
+                summarytext:'',
+                fulldetail:'',
+
+                
                 genres: [], // Change to array for multiple genres
-
-
             });
-
-            const responsed = await axios.post('http://localhost:5000/korean-drama', formData, {
+            const responsed = await axios.post(`${API_BASE_URL}/korean-drama`, formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -351,22 +189,22 @@ const fetchNews = async () => {
     // Determine the API endpoint URL based on the selected option
         switch (selectedOption) {
             case 'korean':
-                apiUrl = 'http://localhost:5000/api/kd';
+                apiUrl = `${API_BASE_URL}/api/kd`;
                 break;
             case 'chinese':
-                apiUrl = 'http://localhost:5000/api/ch';
+                apiUrl = `${API_BASE_URL}/api/ch`;
                 break;
             case 'japan':
-                apiUrl = 'http://localhost:5000/api/ja';
+                apiUrl = `${API_BASE_URL}/api/ja`;
                 break;
             case 'taiwan':
-                apiUrl = 'http://localhost:5000/api/tw';
+                apiUrl = `${API_BASE_URL}/api/tw`;
                 break;
             case 'thailand':
-                apiUrl = 'http://localhost:5000/api/th';
+                apiUrl = `${API_BASE_URL}/api/th`;
                 break;
             case 'other':
-                apiUrl = 'http://localhost:5000/api/ot';
+                apiUrl = `${API_BASE_URL}/api/ot`;
                 break;
             default:
                 // Handle default case or show error message
@@ -435,7 +273,7 @@ const fetchNews = async () => {
 // };
 
 const updateAppJs = (jsFileName) => {
-    axios.post('http://localhost:5000/update-app-js', { jsFileName }, {
+    axios.post(`${API_BASE_URL}/update-app-js`, { jsFileName }, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -620,44 +458,57 @@ const handleGenreChange = (genre) => {
             <div className="dropdown">
             <button className="dropbtn">Dropdown</button>
             <div className="dropdown-content">
-              <a href="#" onClick={() => setSelectedOption('korean')}>Korean</a>
-              <a href="#" onClick={() => setSelectedOption('chinese')}>Chinese</a>
-              <a href="#" onClick={() => setSelectedOption('japan')}>Japanese</a>
+
+              <a href="#" onClick={() => setSelectedOption('korean')}>Anime</a>
+              <a href="#" onClick={() => setSelectedOption('chinese')}>Movie</a>
+              {/* <a href="#" onClick={() => setSelectedOption('japan')}>Japanese</a>
               <a href="#" onClick={() => setSelectedOption('taiwan')}>Taiwanese</a>
               <a href="#" onClick={() => setSelectedOption('thailand')}>Thai</a>
-              <a href="#" onClick={() => setSelectedOption('other')}>Other</a>
+              <a href="#" onClick={() => setSelectedOption('other')}>Other</a> */}
             </div>
           </div>
 
           <div className="genre-selection">
                     <div className="checkbox-container">
                         <label>
-                            <input type="checkbox" checked={formData.genres.includes('romantic')} onChange={() => handleGenreChange('romantic')} />
-                            Romantic
-                        </label>
-                        <label>
-                            <input type="checkbox" checked={formData.genres.includes('costume')} onChange={() => handleGenreChange('costume')} />
-                            Costume & Period
-                        </label>
-                        <label>
-                            <input type="checkbox" checked={formData.genres.includes('action')} onChange={() => handleGenreChange('action')} />
+                            <input type="checkbox" checked={formData.genres.includes('Action')} onChange={() => handleGenreChange('Action')} />
                             Action
                         </label>
                         <label>
-                            <input type="checkbox" checked={formData.genres.includes('crime')} onChange={() => handleGenreChange('crime')} />
-                            Crime & Mystery
+                            <input type="checkbox" checked={formData.genres.includes('Adventure')} onChange={() => handleGenreChange('Adventure')} />
+                            Adventure
                         </label>
                         <label>
-                            <input type="checkbox" checked={formData.genres.includes('thriller')} onChange={() => handleGenreChange('thriller')} />
-                            Thriller & Suspense
+                            <input type="checkbox" checked={formData.genres.includes('Supernatural')} onChange={() => handleGenreChange('Supernatural')} />
+                            Supernatural
                         </label>
                         <label>
-                            <input type="checkbox" checked={formData.genres.includes('animation')} onChange={() => handleGenreChange('animation')} />
-                            Animation
-                        </label>
-                        <label>
-                            <input type="checkbox" checked={formData.genres.includes('fantasy')} onChange={() => handleGenreChange('fantasy')} />
+                            <input type="checkbox" checked={formData.genres.includes('Fantasy')} onChange={() => handleGenreChange('Fantasy')} />
                             Fantasy
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('Science')} onChange={() => handleGenreChange('Science')} />
+                            Science Fiction
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('Historical')} onChange={() => handleGenreChange('Historical')} />
+                            Historical
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('Comedy')} onChange={() => handleGenreChange('Comedy')} />
+                            Comedy
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('Drama')} onChange={() => handleGenreChange('Drama')} />
+                            Drama
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('Sport')} onChange={() => handleGenreChange('Sport')} />
+                            Sport
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={formData.genres.includes('Mystery')} onChange={() => handleGenreChange('Mystery')} />
+                            Mystery
                         </label>
                         {/* Add more genres as needed */}
                     </div>
@@ -683,6 +534,10 @@ const handleGenreChange = (genre) => {
           <div className="input-container">
             <label>Title:</label>
             <input type="text" name="title" value={formData.title} onChange={(e) => handleChange(e.target.name, e.target.value)} />
+          </div>
+          <div className="input-container">
+            <label>Episode:</label>
+            <input type="text" name="episode" value={formData.episode} onChange={(e) => handleChange(e.target.name, e.target.value)} />
           </div>
           <div className="input-container">
             <label>Image URL:</label>
@@ -711,8 +566,41 @@ const handleGenreChange = (genre) => {
                     {renderInputs()}
             </div>
                 {/* <!-- CastName --> */}
-            
+            <div className="Describle">
+                <label>Summary:</label>
+                <textarea
+                    ref={summaryTextareaRef}
+                    name="summarytext"
+                    value={formData.summarytext}
+                    onChange={(e) => handleChange(e.target.name, e.target.value)}
+                />
+                <span>
+                    <BoldToggle type="b" textareaRef={summaryTextareaRef} />
+                    <BoldToggle type="i" textareaRef={summaryTextareaRef} />
+                    <BoldToggle type="p" textareaRef={summaryTextareaRef} />
+                    <BoldToggle type="color" textareaRef={summaryTextareaRef} />
+                    <BoldToggle type="link" textareaRef={summaryTextareaRef} />
+                    <BoldToggle type="img" textareaRef={summaryTextareaRef} />
+                </span>
+            </div>
 
+            <div className="Describle">
+                <label>Fulldetail:</label>
+                <textarea
+                    ref={fulldetailTextareaRef}
+                    name="fulldetail"
+                    value={formData.fulldetail}
+                    onChange={(e) => handleChange(e.target.name, e.target.value)}
+                />
+                <span>
+                    <BoldToggle type="b" textareaRef={fulldetailTextareaRef} />
+                    <BoldToggle type="i" textareaRef={fulldetailTextareaRef} />
+                    <BoldToggle type="p" textareaRef={fulldetailTextareaRef} />
+                    <BoldToggle type="color" textareaRef={fulldetailTextareaRef} />
+                    <BoldToggle type="link" textareaRef={fulldetailTextareaRef} />
+                    <BoldToggle type="img" textareaRef={fulldetailTextareaRef} />
+                </span>
+            </div>
             <div className="buttons">
                 <button type="submit" className="submit-button">Submit</button>
             </div > 

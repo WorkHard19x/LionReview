@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../styles/PostCreationForm.css';
 import { useParams } from 'react-router-dom';
 import BoldToggle from './BoldToggle';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 
 function PostCreationForm({ updatePosts  }) {
@@ -227,7 +228,7 @@ function PostCreationForm({ updatePosts  }) {
         try {
             console.log('Form data:', formData); // Log the form data to check its content
     
-            const response = await axios.post('http://localhost:5000/api/cel', formData, {
+            const response = await axios.post(`${API_BASE_URL}/api/cel`, formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -425,7 +426,7 @@ function PostCreationForm({ updatePosts  }) {
 
             });
 
-            const responsed = await axios.post('http://localhost:5000/generate-jsx', formData, {
+            const responsed = await axios.post(`${API_BASE_URL}/generate-jsx`, formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -452,7 +453,7 @@ function PostCreationForm({ updatePosts  }) {
 
 const fetchNews = async () => {
     try {
-        const response = await axios.get('http://localhost:5000/api/cel');
+        const response = await axios.get(`${API_BASE_URL}/api/cel`);
         // Process the fetched news data as needed
     } catch (error) {
         console.error('Error fetching cel:', error);
@@ -465,7 +466,7 @@ const fetchNews = async () => {
 
 
     const updateAppJs = (jsFileName) => {
-        axios.post('http://localhost:5000/update-app-js', { jsFileName }, {
+        axios.post(`${API_BASE_URL}/update-app-js`, { jsFileName }, {
             headers: {
                 'Content-Type': 'application/json'
             }

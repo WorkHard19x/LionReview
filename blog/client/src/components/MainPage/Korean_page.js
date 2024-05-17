@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import '../../styles/Drama_page.css';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 const Korean_page = () => {
     const [error, setError] = useState(null);
@@ -12,7 +13,7 @@ const Korean_page = () => {
     }, []);
   const fetchPostkd = async () => {
     try {
-        const response = await axios.get(`http://localhost:5000/api/kd`);
+        const response = await axios.get(`${API_BASE_URL}/api/kd`);
         console.log('Response:', response.data); // Log the response data
         setPostskd(response.data);
         setError(null); // Reset error state if request is successful
@@ -48,7 +49,7 @@ const location = useLocation();
         <div className="Drama-title">
             <div className='Drama-header'>
                     <div className='Drama-header-inside'>
-                                    <p>Series & Movie Categories &gt; <span style={{fontSize:"20px"}}>Korean</span></p>
+                                    <p>Series & Movie  &gt; <span style={{fontSize:"20px"}}>Watch</span></p>
 
                                     <div className="dropdowns">
                                         <button className="dropbtnn">Genres: {selectedGenre ? selectedGenre : "All"}</button>
@@ -57,26 +58,35 @@ const location = useLocation();
                                         <a href="#" onClick={() => { toggleSection('') }} >
                                                 <span>ALL</span>
                                         </a>
-                                        <a href="#Romantic" onClick={() => { toggleSection('Romantic') }} >
-                                                <span>Romantic</span>
-                                        </a>
-                                        <a href="#Costume" onClick={() => { toggleSection('Costume') }} >
-                                                <span>Costume & Period</span>
-                                        </a>
-                                        <a href="#Costume" onClick={() => { toggleSection('Action') }} >
+                                        <a href="#Action" onClick={() => { toggleSection('Action') }} >
                                                 <span>Action</span>
                                         </a>
-                                        <a href="#Crime" onClick={() => { toggleSection('Crime') }} >
-                                                <span>Crime & Mystery</span>
+                                        <a href="#Adventure" onClick={() => { toggleSection('Adventure') }} >
+                                                <span>Adventure</span>
                                         </a>
-                                        <a href="#Thriller" onClick={() => { toggleSection('Thriller') }} >
-                                                <span>Thriller & Suspense</span>
+                                        <a href="#Comedy" onClick={() => { toggleSection('Comedy') }} >
+                                                <span>Comedy</span>
                                         </a>
-                                        <a href="#Animation" onClick={() => { toggleSection('Animation') }} >
-                                                <span>Animation</span>
+                                        <a href="#Drama" onClick={() => { toggleSection('Drama') }} >
+                                                <span>Drama</span>
                                         </a>
                                         <a href="#Fantasy" onClick={() => { toggleSection('Fantasy') }} >
                                                 <span>Fantasy</span>
+                                        </a>
+                                        <a href="#Historical" onClick={() => { toggleSection('Historical') }} >
+                                                <span>Historical</span>
+                                        </a>
+                                        <a href="#Mystery" onClick={() => { toggleSection('Mystery') }} >
+                                                <span>Mystery</span>
+                                        </a>
+                                        <a href="#Science" onClick={() => { toggleSection('Science') }} >
+                                                <span>Science Fiction</span>
+                                        </a>
+                                        <a href="#Sport" onClick={() => { toggleSection('Sport') }} >
+                                                <span>Sport</span>
+                                        </a>
+                                        <a href="#Supernatural" onClick={() => { toggleSection('Supernatural') }} >
+                                                <span>Supernatural</span>
                                         </a>
                                         </div>
                                     </div>
