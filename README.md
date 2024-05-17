@@ -1,4 +1,4 @@
-<h1>Relax is a Blog for Entertainment</h1>
+<h1>Lion Review, known as Review Anime</h1>
 
 ``
 
@@ -42,6 +42,4 @@
 - Receive guidance on Python syntax, registration, login, and contracts.
 - Establish backend-to-frontend connectivity.
 - Collaborate on JavaScript concepts and brainstorm ideas.
-## License
 
-[CD](LICENSE)
